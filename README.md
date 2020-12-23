@@ -22,5 +22,5 @@ Bonsai gives you a helpful report with statistics about your productivity. You w
 
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
