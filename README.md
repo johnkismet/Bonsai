@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+BONSAI - Take care of your mind
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Grow virtual bonsai trees that represent projects and skills you're developing! Bonsai may be the accountability you need to improve and succeed.
 
-## Available Scripts
+Step One: Create your bonsai tree
 
-In the project directory, you can run:
+    You can add any details about your project so that all of your information is in one place and easily accessible.
 
-### `npm start`
+Step Two: Care for your bonsai tree
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    These trees have life cycles, growth and decay. By default the tree must be worked on every day for at least one hour. This can be tailored to fit the exact needs of your project. With the default life cycle, the tree will begin to wither after one day of no work done. And by the third day it will wither away for ever and lose all accumulated points
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Step Three: Accumulate points for your tree
 
-### `npm test`
+    With each project, you will have tasks that need done. Take some time (it may be less than you think) and try to detail the basic tasks you'll need to complete over the duration of this project. You can set one-time tasks, or repeated tasks that will re-appear after they've been completed for the day. Each task you complete will gain that tree a point! This is mainly a statistic for you to use and track your progress and growth. It's great to feel good about all the work you've done!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Step Four: View your progress
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    Bonsai gives you a helpful report with statistics about your productivity. You will be able to view your hours logged in a week/month period, your tree farm and lifetime points, your bonsai streak, and more.
