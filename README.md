@@ -19,7 +19,7 @@ With each project, you will have tasks that need done. Take some time (it may be
 ## Step Four: View your progress
 
 Bonsai gives you a helpful report with statistics about your productivity. You will be able to view your hours logged in a week/month period, your tree farm and lifetime points, your bonsai streak, and more.
-=======
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
