@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 BONSAI - Take care of your mind
 
 Grow virtual bonsai trees that represent projects and skills you're developing! Bonsai may be the accountability you need to improve and succeed.
@@ -17,3 +18,8 @@ Step Three: Accumulate points for your tree
 Step Four: View your progress
 
     Bonsai gives you a helpful report with statistics about your productivity. You will be able to view your hours logged in a week/month period, your tree farm and lifetime points, your bonsai streak, and more.
+=======
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+>>>>>>> afaac0d2869fa7e0fce1a6983cd0640252a1a51d
