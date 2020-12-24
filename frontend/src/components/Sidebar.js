@@ -3,14 +3,16 @@ import { slide as Menu } from "react-burger-menu";
 function Sidebar(props) {
 	return (
 		<Menu {...props}>
-			<a id="home" className="menu-item" href="/">
+			<div className="userPicture"></div>
+			<h1 className="sideBarInfo">Streak: 10</h1>
+			<a className="sideBarInfo" href="/">
 				Home
 			</a>
-			<a id="about" className="menu-item" href="/about">
-				About
+			<a className="sideBarInfo" href="/">
+				Customize Tree
 			</a>
-			<a id="contact" className="menu-item" href="/contact">
-				Contact
+			<a className="sideBarInfo" href="/">
+				Settings
 			</a>
 		</Menu>
 	);

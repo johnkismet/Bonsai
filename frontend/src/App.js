@@ -13,30 +13,39 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<nav>
-				<Sidebar />
-			</nav>
+		<React.Fragment>
+			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 
-			{/* <div id="treeFarm">
-				<Grid container direction="row" justify="center" alignItems="center">
-					<div className="tree">Tree 1</div>
-					<div className="tree">Tree 2</div>
-					<div className="tree">Tree 3</div>
-					<div className="tree">Tree 4</div>
-					<div className="tree">Tree 5</div>
-					<div className="tree">Tree 6</div>
-					<div className="tree">Tree 7</div>
-					<div className="tree">Tree 8</div>
-				</Grid>
+			<div className="App">
+				<div id="page-wrap">
+					<div id="treeFarm">
+						<Grid
+							container
+							direction="row"
+							justify="center"
+							alignItems="center"
+						>
+							<div className="tree">Tree 1</div>
+							<div className="tree">Tree 2</div>
+							<div className="tree">Tree 3</div>
+							<div className="tree">Tree 4</div>
+							<div className="tree">Tree 5</div>
+							<div className="tree">Tree 6</div>
+							<div className="tree">Tree 7</div>
+							<div className="tree">Tree 8</div>
+							<div className="tree">Tree 9</div>
+							<div className="tree">Tree 10</div>
+						</Grid>
 
-				<img
-					className="addTaskBtn"
-					src="/assets/images/Add task button.png"
-					alt="Add task button"
-				/>
-			</div> */}
-		</div>
+						<img
+							className="addTaskBtn"
+							src="/assets/images/Add task button.png"
+							alt="Add tree button"
+						/>
+					</div>
+				</div>
+			</div>
+		</React.Fragment>
 	);
 }
 
