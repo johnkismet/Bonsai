@@ -23,16 +23,10 @@ Bonsai gives you a helpful report with statistics about your productivity. You w
 
 # About us
 | Name | Scrum Role | Role |
-|------|------------|------|
 | Jon  |  Investor  |Invest|
-|------|------------|------|
 | John | Owner/Scrum|......|
-|------|------------|------|
 | Tim  |      Dev   |......|
-|------|------------|------|
 | Nich |      Dev   |......|
-|------|------------|------|
 | Luke |      Dev   |......|
-|------|------------|------|
 |Nathan|      Dev   |......|
 #### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
