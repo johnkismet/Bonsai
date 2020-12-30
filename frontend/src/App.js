@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
 import { Container } from "@material-ui/core";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
 	const showSettings = (event) => {
