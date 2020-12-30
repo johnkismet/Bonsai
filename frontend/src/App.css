@@ -1,6 +1,7 @@
 html,
 body {
 	margin: 0;
+	font-family: "Montserrat", sans-serif;
 }
 .App {
 	font-family: sans-serif;
@@ -8,7 +9,12 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #99b9a1;
+	background: rgb(55, 178, 96);
+	background: linear-gradient(
+		180deg,
+		rgba(55, 178, 96, 1) 0%,
+		rgba(106, 179, 125, 1) 100%
+	);
 }
 
 /* SIDEBAR STYLING */
@@ -73,7 +79,7 @@ body {
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-	fill: #373a47;
+	fill: #839b70;
 }
 
 /* Wrapper for item list */
@@ -91,6 +97,12 @@ body {
 	border: 2px solid rgba(0, 0, 0, 0.449);
 	border-radius: 50%;
 	background: rgb(235, 235, 235);
+	margin: 15px;
+}
+#title {
+	color: rgb(33, 83, 33);
+	font-family: "Langar", cursive;
+	font-size: 2rem;
 }
 .sideBarInfo {
 	text-align: center;
@@ -99,7 +111,7 @@ body {
 /* MAIN PAGE STYLING */
 #treeFarm {
 	height: 70vh;
-	width: 90%;
+	width: 50%;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
@@ -115,13 +127,14 @@ body {
 	text-align: center;
 }
 .addTaskBtn {
-	width: 10vh;
-	height: 10vh;
+	width: 9vh;
+	height: 9vh;
 	align-self: flex-end;
 	margin: 10px;
-	border: 1px solid black;
-	border-radius: 10px;
-	text-align: center;
 	position: fixed;
-	bottom: 100px;
+	bottom: 120px;
+	background: transparent;
+	border: transparent;
+	background-image: url(./assets/images/AddTaskBtn.png);
+	cursor: pointer;
 }

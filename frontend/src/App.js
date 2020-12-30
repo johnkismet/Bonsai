@@ -5,6 +5,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -37,11 +38,7 @@ function App() {
 							<div className="tree">Tree 10</div>
 						</Grid>
 
-						<img
-							className="addTaskBtn"
-							src="/assets/images/Add task button.png"
-							alt="Add tree button"
-						/>
+						<button className="addTaskBtn"></button>
 					</div>
 				</div>
 			</div>
