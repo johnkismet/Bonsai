@@ -135,6 +135,7 @@ body {
 	bottom: 120px;
 	background: transparent;
 	border: transparent;
-	background-image: url(./assets/images/AddTaskBtn.png);
+	background-image: url(./assets/images/addTreeIcon.png);
+	background-size: cover;
 	cursor: pointer;
 }
