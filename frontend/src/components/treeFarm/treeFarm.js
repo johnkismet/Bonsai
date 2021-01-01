@@ -6,25 +6,25 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../../App.css";
 import Sidebar from "../sidebar/Sidebar";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../../actions";
+import Tree from "../tree/Tree";
+
 const axios = require("axios").default;
 
 function TreeFarm() {
-	const [trees, setTrees] = useState([]);
+	const treeCount = useSelector((state) => state.treeCount);
+	const dispatch = useDispatch();
 
-	// for (const [index, value] of treeArray.entries()) {
-	// 	items.push(<li key={index}>{value}</li>)
-	//   }
 	useEffect(() => {
 		axios
 			.get("http://localhost:4000/trees")
 			.then(function (res) {
 				// handle success
 				let data = res.data;
-				// console.log(data.length);
 				data.map((tree) => {
-					setTrees(...trees, tree);
+					dispatch(increment());
 				});
-				// console.log("s");
 			})
 			.catch(function (error) {
 				// handle error
@@ -32,7 +32,6 @@ function TreeFarm() {
 			})
 			.then(function () {
 				// always executed
-				console.log(trees);
 			});
 	}, []);
 
@@ -49,7 +48,7 @@ function TreeFarm() {
 							justify="center"
 							alignItems="center"
 						>
-							{/* {trees} */}
+							{renderTrees(treeCount)}
 						</Grid>
 
 						<Link to="/newTree" className="addTaskBtn"></Link>
@@ -59,5 +58,12 @@ function TreeFarm() {
 		</React.Fragment>
 	);
 }
+
+const renderTrees = (amountOfTrees) => {
+	for (let i = 0; i < amountOfTrees; i++) {
+		console.log("Tree added");
+		return <Tree />;
+	}
+};
 
 export default TreeFarm;

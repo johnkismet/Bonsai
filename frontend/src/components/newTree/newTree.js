@@ -1,8 +1,12 @@
 // Advanced settings:
 // Needs (how long user must work on tree)
 // Wither Rate (How long until tree begins to wither) */
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, logIn } from "../../actions";
 
 function NewTree() {
+	const dispatch = useDispatch();
+
 	return (
 		<div>
 			<form
@@ -23,7 +27,7 @@ function NewTree() {
 				<label htmlFor="details">Project details: </label>
 				<input name="details" type="text" />
 				<br />
-				<input type="submit" />
+				<input onClick={() => dispatch(increment())} type="submit" />
 			</form>
 		</div>
 	);
