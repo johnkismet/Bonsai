@@ -1,15 +1,41 @@
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import { Modal } from "@material-ui/core";
-import { Container } from "@material-ui/core";
-import React from "react";
+// import { Modal } from "@material-ui/core";
+// import { Container } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../../App.css";
-
-// components
 import Sidebar from "../sidebar/Sidebar";
+const axios = require("axios").default;
 
 function TreeFarm() {
+	const [trees, setTrees] = useState([]);
+
+	// for (const [index, value] of treeArray.entries()) {
+	// 	items.push(<li key={index}>{value}</li>)
+	//   }
+	useEffect(() => {
+		axios
+			.get("http://localhost:4000/trees")
+			.then(function (res) {
+				// handle success
+				let data = res.data;
+				// console.log(data.length);
+				data.map((tree) => {
+					setTrees(...trees, tree);
+				});
+				// console.log("s");
+			})
+			.catch(function (error) {
+				// handle error
+				console.error(error);
+			})
+			.then(function () {
+				// always executed
+				console.log(trees);
+			});
+	}, []);
+
 	return (
 		<React.Fragment>
 			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
@@ -23,16 +49,7 @@ function TreeFarm() {
 							justify="center"
 							alignItems="center"
 						>
-							<div className="tree">Tree 1</div>
-							<div className="tree">Tree 2</div>
-							<div className="tree">Tree 3</div>
-							<div className="tree">Tree 4</div>
-							<div className="tree">Tree 5</div>
-							<div className="tree">Tree 6</div>
-							<div className="tree">Tree 7</div>
-							<div className="tree">Tree 8</div>
-							<div className="tree">Tree 9</div>
-							<div className="tree">Tree 10</div>
+							{/* {trees} */}
 						</Grid>
 
 						<Link to="/newTree" className="addTaskBtn"></Link>
