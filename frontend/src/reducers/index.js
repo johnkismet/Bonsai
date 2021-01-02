@@ -1,4 +1,4 @@
-import counterReducer from "./counter";
+import counterReducer from "./treeReducer";
 import loggedReducer from "./isLogged";
 import { combineReducers } from "redux";
 

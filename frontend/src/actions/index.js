@@ -1,10 +1,13 @@
-export const increment = () => {
+export const addTree = (tree) => {
 	return {
-		type: "INCREMENT",
+		type: "ADD_TREE",
+		payload: tree,
 	};
 };
-export const decrement = () => {
+
+export const deleteTree = (tree) => {
 	return {
-		type: "DECREMENT",
+		type: "DEL_TREE",
+		payload: tree,
 	};
 };
