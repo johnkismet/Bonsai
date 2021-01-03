@@ -8,14 +8,16 @@ import "../../App.css";
 import Sidebar from "../sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { addTree } from "../../actions";
-import Tree from "../tree/Tree";
+import Tree from "./treeLink";
 
 const axios = require("axios").default;
 
 function TreeFarm() {
 	const treeCount = useSelector((state) => state.treeCount);
 	const dispatch = useDispatch();
-	const showTrees = treeCount.trees.map((tree, index) => <Tree id={index} />);
+	const showTrees = treeCount.trees.map((tree, index) => (
+		<Tree name={tree.name} id={tree._id} />
+	));
 
 	useEffect(() => {
 		axios

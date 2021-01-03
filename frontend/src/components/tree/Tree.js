@@ -1,25 +1,37 @@
-import { useSelector, useDispatch } from "react-redux";
-import React from "react";
-import "./Tree.css";
+import React, { useState, useEffect } from "react";
+import Sidebar from "../sidebar/Sidebar";
+
+const axios = require("axios").default;
 
 function Tree(props) {
-	return (
-		<div className="tree">
-			{/* <img
-				src="../../assets/images/tempTreeSprite.png"
-				alt="Bonsai Tree"
-				className="bonsaiImg"
-			/> */}
-			<div className="bonsaiImg"></div>
-			<h2 className="treeName">Tree name</h2>
+	const [treeInfo, setTreeInfo] = useState([]);
 
-			<button className="workBtn">Work</button>
-		</div>
+	let id = window.location.pathname.substring(7);
+
+	useEffect(() => {
+		axios
+			.get(`http://localhost:4000/trees/${id}`)
+			.then(function (res) {
+				// handle success
+				setTreeInfo(res.data);
+				console.log(treeInfo);
+			})
+			.catch(function (error) {
+				// handle error
+				console.error(error);
+			})
+			.then(function () {
+				// always executed
+			});
+	}, []);
+
+	return (
+		<React.Fragment>
+			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+
+			<h1>Tree Name: {treeInfo.name}</h1>
+			<h1>Tree details: {treeInfo.details}</h1>
+		</React.Fragment>
 	);
 }
-
-function deleteTree(e) {
-	console.log(e.target);
-}
-
 export default Tree;

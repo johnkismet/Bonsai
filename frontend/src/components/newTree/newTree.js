@@ -2,9 +2,11 @@
 // Needs (how long user must work on tree)
 // Wither Rate (How long until tree begins to wither) */
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function NewTree() {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	return (
 		<div>
@@ -26,7 +28,12 @@ function NewTree() {
 				<label htmlFor="details">Project details: </label>
 				<input name="details" type="text" />
 				<br />
-				<input type="submit" />
+				<input
+					onClick={() => {
+						history.goBack();
+					}}
+					type="submit"
+				/>
 			</form>
 		</div>
 	);
