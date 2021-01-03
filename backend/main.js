@@ -22,6 +22,8 @@ const treeSchema = new mongoose.Schema({
 	name: String,
 	type: String,
 	details: String,
+	tasks: Array,
+	points: Number,
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
@@ -53,10 +55,17 @@ app.delete("/trees/:id", (req, res) => {
 app.post("/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
+	if (!body.name || !body.typeOfTree) {
+		console.log("Must have name!");
+		return;
+	}
+
 	const bonsai = new Tree({
 		name: body.name,
 		type: body.typeOfTree,
 		details: body.details,
+		tasks: [],
+		points: 0,
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
