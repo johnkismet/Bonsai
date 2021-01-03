@@ -37,8 +37,4 @@ function Sidebar(props) {
 	);
 }
 
-function Store() {
-	return <h1>Store under construction</h1>;
-}
-
 export default Sidebar;

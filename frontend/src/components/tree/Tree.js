@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../sidebar/Sidebar";
+import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 
 const axios = require("axios").default;
@@ -30,9 +30,22 @@ function Tree(props) {
 		<React.Fragment>
 			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 			<div className="treeInfoContainer">
-				<h1 className="treeInfo">Tree Name: {treeInfo.name}</h1>
-				<h1 className="treeInfo">Tree details: {treeInfo.details}</h1>
-				<button onClick={deleteTree}>Delete Tree</button>
+				<div className="treePic">Tree pic</div>
+				<div className="treeTaskContainer">
+					<div className="task">
+						<p>Task One</p>
+						<button className="taskCheckBtn"></button>
+					</div>
+					<div className="task">
+						<p>Task Two</p>
+						<button className="taskCheckBtn"></button>
+					</div>
+					<div className="task">
+						<p>Task Three</p>
+						<button className="taskCheckBtn"></button>
+					</div>
+				</div>
+				{/* <button onClick={deleteTree}>Delete Tree</button> */}
 			</div>
 		</React.Fragment>
 	);
@@ -44,6 +57,6 @@ function deleteTree() {
 
 	setTimeout(() => {
 		window.location = "/";
-	}, 1000);
+	}, 500);
 }
 export default Tree;

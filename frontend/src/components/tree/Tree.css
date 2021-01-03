@@ -1,13 +1,43 @@
 .treeInfoContainer {
 	margin: auto;
 	margin-top: 80px;
-	width: 70%;
+	width: 60%;
 	height: 70vh;
 	display: flex;
 	flex-flow: column;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 }
-.treeInfo {
+.treePic {
+	border: 1px solid black;
+	width: 25%;
+	height: 25%;
 	text-align: center;
+	border-radius: 10px;
+}
+.treeTaskContainer {
+	border: 1px solid black;
+	width: 50%;
+	height: 70%;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 10px;
+}
+.task {
+	width: 75%;
+	height: 20%;
+	border: 1px solid black;
+	border-radius: 10px;
+	text-align: center;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.taskCheckBtn {
+	width: 20%;
+	height: 50%;
+	border: 1px solid black;
+	border-radius: 5px;
 }
