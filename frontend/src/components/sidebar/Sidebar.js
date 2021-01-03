@@ -1,7 +1,7 @@
 import { bubble as Menu } from "react-burger-menu";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Home from "../../App";
+import TreeFarm from "../treeFarm/treeFarm";
 
 // TODO: Figure out why text isn't completely aligned
 function Sidebar(props) {
@@ -23,16 +23,10 @@ function Sidebar(props) {
 				<Link className="sideBarInfo" to="/settings">
 					Settings
 				</Link>
-				{/* 
-				<Switch>
-					<Route path="/store">
-						<Store />
-					</Route>
-					<Route path="/settings">
-						<Home />
-					</Route>
+
+				{/* <Switch>
 					<Route path="/">
-						<Home />
+						<TreeFarm />
 					</Route>
 				</Switch> */}
 			</Menu>
