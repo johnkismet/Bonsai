@@ -32,7 +32,26 @@ app.get("/trees", (req, res) => {
 	});
 });
 
+app.get("/trees/:id", (req, res) => {
+	let id = req.params.id;
+	Tree.findById(id, function (err, tree) {
+		if (err) console.log(err);
+
+		res.send(tree);
+	});
+});
+
+app.delete("/trees/:id", (req, res) => {
+	let id = req.params.id;
+	Tree.findByIdAndDelete(id, function (err, tree) {
+		if (err) console.log(err);
+
+		res.send("Tree deleted!");
+	});
+});
+
 app.post("/newTree", (req, res) => {
+	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
 	const bonsai = new Tree({
 		name: body.name,
