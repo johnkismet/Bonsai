@@ -17,7 +17,7 @@ function Sidebar(props) {
 				Home
 			</Link>
 			<Link to="/store" className="sideBarInfo">
-				Customize Tree
+				Store
 			</Link>
 			<Link to="/archive" className="sideBarInfo">
 				Archive
