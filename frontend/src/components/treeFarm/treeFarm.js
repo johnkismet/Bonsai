@@ -13,53 +13,51 @@ import Tree from "./treeLink";
 const axios = require("axios").default;
 
 function TreeFarm() {
-	const treeCount = useSelector((state) => state.treeCount);
-	const dispatch = useDispatch();
-	const showTrees = treeCount.trees.map((tree, index) => (
-		<Tree name={tree.name} id={tree._id} />
-	));
+  const treeCount = useSelector((state) => state.treeCount);
+  const dispatch = useDispatch();
+  const showTrees = treeCount.trees.map((tree, index) => (
+    <Tree name={tree.name} id={tree._id} />
+  ));
 
-	useEffect(() => {
-		axios
-			.get("http://localhost:4000/trees")
-			.then(function (res) {
-				// handle success
-				let data = res.data;
-				data.map((tree) => {
-					dispatch(addTree(tree));
-				});
-			})
-			.catch(function (error) {
-				// handle error
-				console.error(error);
-			})
-			.then(function () {
-				// always executed
-			});
-	}, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/trees")
+      .then(function (res) {
+        // handle success
+        let data = res.data;
+        data.map((tree) => {
+          dispatch(addTree(tree));
+        });
+      })
+      .catch(function (error) {
+        // handle error
+        console.error(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, []);
 
-	return (
-		<React.Fragment>
-			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+  return (
+    <React.Fragment>
+      <div className="App">
+        <div id="page-wrap">
+          <div id="treeFarm">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              {showTrees}
+            </Grid>
 
-			<div className="App">
-				<div id="page-wrap">
-					<div id="treeFarm">
-						<Grid
-							container
-							direction="row"
-							justify="center"
-							alignItems="center"
-						>
-							{showTrees}
-						</Grid>
-
-						<Link to="/newTree" className="addTaskBtn"></Link>
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
-	);
+            <Link to="/newTree" className="addTaskBtn"></Link>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default TreeFarm;
