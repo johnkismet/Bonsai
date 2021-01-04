@@ -3,13 +3,14 @@
 // Wither Rate (How long until tree begins to wither) */
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import "./newTree.css";
 
 function NewTree() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	return (
-		<div>
+		<div className="newTree">
 			<form
 				action="http://localhost:4000/newTree"
 				method="post"
@@ -17,6 +18,8 @@ function NewTree() {
 			>
 				<label htmlFor="name">Name of tree: </label>
 				<input name="name" type="text" />
+				<br />
+				<br />
 
 				<h2>Type of tree</h2>
 
@@ -24,6 +27,7 @@ function NewTree() {
 				<label htmlFor="typeOfTree">Long term </label>
 				<input value="shortTerm" name="typeOfTree" type="radio" />
 				<label htmlFor="shortTerm">Short term </label>
+				<br />
 				<br />
 				<label htmlFor="details">Project details: </label>
 				<input name="details" type="text" />
