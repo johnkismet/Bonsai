@@ -14,8 +14,8 @@ import Sidebar from "./components/sidebar/Sidebar";
 function App() {
   return (
     <>
-      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
       <BrowserRouter>
+        <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
         <Switch>
           <Route exact path="/">
             <TreeFarm />
@@ -26,7 +26,7 @@ function App() {
           <Route exact path="/archive">
             <Archive />
           </Route>
-          <Route exact path="/Statistics">
+          <Route exact path="/statistics">
             <Statistics />
           </Route>
           <Route exact path="/newTree">
