@@ -77,12 +77,11 @@ app.post("/newTree", (req, res) => {
 const taskSchema = new mongoose.Schema({
 	name: String,
 	completed: Boolean,
-	parent: String,
+	parentId: String,
 });
 const Task = mongoose.model("Task", taskSchema);
 
 app.post("/addTask", (req, res) => {
-	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
 	try {
 		const taskRequest = req.body;
 		if (!taskRequest.name) {
@@ -94,9 +93,13 @@ app.post("/addTask", (req, res) => {
 		const newTask = new Task({
 			name: taskRequest.name,
 			completed: false,
-			parent: taskRequest.parent,
+			parentId: taskRequest.parent,
 		});
-		newTask.save((err) => {
+		Tree.findById(taskRequest.parent, (err, foundTree) => {
+			foundTree.tasks.push(newTask);
+			foundTree.save((err) => {
+				if (err) return console.error(err);
+			});
 			if (err) return console.error(err);
 		});
 		res.status(201).send("Task added.");
