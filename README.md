@@ -26,8 +26,8 @@ Bonsai gives you a helpful report with statistics about your productivity. You w
 |------|------------|------|
 | Jon Taylor  |  Investor  |Investing|
 | John Anderson | Owner/Scrum|......|
-| Timothy Charboneau  |      Dev   |......|
-| Nicholas Smock |      Dev   |......|
+| Timothy Charboneau  |      Backend   |......|
+| Nicholas Smock |      Frontend   |......|
 | Luke Charboneau |      Dev   |......|
 |Nathan Holt|      Dev   |......|
 #### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
