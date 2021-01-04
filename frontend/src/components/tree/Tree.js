@@ -28,7 +28,7 @@ function Tree(props) {
 
 	return (
 		<React.Fragment>
-			<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
 			<div className="treeInfoContainer">
 				<div className="treePic">Tree pic</div>
 				<div className="treeTaskContainer">

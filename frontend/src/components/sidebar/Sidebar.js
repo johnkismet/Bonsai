@@ -11,8 +11,7 @@ function Sidebar(props) {
 				BONSAI
 			</h1>
 			<div className="userPicture"></div>
-			<h1 className="sideBarInfo">John Anderson</h1>
-			<h1 className="sideBarInfo">Streak: 10</h1>
+			<h1 className="sideBarInfo">User Name</h1>
 			<Link to="/" className="sideBarInfo">
 				Home
 			</Link>
