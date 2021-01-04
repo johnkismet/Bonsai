@@ -74,6 +74,33 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000");
 });
 
+app.post("/addTask", (req, res) => {
+	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
+	try {
+		res.status(201).send("This is stub request. Change me!")
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
+app.delete("/removeTask", (req, res) => {
+	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
+	try {
+		res.status(200).send("This is stub request. Change me!")
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
+app.patch("/completeTask", (req, res) => {
+	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
+	try {
+		res.status(200).send("This is stub request. Change me!")
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
 });
