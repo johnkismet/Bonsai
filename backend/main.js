@@ -74,10 +74,32 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000");
 });
 
+const taskSchema = new mongoose.Schema({
+	name: String,
+	completed: Boolean,
+	parent: String,
+});
+const Task = mongoose.model("Task", taskSchema);
+
 app.post("/addTask", (req, res) => {
 	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
 	try {
-		res.status(201).send("This is stub request. Change me!")
+		const taskRequest = req.body;
+		if (!taskRequest.name) {
+			res.status(400).send("Task must have a name.");
+		}
+		if (!taskRequest.parent) {
+			res.status(400).send("Task must have a tree.");
+		}
+		const newTask = new Task({
+			name: taskRequest.name,
+			completed: false,
+			parent: taskRequest.parent,
+		});
+		newTask.save((err) => {
+			if (err) return console.error(err);
+		});
+		res.status(201).send("Task added.");
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
