@@ -45,7 +45,7 @@ function Tree(props) {
 						<button className="taskCheckBtn"></button>
 					</div>
 				</div>
-				{/* <button onClick={deleteTree}>Delete Tree</button> */}
+				<button onClick={deleteTree}>Delete Tree</button>
 			</div>
 		</React.Fragment>
 	);
