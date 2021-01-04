@@ -2,27 +2,41 @@
 	margin: 0;
 	padding: 0;
 }
-.treeInfoContainer {
+.treeContainer {
 	margin: auto;
 	margin-top: 80px;
 	width: 60%;
-	height: 70vh;
+	height: 90vh;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-around;
 	align-items: center;
 }
+.treeInfoCont {
+	width: 100%;
+	height: 30%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.treeNotes {
+	width: 50%;
+	height: 100%;
+	border: 1px solid black;
+	border-radius: 10px;
+	text-align: center;
+}
 .treePic {
 	border: 1px solid black;
-	width: 25%;
-	height: 25%;
+	width: 50%;
+	height: 100%;
 	text-align: center;
 	border-radius: 10px;
 }
 .treeTaskContainer {
 	border: 1px solid black;
 	width: 50%;
-	height: 70%;
+	height: 60%;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-around;
