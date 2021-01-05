@@ -87,15 +87,15 @@ app.post("/addTask", (req, res) => {
 		if (!taskRequest.name) {
 			res.status(400).send("Task must have a name.");
 		}
-		if (!taskRequest.parent) {
+		if (!taskRequest.parentId) {
 			res.status(400).send("Task must have a tree.");
 		}
 		const newTask = new Task({
 			name: taskRequest.name,
 			completed: false,
-			parentId: taskRequest.parent,
+			parentId: taskRequest.parentId,
 		});
-		Tree.findById(taskRequest.parent, (err, foundTree) => {
+		Tree.findById(taskRequest.parentId, (err, foundTree) => {
 			foundTree.tasks.push(newTask);
 			foundTree.save((err) => {
 				if (err) return console.error(err);
@@ -109,9 +109,25 @@ app.post("/addTask", (req, res) => {
 });
 
 app.delete("/removeTask", (req, res) => {
-	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
 	try {
-		res.status(200).send("This is stub request. Change me!")
+		const taskRequest = req.body;
+		if (!taskRequest.name) {
+			res.status(400).send("Task must have a name.");
+		}
+		if (!taskRequest.parentId) {
+			res.status(400).send("Task must have a tree.");
+		}
+		Tree.findById(taskRequest.parentId, (err, foundTree) => {
+			let newTasks = foundTree.tasks.filter((task) => {
+				return !(task._id == taskRequest._id); //This is purposely a loose equality since the types are different
+			})
+			foundTree.tasks = newTasks;
+			foundTree.save((err) => {
+				if (err) return console.error(err);
+			});
+			if (err) return console.error(err);
+		});
+		res.status(200).send("Task deleted successfully.")
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
