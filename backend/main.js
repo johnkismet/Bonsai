@@ -76,6 +76,15 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000");
 });
 
+app.post("/trees/:id", (req, res) => {
+	let id = req.params.id;
+	Tree.findById(id, function (err, tree) {
+		if (err) console.log(err);
+
+		res.send(tree);
+	});
+});
+
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
 });
