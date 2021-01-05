@@ -24,6 +24,7 @@ const treeSchema = new mongoose.Schema({
 	details: String,
 	tasks: Array,
 	points: Number,
+	workTimer: Number,
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
@@ -66,6 +67,7 @@ app.post("/newTree", (req, res) => {
 		details: body.details,
 		tasks: [],
 		points: 0,
+		workTimer: 0,
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
