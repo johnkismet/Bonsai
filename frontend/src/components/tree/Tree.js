@@ -16,6 +16,7 @@ function Tree(props) {
 
 	useEffect(() => {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
+
 		axios
 			.get(`http://localhost:4000/trees/${id}`)
 			.then(function (res) {
@@ -41,6 +42,8 @@ function Tree(props) {
 			});
 
 		return () => {
+			document.title = `Bonsai`;
+
 			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
 			axios({
 				method: "post",
@@ -51,6 +54,7 @@ function Tree(props) {
 			});
 		};
 	}, []);
+	document.title = `Working on ${name}`;
 
 	return (
 		<React.Fragment>
