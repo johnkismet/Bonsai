@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
+import TimeMe from "timeme.js";
 
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 
 function Tree(props) {
-	const [treeInfo, setTreeInfo] = useState([]);
+	const [name, setName] = useState("");
+	const [details, setDetails] = useState("");
+	const [type, setType] = useState("");
+	const [tasks, setTasks] = useState([]);
+	const [points, setPoints] = useState(0);
+	const [workTimer, setWorkTimer] = useState(0);
 
 	useEffect(() => {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
@@ -14,8 +20,12 @@ function Tree(props) {
 			.get(`http://localhost:4000/trees/${id}`)
 			.then(function (res) {
 				// handle success
-				setTreeInfo(res.data);
-				// console.log(treeInfo);
+				setName(res.data.name);
+				setDetails(res.data.details);
+				setType(res.data.type);
+				setTasks(res.data.tasks);
+				setPoints(res.data.points);
+				setWorkTimer(res.data.workTimer);
 			})
 			.catch(function (error) {
 				// handle error
@@ -23,16 +33,32 @@ function Tree(props) {
 			})
 			.then(function () {
 				// always executed
+				// Initialize library and start tracking time
+				TimeMe.initialize({
+					currentPageName: "my-home-page", // current page
+					idleTimeoutInSeconds: 1000000, // seconds
+				});
 			});
+
+		return () => {
+			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+			axios({
+				method: "post",
+				url: `http://localhost:4000/trees/${id}`,
+				data: {
+					workTimer: timeSpentOnPage,
+				},
+			});
+		};
 	}, []);
 
 	return (
 		<React.Fragment>
 			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
 			<div className="treeContainer">
-				<h1>{treeInfo.name}</h1>
+				<h1>{name}</h1>
 				<div className="treeInfoCont">
-					<div className="treeNotes">{treeInfo.details}</div>
+					<div className="treeNotes">{details}</div>
 					<div className="treePic">Tree pic</div>
 				</div>
 				<div className="treeTaskContainer">
@@ -50,9 +76,24 @@ function Tree(props) {
 					</div>
 				</div>
 				<button onClick={deleteTree}>Delete Tree</button>
+				<h1>You've worked on this tree for {convertTime(workTimer)}!</h1>
 			</div>
 		</React.Fragment>
 	);
+}
+
+function convertTime(workTimer) {
+	let timeInMinutes = Math.floor(workTimer / 60);
+	let timeInHours = Math.floor(workTimer / 3600);
+
+	if (workTimer < 60) {
+		return `${workTimer} seconds`;
+	} else if (workTimer < 3600) {
+		if (workTimer < 120) return `${timeInMinutes} minute`;
+		return `${timeInMinutes} minutes`;
+	} else {
+		return `${timeInHours} hours`;
+	}
 }
 
 function deleteTree() {
