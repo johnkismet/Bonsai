@@ -4,7 +4,8 @@ import express from "express";
 const mongoose = require("mongoose");
 const app = express();
 const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/sample_airbnb?retryWrites=true&w=majority";
+	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
+const { MongoClient } = require("mongodb");
 
 app.use(cors());
 app.use(express.json());
@@ -78,9 +79,11 @@ app.post("/newTree", (req, res) => {
 
 app.post("/trees/:id", (req, res) => {
 	let id = req.params.id;
-	Tree.findById(id, function (err, tree) {
+	Tree.findOne({ _id: id }, (err, tree) => {
 		if (err) console.log(err);
-
+		let totalAmount = parseInt(tree.workTimer) + parseInt(req.body.workTimer);
+		tree.workTimer = totalAmount;
+		tree.save();
 		res.send(tree);
 	});
 });
