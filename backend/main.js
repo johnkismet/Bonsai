@@ -4,7 +4,7 @@ import express from "express";
 const mongoose = require("mongoose");
 const app = express();
 const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/sample_airbnb?retryWrites=true&w=majority";
+	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(express.json());
@@ -136,7 +136,35 @@ app.delete("/removeTask", (req, res) => {
 app.patch("/completeTask", (req, res) => {
 	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
 	try {
-		res.status(200).send("This is stub request. Change me!")
+		const taskRequest = req.body;
+		if (!taskRequest.parentId) {
+			res.status(400).send("Task must have a tree.");
+		}
+		Tree.findById(taskRequest.parentId, (err, foundTree) => {
+			let targetTask = foundTree.tasks.filter((task) => {
+				if (task._id == taskRequest._id) {
+					task.completed = false;
+					console.log(task.completed)
+				}
+				return task._id == taskRequest._id; 
+			})
+			let otherTasks = foundTree.tasks.filter((task) => {
+				return !(task._id == taskRequest._id); 
+			})
+			// targetTask.completed = !targetTask.completed;
+			
+			foundTree.tasks = otherTasks.concat(targetTask);
+			foundTree.points += 10;
+			foundTree.save((err) => {
+				if (err) {
+					console.error(err);
+				}
+			})
+			if (err) {
+				return console.error(err);
+			}
+		})
+		res.status(200).send("Task completed successfully.")
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
