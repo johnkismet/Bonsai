@@ -36,13 +36,19 @@ function Tree(props) {
 				// Initialize library and start tracking time
 				TimeMe.initialize({
 					currentPageName: "my-home-page", // current page
-					idleTimeoutInSeconds: 90, // seconds
+					idleTimeoutInSeconds: 1000000, // seconds
 				});
 			});
 
 		return () => {
 			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-			setWorkTimer(timeSpentOnPage);
+			axios({
+				method: "post",
+				url: `http://localhost:4000/trees/${id}`,
+				data: {
+					workTimer: timeSpentOnPage,
+				},
+			});
 		};
 	}, []);
 
@@ -70,9 +76,24 @@ function Tree(props) {
 					</div>
 				</div>
 				<button onClick={deleteTree}>Delete Tree</button>
+				<h1>You've worked on this tree for {convertTime(workTimer)}!</h1>
 			</div>
 		</React.Fragment>
 	);
+}
+
+function convertTime(workTimer) {
+	let timeInMinutes = Math.floor(workTimer / 60);
+	let timeInHours = Math.floor(workTimer / 3600);
+
+	if (workTimer < 60) {
+		return `${workTimer} seconds`;
+	} else if (workTimer < 3600) {
+		if (workTimer < 120) return `${timeInMinutes} minute`;
+		return `${timeInMinutes} minutes`;
+	} else {
+		return `${timeInHours} hours`;
+	}
 }
 
 function deleteTree() {
