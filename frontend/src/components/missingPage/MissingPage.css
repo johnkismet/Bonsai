@@ -1,21 +1,19 @@
 html,
 body {
+  text-align: center;
   margin: 0;
   font-family: "Montserrat", sans-serif;
 }
-.App {
+.Missing {
   font-family: sans-serif;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: rgb(55, 178, 96);
   background: linear-gradient(
     180deg,
     rgba(55, 178, 96, 1) 0%,
     rgba(106, 179, 125, 1) 100%
   );
-  overflow: hidden;
+  overflow: hideen;
 }
 
 /* SIDEBAR STYLING */
@@ -140,7 +138,7 @@ body {
   bottom: 120px;
   background: transparent;
   border: transparent;
-  background-image: url(./assets/images/addTreeIcon.png);
+  background-image: url(../../assets/images/addTreeIcon.png);
   background-size: cover;
   cursor: pointer;
 }
