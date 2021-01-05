@@ -134,7 +134,6 @@ app.delete("/removeTask", (req, res) => {
 });
 
 app.patch("/completeTask", (req, res) => {
-	// TODO: Users will be able to add tasks to the tree, complete them, and delete tasks
 	try {
 		const taskRequest = req.body;
 		if (!taskRequest.parentId) {
@@ -143,16 +142,13 @@ app.patch("/completeTask", (req, res) => {
 		Tree.findById(taskRequest.parentId, (err, foundTree) => {
 			let targetTask = foundTree.tasks.filter((task) => {
 				if (task._id == taskRequest._id) {
-					task.completed = false;
-					console.log(task.completed)
+					task.completed = true;
 				}
 				return task._id == taskRequest._id; 
 			})
 			let otherTasks = foundTree.tasks.filter((task) => {
 				return !(task._id == taskRequest._id); 
 			})
-			// targetTask.completed = !targetTask.completed;
-			
 			foundTree.tasks = otherTasks.concat(targetTask);
 			foundTree.points += 10;
 			foundTree.save((err) => {
