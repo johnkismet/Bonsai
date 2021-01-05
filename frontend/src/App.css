@@ -1,146 +1,146 @@
 html,
 body {
-	margin: 0;
-	font-family: "Montserrat", sans-serif;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
 }
 .App {
-	font-family: sans-serif;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: rgb(55, 178, 96);
-	background: linear-gradient(
-		180deg,
-		rgba(55, 178, 96, 1) 0%,
-		rgba(106, 179, 125, 1) 100%
-	);
-	overflow: hideen;
+  font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(55, 178, 96);
+  background: linear-gradient(
+    180deg,
+    rgba(55, 178, 96, 1) 0%,
+    rgba(106, 179, 125, 1) 100%
+  );
+  overflow: hidden;
 }
 
 /* SIDEBAR STYLING */
 #page-wrap {
-	text-align: center;
-	overflow: auto;
-	/* top: 45%; */
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  overflow: auto;
+  /* top: 45%; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bm-item {
-	display: inline-block;
-	/* Our sidebar item styling */
-	text-decoration: none;
-	margin-bottom: 10px;
-	color: #f3f3f3;
-	transition: color 0.2s;
+  display: inline-block;
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #f3f3f3;
+  transition: color 0.2s;
 }
 
 .bm-item:hover {
-	color: white;
+  color: white;
 }
 
 .bm-burger-button {
-	position: fixed;
-	width: 36px;
-	height: 30px;
-	top: 36px;
-	left: 85px;
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  top: 36px;
+  left: 85px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-	background: #373a47;
-	border-radius: 10px;
+  background: #373a47;
+  border-radius: 10px;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-	height: 24px;
-	width: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-	background: #444444;
+  background: #444444;
 }
 
 /* General sidebar styles */
 .bm-menu {
-	background: #95ab84;
-	padding: 2.5em 1.5em 0;
-	font-size: 1.15em;
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
+  background: #95ab84;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-	fill: #839b70;
+  fill: #839b70;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-	color: #b8b7ad;
+  color: #b8b7ad;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-	background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 .userPicture {
-	width: 150px;
-	height: 150px;
-	border: 2px solid rgba(0, 0, 0, 0.449);
-	border-radius: 50%;
-	background: rgb(235, 235, 235);
-	margin: 15px;
+  width: 150px;
+  height: 150px;
+  border: 2px solid rgba(0, 0, 0, 0.449);
+  border-radius: 50%;
+  background: rgb(235, 235, 235);
+  margin: 15px;
 }
 #title {
-	color: rgb(33, 83, 33);
-	font-family: "Langar", cursive;
-	font-size: 2rem;
+  color: rgb(33, 83, 33);
+  font-family: "Langar", cursive;
+  font-size: 2rem;
 }
 .sideBarInfo {
-	text-align: center;
+  text-align: center;
 }
 
 /* MAIN PAGE STYLING */
 #treeFarm {
-	height: 70vh;
-	width: 50%;
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
-	align-items: center;
-	/* border: 1px solid black; */
+  height: 70vh;
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid black; */
 }
 .tree {
-	width: 150px;
-	height: 150px;
-	margin: 10px;
-	border: 1px solid black;
-	border-radius: 10px;
-	text-align: center;
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 .addTaskBtn {
-	width: 9vh;
-	height: 9vh;
-	align-self: flex-end;
-	margin: 10px;
-	position: fixed;
-	bottom: 120px;
-	background: transparent;
-	border: transparent;
-	background-image: url(./assets/images/addTreeIcon.png);
-	background-size: cover;
-	cursor: pointer;
+  width: 9vh;
+  height: 9vh;
+  align-self: flex-end;
+  margin: 10px;
+  position: fixed;
+  bottom: 120px;
+  background: transparent;
+  border: transparent;
+  background-image: url(./assets/images/addTreeIcon.png);
+  background-size: cover;
+  cursor: pointer;
 }
