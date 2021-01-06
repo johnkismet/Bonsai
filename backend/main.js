@@ -75,7 +75,6 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000");
 });
 
-=======
 const taskSchema = new mongoose.Schema({
 	name: String,
 	completed: Boolean,
@@ -122,14 +121,14 @@ app.delete("/removeTask", (req, res) => {
 		Tree.findById(taskRequest.parentId, (err, foundTree) => {
 			let newTasks = foundTree.tasks.filter((task) => {
 				return !(task._id == taskRequest._id); //This is purposely a loose equality since the types are different
-			})
+			});
 			foundTree.tasks = newTasks;
 			foundTree.save((err) => {
 				if (err) return console.error(err);
 			});
 			if (err) return console.error(err);
 		});
-		res.status(200).send("Task deleted successfully.")
+		res.status(200).send("Task deleted successfully.");
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
@@ -146,23 +145,23 @@ app.patch("/completeTask", (req, res) => {
 				if (task._id == taskRequest._id) {
 					task.completed = true;
 				}
-				return task._id == taskRequest._id; 
-			})
+				return task._id == taskRequest._id;
+			});
 			let otherTasks = foundTree.tasks.filter((task) => {
-				return !(task._id == taskRequest._id); 
-			})
+				return !(task._id == taskRequest._id);
+			});
 			foundTree.tasks = otherTasks.concat(targetTask);
 			foundTree.points += 10;
 			foundTree.save((err) => {
 				if (err) {
 					console.error(err);
 				}
-			})
+			});
 			if (err) {
 				return console.error(err);
 			}
-		})
-		res.status(200).send("Task completed successfully.")
+		});
+		res.status(200).send("Task completed successfully.");
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
@@ -176,7 +175,8 @@ app.post("/trees/:id", (req, res) => {
 		tree.workTimer = totalAmount;
 		tree.save();
 		res.send(tree);
-	})});
+	});
+});
 
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
