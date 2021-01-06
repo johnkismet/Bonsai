@@ -10,6 +10,7 @@ function Tree(props) {
 	const [name, setName] = useState("");
 	const [details, setDetails] = useState("");
 	const [type, setType] = useState("");
+	const [stage, setStage] = useState(0);
 	const [tasks, setTasks] = useState([]);
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
@@ -24,6 +25,7 @@ function Tree(props) {
 				setName(res.data.name);
 				setDetails(res.data.details);
 				setType(res.data.type);
+				setStage(res.data.stage);
 				setTasks(res.data.tasks);
 				setPoints(res.data.points);
 				setWorkTimer(res.data.workTimer);
