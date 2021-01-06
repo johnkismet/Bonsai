@@ -4,7 +4,7 @@ import "./Login.css";
 
 function Login(props) {
 	return (
-		<>
+		<div className="Login">
 			<div className="spacer">BONSAI</div>
 			<div className="loginContainer">
 				<Link to="/register" className="register">
@@ -15,7 +15,7 @@ function Login(props) {
 				</Link>
 			</div>
 			<div className="spacer"></div>
-		</>
+		</div>
 	);
 }
 export default Login;
