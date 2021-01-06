@@ -178,11 +178,11 @@ app.post("/trees/:id", (req, res) => {
 	});
 });
 
-app.get("/getTasks", (req, res) => {
+app.get("/getTasks/:parentId", (req, res) => {
 	try {
-		const taskRequest = req.body;
+		const parentId = req.params.parentId;
 		let tasks = new Array;
-		Tree.findById(taskRequest.parentId, (err, foundTree) => {
+		Tree.findById(parentId, (err, foundTree) => {
 			tasks = foundTree.tasks;
 			res.status(200).send(tasks);
 			if (err) {
