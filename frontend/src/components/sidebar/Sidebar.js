@@ -12,7 +12,7 @@ function Sidebar(props) {
 			</h1>
 			<div className="userPicture"></div>
 			<h1 className="sideBarInfo">User Name</h1>
-			<Link to="/treefarm" className="sideBarInfo">
+			<Link to="/" className="sideBarInfo">
 				Home
 			</Link>
 			<Link to="/store" className="sideBarInfo">
