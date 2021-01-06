@@ -64,14 +64,14 @@ function Tree(props) {
 			<div className="Tree">
 				<div className="leftSide">
 					<div className="nameOfTree">
-						<h2>{name}</h2>
+						<h3>{name}</h3>
 					</div>
 					<div className="details">
 						<p>{details}</p>
 					</div>
 					<div className="treePic">
 						{/* TODO: figure out why images aren't working */}
-						<img src="" alt="treePic" srcset="" />
+						{getTreePic(stage)}
 					</div>
 					<div className="buttonsContainer">
 						<button className="treeButton archiveTree">Archive</button>
@@ -162,6 +162,17 @@ function convertTime(seconds) {
 	}
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
+}
+
+function getTreePic(stage) {
+	console.log(stage);
+	if (stage === 0) {
+		return "age: 1";
+	} else if (stage === 1) {
+		return "age: 2";
+	} else {
+		return "age: 3";
+	}
 }
 
 function deleteTree() {
