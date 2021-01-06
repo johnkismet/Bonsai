@@ -1,64 +1,63 @@
-* {
-  margin: 0;
-  padding: 0;
+.Spacer {
+	width: 90%;
+	height: 15vh;
 }
-.treeContainer {
-  margin: auto;
-  margin-top: 80px;
-  width: 60%;
-  height: 90vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
+.Tree {
+	width: 90%;
+	height: 80vh;
+	border: 1px solid black;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.treeInfoCont {
-  width: 100%;
-  height: 30%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.leftSide {
+	width: 30%;
+	height: 100%;
+	border: 1px solid black;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
 }
-.treeNotes {
-  width: 50%;
-  height: 100%;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-align: center;
+.nameOfTree {
+	width: 100%;
+	height: 10%;
+	border: 1px solid black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.details {
+	width: 100%;
+	height: 30%;
+	border: 1px solid black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .treePic {
-  border: 1px solid black;
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  border-radius: 10px;
+	width: 100%;
+	height: 50%;
+	border: 1px solid black;
 }
-.treeTaskContainer {
-  border: 1px solid black;
-  width: 50%;
-  height: 60%;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 10px;
+.buttonsContainer {
+	width: 100%;
+	height: 10%;
+	border: 1px solid black;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
-.task {
-  width: 75%;
-  height: 20%;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.treeButton {
+	border-radius: 10px;
+	padding: 3px;
+	cursor: pointer;
 }
-.taskCheckBtn {
-  width: 20%;
-  height: 50%;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-.buttons {
-  display: flex;
+.rightSide {
+	width: 70%;
+	height: 100%;
+	border: 1px solid black;
 }

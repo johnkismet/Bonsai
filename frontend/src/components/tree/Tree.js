@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
+import Tasks from "./taskSystem/Tasks";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 
@@ -56,32 +57,28 @@ function Tree(props) {
 	document.title = `Working on ${name}`;
 
 	return (
-		<React.Fragment>
-			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
-			<div className="treeContainer">
-				<h1>{name}</h1>
-				<div className="treeInfoCont">
-					<div className="treeNotes">{details}</div>
-					<div className="treePic">Tree pic</div>
-				</div>
-				<div className="treeTaskContainer">
-					<div className="task">
-						<p>Task One</p>
-						<button className="taskCheckBtn"></button>
+		<>
+			<div className="Spacer"></div>
+			<div className="Tree">
+				<div className="leftSide">
+					<div className="nameOfTree">
+						<h2>{name}</h2>
 					</div>
-					<div className="task">
-						<p>Task Two</p>
-						<button className="taskCheckBtn"></button>
+					<div className="details">
+						<p>{details}</p>
 					</div>
-					<div className="task">
-						<p>Task Three</p>
-						<button className="taskCheckBtn"></button>
+					<div className="treePic">
+						{/* TODO: figure out why images aren't working */}
+						<img src="" alt="treePic" srcset="" />
+					</div>
+					<div className="buttonsContainer">
+						<button className="treeButton archiveTree">Archive</button>
+						<button className="treeButton deleteTree">Delete</button>
 					</div>
 				</div>
-				<button onClick={deleteTree}>Delete Tree</button>
-				<h1>You've worked on this tree for {convertTime(workTimer)}!</h1>
+				<div className="rightSide">{/* Put tasks here */}</div>
 			</div>
-		</React.Fragment>
+		</>
 	);
 }
 
@@ -168,7 +165,7 @@ function deleteTree() {
 	axios.delete(`http://localhost:4000/trees/${id}`);
 
 	setTimeout(() => {
-		window.location = "/";
+		window.location = "/treefarm";
 	}, 500);
 }
 export default Tree;
