@@ -1,11 +1,21 @@
 import React from "react";
+import { Link, BrowserRouter } from "react-router-dom";
+import "./Login.css";
 
 function Login(props) {
-  return (
-    <>
-      <button>Login</button>
-      <button>Register</button>
-    </>
-  );
+	return (
+		<>
+			<div className="spacer">BONSAI</div>
+			<div className="loginContainer">
+				<Link to="/register" className="register">
+					REGISTER
+				</Link>
+				<Link to="/login" className="login">
+					LOGIN
+				</Link>
+			</div>
+			<div className="spacer"></div>
+		</>
+	);
 }
 export default Login;

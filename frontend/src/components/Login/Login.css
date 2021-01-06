@@ -1,0 +1,46 @@
+* {
+	background: rgb(55, 178, 96);
+}
+.loginContainer {
+	margin: auto;
+	width: 50%;
+	height: 50vh;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+}
+.spacer {
+	width: 50%;
+	height: 25vh;
+	margin: auto;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 4rem;
+}
+.register {
+	background: rgba(0, 0, 0, 0.524);
+	color: white;
+	width: 20%;
+	height: 25%;
+	border: 1px solid black;
+	border-radius: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login {
+	background: rgba(0, 0, 0, 0.524);
+	color: white;
+	width: 20%;
+	height: 25%;
+	border: 1px solid black;
+	border-radius: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
