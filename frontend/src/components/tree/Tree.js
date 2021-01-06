@@ -86,18 +86,82 @@ function Tree(props) {
 	);
 }
 
-function convertTime(workTimer) {
-	let timeInMinutes = Math.floor(workTimer / 60);
-	let timeInHours = Math.floor(workTimer / 3600);
-
-	if (workTimer < 60) {
-		return `${workTimer} seconds`;
-	} else if (workTimer < 3600) {
-		if (workTimer < 120) return `${timeInMinutes} minute`;
-		return `${timeInMinutes} minutes`;
-	} else {
-		return `${timeInHours} hours`;
+function convertTime(seconds) {
+	if (seconds === 0) {
+		return "now";
 	}
+	let total = seconds;
+	let timeObj = {
+		year: 0,
+		day: 0,
+		hour: 0,
+		minute: 0,
+		second: 0,
+	};
+	while (total - 31536000 >= 0) {
+		total -= 31536000;
+		timeObj.year++;
+	}
+	while (total - 86400 >= 0) {
+		total -= 86400;
+		timeObj.day++;
+	}
+	while (total - 3600 >= 0) {
+		total -= 3600;
+		timeObj.hour++;
+	}
+	while (total - 60 >= 0) {
+		total -= 60;
+		timeObj.minute++;
+	}
+	while (total - 1 >= 0) {
+		total -= 1;
+		timeObj.second++;
+	}
+	let formatStr = new String();
+	let and = false;
+	let count = 0;
+	for (const key in timeObj) {
+		if (timeObj[key] > 0) {
+			count++;
+		}
+		if (count > 1) {
+			and = true;
+		}
+	}
+	for (const key in timeObj) {
+		if (timeObj[key] > 0) {
+			if (timeObj[key] > 1) {
+				formatStr += timeObj[key] + " " + key + "s" + " ";
+			} else {
+				formatStr += timeObj[key] + " " + key + " ";
+			}
+		}
+	}
+	let formatArr = formatStr.trim().split(" ");
+	if (and) {
+		formatArr.splice(-2, 0, "and");
+	}
+	let keyCount = 0;
+	for (const key in timeObj) {
+		if (timeObj[key] > 0) {
+			keyCount++;
+		}
+	}
+	if (keyCount === 3) {
+		formatArr[1] += ",";
+	}
+	if (keyCount === 4) {
+		formatArr[1] += ",";
+		formatArr[3] += ",";
+	}
+	if (keyCount === 5) {
+		formatArr[1] += ",";
+		formatArr[3] += ",";
+		formatArr[5] += ",";
+	}
+	formatStr = formatArr.join(" ");
+	return formatStr.trim();
 }
 
 function deleteTree() {
