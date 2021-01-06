@@ -176,7 +176,7 @@ app.post("/trees/:id", (req, res) => {
 		tree.workTimer = totalAmount;
 		tree.save();
 		res.send(tree);
-	});
+	})});
 
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
