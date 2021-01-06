@@ -178,6 +178,14 @@ app.post("/trees/:id", (req, res) => {
 	});
 });
 
+app.get("/getTasks:/parentId"), (req, res) => {
+	try {
+		res.status(200).send("This is a stub request. Change me!");
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
+}
+
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
 });
