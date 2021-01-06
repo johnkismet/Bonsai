@@ -71,7 +71,7 @@ app.post("/newTree", (req, res) => {
 		if (err) return console.error(err);
 	});
 	// res.send(`Tree made!`);
-	res.redirect("http://localhost:3000");
+	res.redirect("http://localhost:3000/treefarm");
 });
 
 app.listen(4000, () => {
