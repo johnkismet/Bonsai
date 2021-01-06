@@ -178,13 +178,21 @@ app.post("/trees/:id", (req, res) => {
 	});
 });
 
-app.get("/getTasks:/parentId"), (req, res) => {
+app.get("/getTasks", (req, res) => {
 	try {
-		res.status(200).send("This is a stub request. Change me!");
+		const taskRequest = req.body;
+		let tasks = new Array;
+		Tree.findById(taskRequest.parentId, (err, foundTree) => {
+			tasks = foundTree.tasks;
+			res.status(200).send(tasks);
+			if (err) {
+				console.log(err);
+			}
+		})
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
-}
+})
 
 app.listen(4000, () => {
 	console.log("express server is running on port 4000");
