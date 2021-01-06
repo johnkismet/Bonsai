@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
-import Tasks from "./taskSystem/Tasks";
+import TaskContainer from "./taskSystem/TaskContainer";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 
@@ -77,7 +77,7 @@ function Tree(props) {
           </div>
         </div>
         <div className="rightSide">
-          <Tasks id={id} />
+          <TaskContainer id={id} />
         </div>
       </div>
     </>

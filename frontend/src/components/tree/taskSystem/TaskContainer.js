@@ -1,8 +1,33 @@
 import "./Tasks.css";
 import { useEffect } from "react";
+import Task from "./Task";
 const axios = require("axios").default;
-function Tasks(props) {
+
+let tasksArray = [
+  {
+    name: "task one",
+    parentId: "12312",
+    completed: false,
+  },
+  {
+    name: "task two",
+    parentId: "123311",
+    completed: false,
+  },
+  {
+    name: "task three",
+    parentId: "234342",
+    completed: false,
+  },
+];
+
+function TaskContainer(props) {
   let id = props.id;
+
+  const showTasks = tasksArray.map((task, index) => (
+    <Task className="task" name={task.name} completed={task.completed} />
+  ));
+
   useEffect(() => {
     axios
       .get(`http://localhost:4000/getTasks`, {
@@ -32,13 +57,9 @@ function Tasks(props) {
         ></input>
         <input className="submitTask" type="submit" />
       </div>
-      <div className="taskContainer">
-        {/* <div className="task">Task one</div>
-        <div className="task">Task one</div>
-        <div className="task">Task one</div> */}
-      </div>
+      <div className="taskContainer">{showTasks}</div>
     </div>
   );
 }
 
-export default Tasks;
+export default TaskContainer;
