@@ -4,7 +4,7 @@ import express from "express";
 const mongoose = require("mongoose");
 const app = express();
 const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/sample_airbnb?retryWrites=true&w=majority";
+	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
 
 app.use(cors());
 app.use(express.json());
