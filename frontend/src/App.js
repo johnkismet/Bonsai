@@ -10,6 +10,7 @@ import Store from "./components/Store/Store";
 import Statistics from "./components/Statistics/Statistics";
 import Archive from "./components/Archive/Archive";
 import Sidebar from "./components/sidebar/Sidebar";
+import Login from "./components/Login/Login";
 
 function App() {
 	return (
@@ -18,6 +19,9 @@ function App() {
 				<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 				<Switch>
 					<Route exact path="/">
+						<Login />
+					</Route>
+					<Route exact path="/treefarm">
 						<TreeFarm />
 					</Route>
 					<Route exact path="/store">

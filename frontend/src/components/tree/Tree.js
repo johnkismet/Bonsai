@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
-
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 

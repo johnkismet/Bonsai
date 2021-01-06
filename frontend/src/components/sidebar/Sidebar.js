@@ -12,7 +12,7 @@ function Sidebar(props) {
 			</h1>
 			<div className="userPicture"></div>
 			<h1 className="sideBarInfo">User Name</h1>
-			<Link to="/" className="sideBarInfo">
+			<Link to="/treefarm" className="sideBarInfo">
 				Home
 			</Link>
 			<Link to="/store" className="sideBarInfo">
@@ -24,12 +24,6 @@ function Sidebar(props) {
 			<Link to="/statistics" className="sideBarInfo">
 				Statistics
 			</Link>
-
-			{/* <Switch>
-					<Route path="/">
-						<TreeFarm />
-					</Route>
-				</Switch> */}
 		</Menu>
 	);
 }
