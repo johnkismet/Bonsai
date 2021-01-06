@@ -17,7 +17,7 @@ function App() {
 			<BrowserRouter>
 				<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 				<Switch>
-					<Route exact path="/">
+					<Route exact path="/treefarm">
 						<TreeFarm />
 					</Route>
 					<Route exact path="/store">
