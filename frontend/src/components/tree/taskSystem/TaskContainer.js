@@ -25,18 +25,23 @@ let tasksArray = [
 function TaskContainer(props) {
   let id = props.id;
   const [tasks, setTasks] = useState([]);
+
+  const showTasks = tasks.map((task, index) => (
+    <Task className="task" name={task.name} completed={task.completed} />
+  ));
+
   const addTask = () => {
+    let newTaskName = document.querySelector(".taskInput").value;
+    console.log("adding task");
     let newTask = {
-      name: "if you see me, scream in excitement",
+      name: newTaskName,
       parentId: id,
       completed: false,
     };
-    tasksArray.push(newTask);
+    let newTasks = [...tasks];
+    newTasks.push(newTask);
+    setTasks(newTasks);
   };
-
-  const showTasks = tasksArray.map((task, index) => (
-    <Task className="task" name={task.name} completed={task.completed} />
-  ));
 
   useEffect(() => {
     axios
@@ -53,6 +58,13 @@ function TaskContainer(props) {
       .then(function () {
         // always executed
       });
+    return () => {
+      //return function inside useEffect is equivalent to componentWillUnmount (https://dev.to/robmarshall/how-to-use-componentwillunmount-with-functional-components-in-react-2a5g)
+
+      console.log("sending tasks");
+      console.log(tasks);
+      axios.post(`http://localhost:4000/setTasks/?${id}`, tasks);
+    };
   }, []);
   return (
     <div className="Tasks">
@@ -61,7 +73,12 @@ function TaskContainer(props) {
           placeholder="What're you working on?"
           className="taskInput"
         ></input>
-        <input className="submitTask" onClick={() => addTask()} type="button" />
+        <input
+          className="submitTask"
+          onClick={() => addTask()}
+          type="button"
+          value="Submit"
+        />
       </div>
       <div className="taskContainer">
         <Grid container direction="column" justify="center" alignItems="center">
