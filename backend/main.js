@@ -124,10 +124,14 @@ app.get("/getTasks/:parentId", (req, res) => {
 		const parentId = req.params.parentId;
 		let tasks = new Array;
 		Tree.findById(parentId, (err, foundTree) => {
-			tasks = foundTree.tasks;
-			res.status(200).send(tasks);
-			if (err) {
-				console.log(err);
+			if (!foundTree) {
+				res.status(404).send("parentId is missing or invalid.");
+			} else {
+				tasks = foundTree.tasks;
+				res.status(200).send(tasks);
+				if (err) {
+					console.log(err);
+				}
 			}
 		})
 	} catch (err) {
