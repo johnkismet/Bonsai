@@ -53,6 +53,9 @@
 	border: 1px solid rgba(255, 255, 255, 0.374);
 	border-top: none;
 	color: whitesmoke;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 .buttonsContainer {
 	width: 100%;

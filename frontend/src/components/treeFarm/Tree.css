@@ -1,8 +1,10 @@
 .bonsaiImg {
 	width: 50%;
 	height: 50%;
-	border: 1px solid rgb(17, 17, 17);
 	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .treeName {
 	font-size: 1rem;

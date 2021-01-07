@@ -3,6 +3,7 @@ import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
 import TaskContainer from "./taskSystem/TaskContainer";
+import TreePic from "../../assets/images/tempTreeSprite.png";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 
@@ -169,11 +170,11 @@ function convertTime(seconds) {
 function getTreePic(stage) {
 	console.log(stage);
 	if (stage === 0) {
-		return "age: 1";
+		return <img src={TreePic} width="100px" />;
 	} else if (stage === 1) {
-		return "age: 2";
+		return <img src={TreePic} width="200px" />;
 	} else {
-		return `age: ${stage}`;
+		return <img src={TreePic} width="300px" />;
 	}
 }
 
