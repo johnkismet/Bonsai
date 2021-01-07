@@ -25,12 +25,14 @@ let tasksArray = [
 function TaskContainer(props) {
   let id = props.id;
   const [tasks, setTasks] = useState([]);
+  const [itemsCompleted, setItemsCompleted] = useState(0);
 
   const showTasks = tasks.map((task, index) => (
     <Task className="task" name={task.name} completed={task.completed} />
   ));
   const addTask = () => {
     let newTaskName = document.querySelector(".taskInput").value;
+    document.querySelector(".taskInput").value = "";
     console.log("adding task");
     let newTask = {
       name: newTaskName,
@@ -51,7 +53,7 @@ function TaskContainer(props) {
   }, []);
   async function GetTasks() {
     await axios
-      .get(`http://localhost:4000/getTasks/${id}`)
+      .get(`http://localhost:4000/getTasks/${id}?`)
       .then(function (res) {
         // handle success
         let data = res.data;
@@ -67,9 +69,17 @@ function TaskContainer(props) {
   }
   async function CompWillUnmnt() {
     //return function inside useEffect is equivalent to componentWillUnmount (https://dev.to/robmarshall/how-to-use-componentwillunmount-with-functional-components-in-react-2a5g)
-    console.log("sending tasks");
-    console.log(tasks);
-    await axios.post(`http://localhost:4000/setTasks/${id}`, tasks);
+    let packageToSend = {
+      tasks: tasks,
+      itemsCompleted: itemsCompleted,
+    };
+
+    console.log(packageToSend);
+    await axios
+      .post(`http://localhost:4000/setTasks/${id}`, packageToSend)
+      .then(function (res) {
+        console.log(res);
+      });
   }
   return (
     <div className="Tasks">
@@ -89,6 +99,7 @@ function TaskContainer(props) {
         <Grid container direction="column" justify="center" alignItems="center">
           {showTasks}
         </Grid>
+        <button onClick={CompWillUnmnt}>Send Data</button>
       </div>
     </div>
   );
