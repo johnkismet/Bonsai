@@ -77,95 +77,36 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000/treefarm");
 });
 
-const taskSchema = new mongoose.Schema({
-	name: String,
-	completed: Boolean,
-	parentId: String,
-});
-const Task = mongoose.model("Task", taskSchema);
-
-app.post("/addTask", (req, res) => {
+app.post("/setTasks/:parentId?", (req, res) => {
 	try {
-		const taskRequest = req.body;
-		if (!taskRequest.name) {
-			res.status(400).send("Task must have a name.");
-		}
-		if (!taskRequest.parentId) {
-			res.status(400).send("Task must have a tree.");
-		}
-		const newTask = new Task({
-			name: taskRequest.name,
-			completed: false,
-			parentId: taskRequest.parentId,
-		});
-		Tree.findById(taskRequest.parentId, (err, foundTree) => {
-			foundTree.tasks.push(newTask);
-			foundTree.save((err) => {
-				if (err) return console.error(err);
-			});
-			if (err) return console.error(err);
-		});
-		res.status(201).send("Task added.");
-	} catch (err) {
-		res.status(400).json({ message: err.message });
-	}
-});
-
-app.delete("/removeTask", (req, res) => {
-	try {
-		const taskRequest = req.body;
-		if (!taskRequest.name) {
-			res.status(400).send("Task must have a name.");
-		}
-		if (!taskRequest.parentId) {
-			res.status(400).send("Task must have a tree.");
-		}
-		Tree.findById(taskRequest.parentId, (err, foundTree) => {
-			let newTasks = foundTree.tasks.filter((task) => {
-				return !(task._id == taskRequest._id); //This is purposely a loose equality since the types are different
-			});
-			foundTree.tasks = newTasks;
-			foundTree.save((err) => {
-				if (err) return console.error(err);
-			});
-			if (err) return console.error(err);
-		});
-		res.status(200).send("Task deleted successfully.");
-	} catch (err) {
-		res.status(400).json({ message: err.message });
-	}
-});
-
-app.patch("/completeTask", (req, res) => {
-	try {
-		const taskRequest = req.body;
-		if (!taskRequest.parentId) {
-			res.status(400).send("Task must have a tree.");
-		}
-		Tree.findById(taskRequest.parentId, (err, foundTree) => {
-			let targetTask = foundTree.tasks.filter((task) => {
-				if (task._id == taskRequest._id) {
-					task.completed = true;
-				}
-				return task._id == taskRequest._id;
-			});
-			let otherTasks = foundTree.tasks.filter((task) => {
-				return !(task._id == taskRequest._id);
-			});
-			foundTree.tasks = otherTasks.concat(targetTask);
-			foundTree.points += 10;
-			foundTree.save((err) => {
+		const newTasks = req.body.tasks;
+		const itemsCompleted = req.body.itemsCompleted;
+		Tree.findById(req.params.parentId, (err, foundTree) => {
+			if (!foundTree) {
+				res.status(404).send("parentId is missing or invalid.");
+			} else {
+				foundTree.tasks = newTasks;
+				foundTree.points += itemsCompleted * 10;
+				foundTree.save((err) => {
+					if (err) {
+						console.log(err);
+					}
+				});
 				if (err) {
-					console.error(err);
+					console.log(err);
 				}
-			});
-			if (err) {
-				return console.error(err);
+				if (foundTree.points < 0) {
+					foundTree.points = 0;
+					res.status(200).send(`Tasks set successfully, but something has likely gone awry somewhere else.
+					 More tasks have been marked incompelete after being marked complete than possible. 
+					 Resetting tree points to 0...`);
+				} else {
+					res.status(200).send("Tasks set successfully.");
+				}	
 			}
 		});
-		res.status(200).send("Task completed successfully.");
 	} catch (err) {
-		res.status(400).json({ message: err.message });
+		res.status(400).send({ message: err.message });
 	}
 });
 
@@ -185,10 +126,14 @@ app.get("/getTasks/:parentId", (req, res) => {
 		const parentId = req.params.parentId;
 		let tasks = new Array();
 		Tree.findById(parentId, (err, foundTree) => {
-			tasks = foundTree.tasks;
-			res.status(200).send(tasks);
-			if (err) {
-				console.log(err);
+			if (!foundTree) {
+				res.status(404).send("parentId is missing or invalid.");
+			} else {
+				tasks = foundTree.tasks;
+				res.status(200).send(tasks);
+				if (err) {
+					console.log(err);
+				}
 			}
 		});
 	} catch (err) {
