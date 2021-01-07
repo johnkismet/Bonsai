@@ -29,7 +29,6 @@ function TaskContainer(props) {
   const showTasks = tasks.map((task, index) => (
     <Task className="task" name={task.name} completed={task.completed} />
   ));
-
   const addTask = () => {
     let newTaskName = document.querySelector(".taskInput").value;
     console.log("adding task");
@@ -41,10 +40,17 @@ function TaskContainer(props) {
     let newTasks = [...tasks];
     newTasks.push(newTask);
     setTasks(newTasks);
+    console.log(tasks);
   };
 
   useEffect(() => {
-    axios
+    GetTasks();
+    return () => {
+      CompWillUnmnt();
+    };
+  }, []);
+  async function GetTasks() {
+    await axios
       .get(`http://localhost:4000/getTasks/${id}`)
       .then(function (res) {
         // handle success
@@ -58,14 +64,13 @@ function TaskContainer(props) {
       .then(function () {
         // always executed
       });
-    return () => {
-      //return function inside useEffect is equivalent to componentWillUnmount (https://dev.to/robmarshall/how-to-use-componentwillunmount-with-functional-components-in-react-2a5g)
-
-      console.log("sending tasks");
-      console.log(tasks);
-      axios.post(`http://localhost:4000/setTasks/?${id}`, tasks);
-    };
-  }, []);
+  }
+  async function CompWillUnmnt() {
+    //return function inside useEffect is equivalent to componentWillUnmount (https://dev.to/robmarshall/how-to-use-componentwillunmount-with-functional-components-in-react-2a5g)
+    console.log("sending tasks");
+    console.log(tasks);
+    await axios.post(`http://localhost:4000/setTasks/${id}`, tasks);
+  }
   return (
     <div className="Tasks">
       <div className="inputContainer">
