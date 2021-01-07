@@ -7,10 +7,10 @@ function Login(props) {
 		<div className="Login">
 			<div className="spacer">BONSAI</div>
 			<div className="loginContainer">
-				<Link to="/register" className="register">
+				<Link to="/treefarm" className="register">
 					REGISTER
 				</Link>
-				<Link to="/login" className="login">
+				<Link to="/treefarm" className="login">
 					LOGIN
 				</Link>
 			</div>
