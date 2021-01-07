@@ -75,7 +75,9 @@ function Tree(props) {
 					</div>
 					<div className="buttonsContainer">
 						<button className="treeButton archiveTree">Archive</button>
-						<button className="treeButton deleteTree">Delete</button>
+						<button onClick={deleteTree} className="treeButton deleteTree">
+							Delete
+						</button>
 					</div>
 				</div>
 				<div className="rightSide">
@@ -171,12 +173,11 @@ function getTreePic(stage) {
 	} else if (stage === 1) {
 		return "age: 2";
 	} else {
-		return "age: 3";
+		return `age: ${stage}`;
 	}
 }
 
 function deleteTree() {
-	console.log("Hi");
 	axios.delete(`http://localhost:4000/trees/${id}`);
 
 	setTimeout(() => {
