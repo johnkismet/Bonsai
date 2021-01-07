@@ -168,7 +168,6 @@ function convertTime(seconds) {
 }
 
 function getTreePic(stage) {
-	console.log(stage);
 	if (stage === 0) {
 		return <img src={TreePic} width="100px" />;
 	} else if (stage === 1) {
