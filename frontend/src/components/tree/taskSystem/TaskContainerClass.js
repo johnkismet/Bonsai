@@ -60,7 +60,12 @@ export default class TaskContainerClass extends Component {
       tasks: newTasks,
     });
   };
-
+  enterAddTask = (event) => {
+    let KeyPressed = event.nativeEvent.code;
+    if (KeyPressed === "Enter") {
+      this.addTask();
+    }
+  };
   ToggleCompleted = (changedId) => {
     //literally stole 90% of this from the todo app
     const newTasks = [...this.state.tasks];
@@ -88,6 +93,7 @@ export default class TaskContainerClass extends Component {
           <input
             placeholder="What're you working on?"
             className="taskInput"
+            onKeyDown={(event) => this.enterAddTask(event)}
             value={this.state.currentName}
             onChange={this.handleChange}
           ></input>
