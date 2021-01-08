@@ -33,9 +33,9 @@ function NewTree() {
 				<input name="details" type="text" />
 				<br />
 				<input
-					onClick={() => {
-						history.goBack();
-					}}
+					// onClick={() => {
+					// 	history.goBack();
+					// }}
 					type="submit"
 				/>
 			</form>
