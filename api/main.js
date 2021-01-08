@@ -73,8 +73,8 @@ app.post("/api/newTree", (req, res) => {
 	bonsai.save((err) => {
 		if (err) return console.error(err);
 	});
-	res.send(`Tree made!`);
-	// res.redirect("http://localhost:3000/treefarm");
+	// res.send(`Tree made!`);
+	res.redirect("http://localhost:3000/treefarm");
 });
 
 app.post("/api/setTasks/:parentId?", (req, res) => {
