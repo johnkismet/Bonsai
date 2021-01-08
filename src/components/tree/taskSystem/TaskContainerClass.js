@@ -4,9 +4,8 @@ import Task from "./Task";
 import { v4 as uuid } from "uuid";
 const url =
 	process.env.NODE_ENV === "production"
-		? "http://myapp.vercel.com/api"
+		? "https://bonsai-one.vercel.app/api"
 		: "localhost:3000/api";
-
 export default class TaskContainerClass extends Component {
 	state = {
 		id: this.props.id,

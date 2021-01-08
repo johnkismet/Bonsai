@@ -8,7 +8,7 @@ const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
 	process.env.NODE_ENV === "production"
-		? "http://myapp.vercel.com/api"
+		? "https://bonsai-one.vercel.app/api"
 		: "localhost:3000/api";
 
 function Tree(props) {

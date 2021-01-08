@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./newTree.css";
 const url =
 	process.env.NODE_ENV === "production"
-		? "http://myapp.vercel.com/api"
+		? "https://bonsai-one.vercel.app/api"
 		: "localhost:3000/api";
 
 function NewTree() {
