@@ -20,7 +20,7 @@ With each project, you will have tasks that need done. Take some time (it may be
 Bonsai gives you a helpful report with statistics about your productivity. You will be able to view your hours logged in a week/month period, your tree farm and lifetime points, your bonsai streak, and more.
 
 # Project Requirements
-[Scrum Board URL](https://github.com/johnkismet/Bonsai/projects/1) | [Deployment URL]() | [Kapstone Pitch URL](https://docs.google.com/document/d/1o-QS1STWTAq39--1Mb5bxqj4uX7sV2X99g7owJL_17k/edit?usp=sharing) | [Group Retrospective Document URL]() | [Kapstone Feedback Form](https://docs.google.com/forms/d/1yeIyQH6ZE6y5Z0qB2i8yW5_1Gzfxs8YiJsNlcyjR0WA/viewform?edit_requested=true)
+[Scrum Board URL](https://github.com/johnkismet/Bonsai/projects/1) | [Deployment URL](bonsai-one.vercel.app) | [Kapstone Pitch URL](https://docs.google.com/document/d/1o-QS1STWTAq39--1Mb5bxqj4uX7sV2X99g7owJL_17k/edit?usp=sharing) | [Group Retrospective Document URL]() | [Kapstone Feedback Form](https://docs.google.com/forms/d/1yeIyQH6ZE6y5Z0qB2i8yW5_1Gzfxs8YiJsNlcyjR0WA/viewform?edit_requested=true)
 # About us
 | Name | Scrum Role | Role |
 |------|------------|------|
