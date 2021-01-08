@@ -12,7 +12,7 @@ import Tree from "./treeLink";
 const url =
 	process.env.NODE_ENV === "production"
 		? "https://bonsai-one.vercel.app/api"
-		: "localhost:3000/api";
+		: "http://localhost:3000/api";
 
 const axios = require("axios").default;
 

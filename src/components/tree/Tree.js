@@ -9,7 +9,7 @@ const id = window.location.pathname.substring(7);
 const url =
 	process.env.NODE_ENV === "production"
 		? "https://bonsai-one.vercel.app/api"
-		: "localhost:3000/api";
+		: "http://localhost:3000/api";
 
 function Tree(props) {
 	const [name, setName] = useState("");
