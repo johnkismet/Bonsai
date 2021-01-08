@@ -1,64 +1,80 @@
-* {
-  margin: 0;
-  padding: 0;
+.Spacer {
+	width: 90%;
+	height: 15vh;
 }
-.treeContainer {
-  margin: auto;
-  margin-top: 80px;
-  width: 60%;
-  height: 90vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
+.Tree {
+	width: 90%;
+	height: 80vh;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(255, 255, 255);
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.10070257611241218) 47%
+	);
 }
-.treeInfoCont {
-  width: 100%;
-  height: 30%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.leftSide {
+	width: 30%;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	border-right: 1px solid rgba(255, 255, 255, 0.374);
 }
-.treeNotes {
-  width: 50%;
-  height: 100%;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-align: center;
+.nameOfTree {
+	width: 100%;
+	height: 10%;
+	border-left: 1px solid rgba(255, 255, 255, 0.374);
+	border-top: 1px solid rgba(255, 255, 255, 0.374);
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: whitesmoke;
+}
+.details {
+	width: 100%;
+	height: 30%;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-right: none;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: whitesmoke;
 }
 .treePic {
-  border: 1px solid black;
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  border-radius: 10px;
+	width: 100%;
+	height: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-top: none;
+	color: whitesmoke;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
-.treeTaskContainer {
-  border: 1px solid black;
-  width: 50%;
-  height: 60%;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 10px;
+.buttonsContainer {
+	width: 100%;
+	height: 10%;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-top: none;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
-.task {
-  width: 75%;
-  height: 20%;
-  border: 1px solid black;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.treeButton {
+	border: none;
+	border-radius: 10px;
+	padding: 4px;
+	cursor: pointer;
 }
-.taskCheckBtn {
-  width: 20%;
-  height: 50%;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-.buttons {
-  display: flex;
+.rightSide {
+	width: 70%;
+	height: 100%;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-left: none;
 }

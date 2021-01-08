@@ -1,0 +1,59 @@
+.Tasks {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.inputContainer {
+	width: 100%;
+	height: 13%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.taskInput {
+	width: 80%;
+	height: 60%;
+	background: transparent;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.374);
+	color: rgba(255, 255, 255, 0.809);
+}
+::placeholder {
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: rgb(255, 255, 255);
+	opacity: 0.7; /* Firefox */
+}
+.submitTask {
+	width: 10%;
+	height: 60%;
+	color: whitesmoke;
+	background: none;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-radius: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.374);
+	opacity: 0.9;
+}
+.taskContainer {
+	width: 100%;
+	height: 90%;
+}
+.task {
+	width: 30%;
+	height: 15%;
+	border: 1px solid rgba(255, 255, 255, 0.374);
+	border-radius: 20px;
+	margin: 5px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	color: whitesmoke;
+}
+.completedBtn {
+	border-radius: 30px;
+	border: none;
+}

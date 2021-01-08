@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/treeSidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
+import TaskContainerClass from "./taskSystem/TaskContainerClass";
+import TreePic from "../../assets/images/tempTreeSprite.png";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 
@@ -9,6 +11,7 @@ function Tree(props) {
 	const [name, setName] = useState("");
 	const [details, setDetails] = useState("");
 	const [type, setType] = useState("");
+	const [stage, setStage] = useState(0);
 	const [tasks, setTasks] = useState([]);
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
@@ -23,6 +26,7 @@ function Tree(props) {
 				setName(res.data.name);
 				setDetails(res.data.details);
 				setType(res.data.type);
+				setStage(res.data.stage);
 				setTasks(res.data.tasks);
 				setPoints(res.data.points);
 				setWorkTimer(res.data.workTimer);
@@ -56,32 +60,32 @@ function Tree(props) {
 	document.title = `Working on ${name}`;
 
 	return (
-		<React.Fragment>
-			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
-			<div className="treeContainer">
-				<h1>{name}</h1>
-				<div className="treeInfoCont">
-					<div className="treeNotes">{details}</div>
-					<div className="treePic">Tree pic</div>
+		<>
+			<div className="Spacer"></div>
+			<div className="Tree">
+				<div className="leftSide">
+					<div className="nameOfTree">
+						<h3>{name}</h3>
+					</div>
+					<div className="details">
+						<p>{details}</p>
+					</div>
+					<div className="treePic">
+						{/* TODO: figure out why images aren't working */}
+						{getTreePic(stage)}
+					</div>
+					<div className="buttonsContainer">
+						<button className="treeButton archiveTree">Archive</button>
+						<button onClick={deleteTree} className="treeButton deleteTree">
+							Delete
+						</button>
+					</div>
 				</div>
-				<div className="treeTaskContainer">
-					<div className="task">
-						<p>Task One</p>
-						<button className="taskCheckBtn"></button>
-					</div>
-					<div className="task">
-						<p>Task Two</p>
-						<button className="taskCheckBtn"></button>
-					</div>
-					<div className="task">
-						<p>Task Three</p>
-						<button className="taskCheckBtn"></button>
-					</div>
+				<div className="rightSide">
+					<TaskContainerClass id={id} />
 				</div>
-				<button onClick={deleteTree}>Delete Tree</button>
-				<h1>You've worked on this tree for {convertTime(workTimer)}!</h1>
 			</div>
-		</React.Fragment>
+		</>
 	);
 }
 
@@ -163,12 +167,21 @@ function convertTime(seconds) {
 	return formatStr.trim();
 }
 
+function getTreePic(stage) {
+	if (stage === 0) {
+		return <img src={TreePic} width="100px" />;
+	} else if (stage === 1) {
+		return <img src={TreePic} width="200px" />;
+	} else {
+		return <img src={TreePic} width="300px" />;
+	}
+}
+
 function deleteTree() {
-	console.log("Hi");
 	axios.delete(`http://localhost:4000/trees/${id}`);
 
 	setTimeout(() => {
-		window.location = "/";
+		window.location = "/treefarm";
 	}, 500);
 }
 export default Tree;
