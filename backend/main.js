@@ -28,14 +28,14 @@ const treeSchema = new mongoose.Schema({
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
-app.get("/trees", (req, res) => {
+app.get("/api/trees", (req, res) => {
 	Tree.find((err, trees) => {
 		if (err) return console.error(err);
 		res.send(trees);
 	});
 });
 
-app.get("/trees/:id", (req, res) => {
+app.get("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findById(id, function (err, tree) {
 		if (err) console.log(err);
@@ -44,7 +44,7 @@ app.get("/trees/:id", (req, res) => {
 	});
 });
 
-app.delete("/trees/:id", (req, res) => {
+app.delete("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findByIdAndDelete(id, function (err, tree) {
 		if (err) console.log(err);
@@ -53,7 +53,7 @@ app.delete("/trees/:id", (req, res) => {
 	});
 });
 
-app.post("/newTree", (req, res) => {
+app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
 	if (!body.name || !body.typeOfTree) {
@@ -77,7 +77,7 @@ app.post("/newTree", (req, res) => {
 	res.redirect("http://localhost:3000/treefarm");
 });
 
-app.post("/setTasks/:parentId?", (req, res) => {
+app.post("/api/setTasks/:parentId?", (req, res) => {
 	try {
 		const newTasks = req.body.tasks;
 		const itemsCompleted = req.body.itemsCompleted;
@@ -110,7 +110,7 @@ app.post("/setTasks/:parentId?", (req, res) => {
 	}
 });
 
-app.post("/trees/:id", (req, res) => {
+app.post("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findOne({ _id: id }, (err, tree) => {
 		if (err) console.log(err);
@@ -121,7 +121,7 @@ app.post("/trees/:id", (req, res) => {
 	});
 });
 
-app.get("/getTasks/:parentId", (req, res) => {
+app.get("/api/getTasks/:parentId", (req, res) => {
 	try {
 		const parentId = req.params.parentId;
 		let tasks = new Array();
@@ -139,8 +139,4 @@ app.get("/getTasks/:parentId", (req, res) => {
 	} catch (err) {
 		res.status(400).json({ message: err.message });
 	}
-});
-
-app.listen(4000, () => {
-	console.log("express server is running on port 4000");
 });
