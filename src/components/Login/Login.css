@@ -1,10 +1,23 @@
 .Login {
 	background: rgb(55, 178, 96);
+	background-image: url("../../assets/images/backgroundTwo.png");
+	background-repeat: none;
+	background-size: cover;
 }
 .loginContainer {
 	margin: auto;
 	width: 50%;
-	height: 50vh;
+	height: 70vh;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+}
+.loginContainer h1 {
+	font-size: 3rem;
+	color: whitesmoke;
+}
+.logoContainer {
 	display: flex;
 	flex-flow: column;
 	justify-content: space-around;
@@ -12,7 +25,7 @@
 }
 .spacer {
 	width: 50%;
-	height: 25vh;
+	height: 100px;
 	margin: auto;
 	text-align: center;
 	display: flex;
@@ -23,24 +36,28 @@
 .register {
 	background: rgba(0, 0, 0, 0.524);
 	color: white;
-	width: 20%;
-	height: 25%;
+	width: 75px;
+	height: 75px;
+	font-size: 80%;
 	border: 1px solid black;
 	border-radius: 100%;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-decoration: none;
 }
 .login {
 	background: rgba(0, 0, 0, 0.524);
 	color: white;
-	width: 20%;
-	height: 25%;
+	width: 75px;
+	height: 75px;
+	font-size: 90%;
 	border: 1px solid black;
 	border-radius: 100%;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-decoration: none;
 }

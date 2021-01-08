@@ -7,9 +7,11 @@ function Tree(props) {
 	return (
 		<div id={props.id} className="tree">
 			<div className="bonsaiImg">
-				<img src={treePic} width="100px" />
+				<img src={treePic} alt="tree" width="100px" />
 			</div>
-			<h2 className="treeName">{props.name}</h2>
+			<div className="treeNameTag">
+				<h2 className="treeName">{props.name}</h2>
+			</div>
 
 			<button onClick={findTree} className="workBtn">
 				Work

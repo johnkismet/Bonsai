@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const app = express();
 const uri =
 	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
-
 const url =
 	process.env.NODE_ENV === "production"
 		? "https://bonsai-one.vercel.app"
@@ -42,7 +41,8 @@ app.get("/api/trees/:id", (req, res) => {
 	});
 });
 
-app.get("/api/trees", (req, res) => {
+app.get(`/api/trees`, (req, res) => {
+	console.log("ah");
 	Tree.find((err, trees) => {
 		if (err) return console.error(err);
 		res.send(trees);

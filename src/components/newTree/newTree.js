@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./newTree.css";
 const url =
 	process.env.NODE_ENV === "production"
-		? "https://bonsai-one.vercel.app/api"
+		? "https://bonsai-one.vercel.app"
 		: "http://localhost:3000/api";
 
 function NewTree() {
@@ -16,7 +16,7 @@ function NewTree() {
 	return (
 		<div className="newTree">
 			<form
-				action={`${url}/newTree`}
+				action={`${url}/api/newTree`}
 				method="post"
 				enctype="application/x-www-form-urlencoded"
 			>

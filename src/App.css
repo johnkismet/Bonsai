@@ -2,7 +2,7 @@ html,
 body {
 	margin: 0;
 	font-family: "Montserrat", sans-serif;
-	background: rgb(55, 178, 96);
+	background: rgb(45, 47, 46);
 }
 .App {
 	font-family: sans-serif;
@@ -10,12 +10,6 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: rgb(55, 178, 96);
-	background: linear-gradient(
-		180deg,
-		rgba(55, 178, 96, 1) 0%,
-		rgba(106, 179, 125, 1) 100%
-	);
 	overflow: hidden;
 }
 
@@ -70,7 +64,7 @@ body {
 
 /* General sidebar styles */
 .bm-menu {
-	background: #95ab84;
+	background: #708e5a;
 	padding: 2.5em 1.5em 0;
 	font-size: 1.15em;
 	display: flex;
@@ -81,7 +75,7 @@ body {
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-	fill: #839b70;
+	fill: #516941;
 }
 
 /* Wrapper for item list */
@@ -124,7 +118,6 @@ body {
 	width: 150px;
 	height: 150px;
 	margin: 10px;
-	border: 1px solid black;
 	border-radius: 10px;
 	text-align: center;
 	display: flex;
