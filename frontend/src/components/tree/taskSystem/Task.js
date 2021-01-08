@@ -1,4 +1,6 @@
 import "./Tasks.css";
+import React from "react";
+import { useState } from "react";
 
 function Task(props) {
   return (
@@ -6,7 +8,7 @@ function Task(props) {
       <p>{props.name}</p>
       <input
         className="completedBtn"
-        onChange={props.onChange}
+        onChange={() => props.onChange(props.taskId)}
         type="checkbox"
       />
     </div>
