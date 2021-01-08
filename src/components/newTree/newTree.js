@@ -12,7 +12,7 @@ function NewTree() {
 	return (
 		<div className="newTree">
 			<form
-				action="http://localhost:4000/newTree"
+				action="http://localhost:3000/api/newTree"
 				method="post"
 				enctype="application/x-www-form-urlencoded"
 			>

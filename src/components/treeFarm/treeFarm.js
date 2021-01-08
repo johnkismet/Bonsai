@@ -21,7 +21,7 @@ function TreeFarm() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:4000/trees")
+			.get("http://localhost:3000/api/trees")
 			.then(function (res) {
 				// handle success
 				let data = res.data;

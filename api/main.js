@@ -28,19 +28,19 @@ const treeSchema = new mongoose.Schema({
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
-app.get("/api/trees", (req, res) => {
-	Tree.find((err, trees) => {
-		if (err) return console.error(err);
-		res.send(trees);
-	});
-});
-
 app.get("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findById(id, function (err, tree) {
 		if (err) console.log(err);
 
 		res.send(tree);
+	});
+});
+
+app.get("/api/trees", (req, res) => {
+	Tree.find((err, trees) => {
+		if (err) return console.error(err);
+		res.send(trees);
 	});
 });
 
@@ -73,8 +73,8 @@ app.post("/api/newTree", (req, res) => {
 	bonsai.save((err) => {
 		if (err) return console.error(err);
 	});
-	// res.send(`Tree made!`);
-	res.redirect("http://localhost:3000/treefarm");
+	res.send(`Tree made!`);
+	// res.redirect("http://localhost:3000/treefarm");
 });
 
 app.post("/api/setTasks/:parentId?", (req, res) => {
@@ -97,12 +97,13 @@ app.post("/api/setTasks/:parentId?", (req, res) => {
 				}
 				if (foundTree.points < 0) {
 					foundTree.points = 0;
-					res.status(200).send(`Tasks set successfully, but something has likely gone awry somewhere else.
+					res.status(200)
+						.send(`Tasks set successfully, but something has likely gone awry somewhere else.
 					 More tasks have been marked incompelete after being marked complete than possible. 
 					 Resetting tree points to 0...`);
 				} else {
 					res.status(200).send("Tasks set successfully.");
-				}	
+				}
 			}
 		});
 	} catch (err) {
@@ -140,3 +141,5 @@ app.get("/api/getTasks/:parentId", (req, res) => {
 		res.status(400).json({ message: err.message });
 	}
 });
+
+export default app;
