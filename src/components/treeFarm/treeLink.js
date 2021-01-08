@@ -3,8 +3,6 @@ import React from "react";
 import treePic from "../../assets/images/tempTreeSprite.png";
 import "./Tree.css";
 
-const axios = require("axios").default;
-
 function Tree(props) {
 	return (
 		<div id={props.id} className="tree">

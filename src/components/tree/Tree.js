@@ -6,6 +6,10 @@ import TaskContainerClass from "./taskSystem/TaskContainerClass";
 import TreePic from "../../assets/images/tempTreeSprite.png";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
+const url =
+	process.env.NODE_ENV === "production"
+		? "http://myapp.vercel.com/api"
+		: "localhost:3000/api";
 
 function Tree(props) {
 	const [name, setName] = useState("");
@@ -20,7 +24,7 @@ function Tree(props) {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
 
 		axios
-			.get(`http://localhost:3000/api/trees/${id}`)
+			.get(`${url}/trees/${id}`)
 			.then(function (res) {
 				// handle success
 				setName(res.data.name);
@@ -50,7 +54,7 @@ function Tree(props) {
 			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
 			axios({
 				method: "post",
-				url: `http://localhost:3000/api/trees/${id}`,
+				url: `${url}/trees/${id}`,
 				data: {
 					workTimer: timeSpentOnPage,
 				},
@@ -178,7 +182,7 @@ function getTreePic(stage) {
 }
 
 function deleteTree() {
-	axios.delete(`http://localhost:3000/api/trees/${id}`);
+	axios.delete(`${url}/trees/${id}`);
 
 	setTimeout(() => {
 		window.location = "/treefarm";

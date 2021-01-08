@@ -2,6 +2,10 @@ import axios from "axios";
 import { Component } from "react";
 import Task from "./Task";
 import { v4 as uuid } from "uuid";
+const url =
+	process.env.NODE_ENV === "production"
+		? "http://myapp.vercel.com/api"
+		: "localhost:3000/api";
 
 export default class TaskContainerClass extends Component {
 	state = {
@@ -12,7 +16,7 @@ export default class TaskContainerClass extends Component {
 	};
 
 	componentDidMount() {
-		fetch(`http://localhost:3000/api/getTasks/${this.state.id}`)
+		fetch(`${url}/getTasks/${this.state.id}`)
 			.then((res) => res.json())
 			.then((data) =>
 				this.setState({
@@ -23,7 +27,7 @@ export default class TaskContainerClass extends Component {
 
 	componentWillUnmount() {
 		axios
-			.post(`http://localhost:3000/api/setTasks/${this.state.id}`, {
+			.post(`${url}/setTasks/${this.state.id}`, {
 				tasks: this.state.tasks,
 				itemsCompleted: 0,
 			})

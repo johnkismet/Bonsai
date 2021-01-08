@@ -4,6 +4,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./newTree.css";
+const url =
+	process.env.NODE_ENV === "production"
+		? "http://myapp.vercel.com/api"
+		: "localhost:3000/api";
 
 function NewTree() {
 	const dispatch = useDispatch();
@@ -12,7 +16,7 @@ function NewTree() {
 	return (
 		<div className="newTree">
 			<form
-				action="http://localhost:3000/api/newTree"
+				action={`${url}/newTree`}
 				method="post"
 				enctype="application/x-www-form-urlencoded"
 			>

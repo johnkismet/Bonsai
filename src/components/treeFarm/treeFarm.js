@@ -9,6 +9,10 @@ import Sidebar from "../sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { addTree } from "../../actions";
 import Tree from "./treeLink";
+const url =
+	process.env.NODE_ENV === "production"
+		? "http://myapp.vercel.com/api"
+		: "localhost:3000/api";
 
 const axios = require("axios").default;
 
@@ -21,7 +25,7 @@ function TreeFarm() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3000/api/trees")
+			.get(`${url}/trees`)
 			.then(function (res) {
 				// handle success
 				let data = res.data;
