@@ -5,6 +5,11 @@ const mongoose = require("mongoose");
 const app = express();
 const uri =
 	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
+
+const url =
+	process.env.NODE_ENV === "production"
+		? "https://bonsai-one.vercel.app"
+		: "http://localhost:3000";
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -74,7 +79,7 @@ app.post("/api/newTree", (req, res) => {
 		if (err) return console.error(err);
 	});
 	// res.send(`Tree made!`);
-	res.redirect("http://localhost:3000/treefarm");
+	res.redirect(`${url}/treefarm`);
 });
 
 app.post("/api/setTasks/:parentId?", (req, res) => {
