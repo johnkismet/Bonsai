@@ -10,6 +10,7 @@ function Task(props) {
         className="completedBtn"
         onChange={() => props.onChange(props.taskId)}
         type="checkbox"
+        checked={props.completed}
       />
     </div>
   );

@@ -62,14 +62,9 @@ export default class TaskContainerClass extends Component {
   };
 
   ToggleCompleted = (changedId) => {
-    console.log(changedId);
+    //literally stole 90% of this from the todo app
     const newTasks = [...this.state.tasks];
-    console.log(newTasks);
-    // let filteredTasks = newTasks.filter((task) => task.taskId === changedId);
-    // console.log(filteredTasks);
     for (let i = 0; i < newTasks.length; i++) {
-      console.log(`current ID: ${newTasks[i].taskId}`);
-      console.log(`Clicked ID: ${changedId}`);
       if (newTasks[i].taskId === changedId) {
         newTasks[i].completed = !newTasks[i].completed;
       }
