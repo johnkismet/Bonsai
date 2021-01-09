@@ -1,4 +1,4 @@
-import { bubble as Menu } from "react-burger-menu";
+import { fallDown as Menu } from "react-burger-menu";
 import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import TreeFarm from "../treeFarm/treeFarm";
