@@ -14,7 +14,7 @@
 	align-items: center;
 }
 .taskInput {
-	width: 80%;
+	width: 60%;
 	height: 60%;
 	background: transparent;
 	border-top: none;
@@ -22,6 +22,7 @@
 	border-right: none;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.374);
 	color: rgba(255, 255, 255, 0.809);
+	margin: 5px;
 }
 ::placeholder {
 	/* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -29,7 +30,7 @@
 	opacity: 0.7; /* Firefox */
 }
 .submitTask {
-	width: 10%;
+	width: 20%;
 	height: 60%;
 	color: whitesmoke;
 	background: none;

@@ -61,6 +61,8 @@ app.delete("/api/trees/:id", (req, res) => {
 app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
+	console.log("hi");
+	console.log(url);
 	if (!body.name || !body.typeOfTree) {
 		console.log("Must have name!");
 		return;
@@ -77,9 +79,9 @@ app.post("/api/newTree", (req, res) => {
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
+		// res.send(`Tree made!`);
+		res.status(400).redirect(`${url}/treefarm`);
 	});
-	// res.send(`Tree made!`);
-	res.redirect(`${url}/treefarm`);
 });
 
 app.post("/api/setTasks/:parentId?", (req, res) => {

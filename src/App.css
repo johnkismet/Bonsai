@@ -12,6 +12,10 @@ body {
 	align-items: center;
 	overflow: hidden;
 }
+.treeFarmGrid {
+	width: 70%;
+	height: 60vh;
+}
 
 /* SIDEBAR STYLING */
 #page-wrap {

@@ -47,20 +47,19 @@ function TreeFarm() {
 	return (
 		<React.Fragment>
 			<div className="App">
-				<div id="page-wrap">
-					<div id="treeFarm">
-						<Grid
-							container
-							direction="row"
-							justify="center"
-							alignItems="center"
-						>
-							{showTrees}
-						</Grid>
-
-						<Link to="/newTree" className="addTaskBtn"></Link>
-					</div>
+				<div className="treeFarmGrid">
+					<Grid
+						className="treeFarmGrid"
+						container
+						direction="row"
+						justify="center"
+						alignItems="center"
+					>
+						{showTrees}
+					</Grid>
 				</div>
+
+				<Link to="/newTree" className="addTaskBtn"></Link>
 			</div>
 		</React.Fragment>
 	);
