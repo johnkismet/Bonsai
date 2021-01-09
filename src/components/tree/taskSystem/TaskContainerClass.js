@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Component } from "react";
+import { Grid } from "@material-ui/core";
 import Task from "./Task";
 import { v4 as uuid } from "uuid";
 const url =
@@ -104,11 +105,13 @@ export default class TaskContainerClass extends Component {
 						className="submitTask"
 						onClick={this.addTask}
 						type="button"
-						value="Submit"
+						value="Add"
 					/>
 				</div>
 				<div className="taskContainer">
-					<div>{this.showTasks()}</div>
+					<Grid container direction="row" justify="center" alignItems="center">
+						{this.showTasks()}
+					</Grid>
 				</div>
 			</div>
 		);

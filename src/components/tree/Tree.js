@@ -68,11 +68,15 @@ function Tree(props) {
 			<div className="Spacer"></div>
 			<div className="Tree">
 				<div className="leftSide">
-					<div className="nameOfTree">
-						<h3>{name}</h3>
+					<div className="treeNameCont">
+						<div className="treeName">
+							<h3>{name}</h3>
+						</div>
 					</div>
-					<div className="details">
-						<p>{details}</p>
+					<div className="detailsCont">
+						<div className="details">
+							<p>{details}</p>
+						</div>
 					</div>
 					<div className="treePic">
 						{/* TODO: figure out why images aren't working */}
@@ -86,7 +90,9 @@ function Tree(props) {
 					</div>
 				</div>
 				<div className="rightSide">
-					<TaskContainerClass id={id} />
+					<div className="taskCont">
+						<TaskContainerClass id={id} />
+					</div>
 				</div>
 			</div>
 		</>

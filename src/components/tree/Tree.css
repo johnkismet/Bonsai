@@ -25,7 +25,7 @@
 	align-items: center;
 	border-right: 1px solid rgba(255, 255, 255, 0.374);
 }
-.nameOfTree {
+.treeNameCont {
 	width: 100%;
 	height: 10%;
 	border-left: 1px solid rgba(255, 255, 255, 0.374);
@@ -36,7 +36,14 @@
 	align-items: center;
 	color: whitesmoke;
 }
-.details {
+.treeName {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	height: 100%;
+}
+.detailsCont {
 	width: 100%;
 	height: 30%;
 	border: 1px solid rgba(255, 255, 255, 0.374);
@@ -46,6 +53,13 @@
 	justify-content: center;
 	align-items: center;
 	color: whitesmoke;
+}
+.details {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	height: 90%;
 }
 .treePic {
 	width: 100%;
@@ -77,4 +91,11 @@
 	height: 100%;
 	border: 1px solid rgba(255, 255, 255, 0.374);
 	border-left: none;
+}
+.taskCont {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	height: 60%;
 }

@@ -43,15 +43,21 @@
 	height: 90%;
 }
 .task {
-	width: 30%;
-	height: 15%;
+	width: 80%;
+	height: 20%;
 	border: 1px solid rgba(255, 255, 255, 0.374);
 	border-radius: 20px;
 	margin: 5px;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	color: whitesmoke;
+}
+.task p {
+	margin-left: 10px;
+}
+.task input {
+	margin-right: 10px;
 }
 .completedBtn {
 	border-radius: 30px;
