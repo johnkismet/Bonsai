@@ -10,7 +10,10 @@ import Store from "./components/Store/Store";
 import Statistics from "./components/Statistics/Statistics";
 import Archive from "./components/Archive/Archive";
 import Sidebar from "./components/sidebar/Sidebar";
-import Login from "./components/Login/Login";
+import Welcome from "./components/WelcomePage/Welcome";
+import Login from "./components/WelcomePage/Login";
+import Register from "./components/WelcomePage/Register";
+import Introduction from "./components/Introduction/Introduction";
 
 function App() {
 	return (
@@ -19,7 +22,16 @@ function App() {
 				<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 				<Switch>
 					<Route exact path="/">
+						<Welcome />
+					</Route>
+					<Route exact path="/login">
 						<Login />
+					</Route>
+					<Route exact path="/register">
+						<Register />
+					</Route>
+					<Route exact path="/introduction">
+						<Introduction />
 					</Route>
 					<Route exact path="/treefarm">
 						<TreeFarm />

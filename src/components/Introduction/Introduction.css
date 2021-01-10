@@ -1,0 +1,13 @@
+.Introduction {
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	margin: auto;
+	width: 60%;
+	height: 40vh;
+	border: 1px solid white;
+}
+.Introduction h1 {
+	color: whitesmoke;
+}
