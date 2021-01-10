@@ -24,6 +24,9 @@ function Sidebar(props) {
 			<Link to="/statistics" className="sideBarInfo">
 				Statistics
 			</Link>
+			<Link to="/" className="sideBarInfo">
+				Logout
+			</Link>
 		</Menu>
 	);
 }
