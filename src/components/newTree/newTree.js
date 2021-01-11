@@ -4,6 +4,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./newTree.css";
+import TreePic from "../../assets/images/tempTreeSprite.png";
+import axios from "axios";
+
 const url =
 	process.env.NODE_ENV === "production"
 		? "https://bonsai-one.vercel.app/api"
@@ -14,36 +17,36 @@ function NewTree() {
 	const history = useHistory();
 
 	return (
-		<div className="newTree">
-			<form
-				action={`${url}/newTree`}
-				method="post"
-				enctype="application/x-www-form-urlencoded"
-			>
-				<label htmlFor="name">Name of tree: </label>
-				<input name="name" type="text" />
-				<br />
-				<br />
-
-				<h2>Type of tree</h2>
-
-				<input value="longTerm" name="typeOfTree" type="radio" />
-				<label htmlFor="typeOfTree">Long term </label>
-				<input value="shortTerm" name="typeOfTree" type="radio" />
-				<label htmlFor="shortTerm">Short term </label>
-				<br />
-				<br />
-				<label htmlFor="details">Project details: </label>
-				<input name="details" type="text" />
-				<br />
-				<input
-					// onClick={() => {
-					// 	history.goBack();
-					// }}
-					type="submit"
-				/>
-			</form>
-		</div>
+		<>
+			<div className="spacer"></div>
+			<div className="newTree">
+				<div className="treeContainer">
+					<img src={TreePic} alt="Tree" srcset="" />
+				</div>
+				<form
+					className="newTreeForm"
+					action={`${url}/newTree`}
+					method="post"
+					encType="application/x-www-form-urlencoded"
+				>
+					<input
+						className="treeInfoInput"
+						id="nameInput"
+						name="name"
+						placeholder="Name"
+						type="text"
+					/>
+					<input
+						className="treeInfoInput"
+						id="notesInput"
+						placeholder="Notes"
+						name="details"
+						type="text"
+					/>
+					<input value="Create Tree" className="submitBtn" type="submit" />
+				</form>
+			</div>
+		</>
 	);
 }
 

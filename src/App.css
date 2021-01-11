@@ -4,7 +4,7 @@ body {
 	font-family: "Montserrat", sans-serif;
 	background: rgb(45, 47, 46);
 }
-.App {
+#App {
 	font-family: sans-serif;
 	height: 100vh;
 	display: flex;
@@ -68,7 +68,7 @@ body {
 
 /* General sidebar styles */
 .bm-menu {
-	background: #708e5a;
+	background: rgb(77, 121, 81);
 	padding: 2.5em 1.5em 0;
 	font-size: 1.15em;
 	display: flex;

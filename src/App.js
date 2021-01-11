@@ -1,50 +1,45 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { BrowserRouter } from "react-router-dom";
-// components
-import TreeFarm from "./components/treeFarm/treeFarm";
-import NewTree from "./components/newTree/newTree";
-import MissingPage from "./components/missingPage/MissingPage";
-import Tree from "./components/tree/Tree";
-import Store from "./components/Store/Store";
-import Statistics from "./components/Statistics/Statistics";
-import Archive from "./components/Archive/Archive";
 import Sidebar from "./components/sidebar/Sidebar";
-import Login from "./components/Login/Login";
+import Navigation from "./components/Navigation";
+import Welcome from "./components/WelcomePage/Welcome";
+import useAuth from "./hooks/useAuth";
+// import Links from "./components/Links";
+import "./App.css";
+
+{
+	/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */
+}
 
 function App() {
+	const auth = useAuth();
+
+	// Please dont do this
+	async function loginNow() {
+		try {
+			const email = prompt("Enter your email");
+			await auth.login(email);
+		} catch (err) {
+			console.error(err);
+			// maybe updat some sort of state to let the user know that it failed =]
+		}
+	}
+
+	if (auth.loading || auth.loggingIn || auth.loggingOut) {
+		// User is currently trying to log in or something..
+		return "Loading....... 😬";
+	}
+
 	return (
-		<>
-			<BrowserRouter>
-				<Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-				<Switch>
-					<Route exact path="/">
-						<Login />
-					</Route>
-					<Route exact path="/treefarm">
-						<TreeFarm />
-					</Route>
-					<Route exact path="/store">
-						<Store />
-					</Route>
-					<Route exact path="/archive">
-						<Archive />
-					</Route>
-					<Route exact path="/statistics">
-						<Statistics />
-					</Route>
-					<Route exact path="/newTree">
-						<NewTree />
-					</Route>
-					<Route exact path="/trees/:id">
-						<Tree />
-					</Route>
-					<Route path="*">
-						<MissingPage />
-					</Route>
-				</Switch>
-			</BrowserRouter>
-		</>
+		<div className="App">
+			{auth.loggedIn ? (
+				<Navigation />
+			) : (
+				<div>
+					<Welcome />
+				</div>
+			)}
+		</div>
 	);
 }
 

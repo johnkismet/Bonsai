@@ -5,10 +5,41 @@
 .newTree {
 	margin: auto;
 	width: 50%;
-	height: 50vh;
+	height: 80vh;
 	display: flex;
-	justify-content: center;
+	flex-flow: column;
+	justify-content: space-around;
 	align-items: center;
 	text-align: center;
 	color: whitesmoke;
+}
+.treeContainer {
+	width: 60%;
+	height: 30%;
+	border: 1px solid rgba(245, 245, 245, 0.326);
+	border-radius: 10px;
+}
+.newTreeForm {
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 60%;
+	height: 40%;
+}
+.treeInfoInput {
+	border: none;
+	border-bottom: 1px solid white;
+	background: transparent;
+	width: 100%;
+	color: rgba(245, 245, 245, 0.904);
+}
+.submitBtn {
+	border: none;
+	width: 100%;
+	height: 20%;
+	background: #82a77e;
+	border-radius: 10px;
+	color: whitesmoke;
+	font-size: 2rem;
 }

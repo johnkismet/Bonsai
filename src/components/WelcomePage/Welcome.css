@@ -1,10 +1,10 @@
-.Login {
+.Welcome {
 	background: rgb(55, 178, 96);
 	background-image: url("../../assets/images/backgroundTwo.png");
 	background-repeat: none;
 	background-size: contain;
 }
-.loginContainer {
+.welcomeContainer {
 	margin: auto;
 	width: 50%;
 	height: 70vh;
@@ -13,7 +13,7 @@
 	justify-content: space-around;
 	align-items: center;
 }
-.loginContainer h1 {
+.welcomeContainer h1 {
 	font-size: 3rem;
 	color: whitesmoke;
 }
@@ -33,7 +33,7 @@
 	align-items: center;
 	font-size: 4rem;
 }
-.register {
+.registerBtn {
 	background: rgba(0, 0, 0, 0.524);
 	color: white;
 	width: 75px;
@@ -47,7 +47,7 @@
 	align-items: center;
 	text-decoration: none;
 }
-.login {
+.loginBtn {
 	background: rgba(0, 0, 0, 0.524);
 	color: white;
 	width: 75px;
@@ -60,4 +60,37 @@
 	justify-content: center;
 	align-items: center;
 	text-decoration: none;
+}
+.Login {
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 70vh;
+	height: 60vh;
+	margin: auto;
+	background: rgb(218, 218, 218);
+	border-radius: 10px;
+}
+.Login h1 {
+	color: rgb(63, 138, 75);
+	font-size: 3rem;
+}
+#loginInput {
+	background: none;
+	border: none;
+	border-bottom: 2px solid rgb(34, 34, 34);
+	width: 50%;
+}
+#loginInput ::placeholder {
+	color: rgb(44, 44, 44);
+}
+#loginSubmitBtn {
+	width: 50%;
+	height: 10%;
+	border-radius: 10px;
+	border: none;
+	background: rgb(63, 138, 75);
+	color: rgb(245, 245, 245);
+	font-size: 2rem;
 }
