@@ -2,9 +2,12 @@ import { fallDown as Menu } from "react-burger-menu";
 import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import TreeFarm from "../treeFarm/treeFarm";
+import useAuth from "../../hooks/useAuth";
 
 // TODO: Figure out why text isn't completely aligned
 function Sidebar(props) {
+	const auth = useAuth();
+
 	return (
 		<Menu {...props}>
 			<h1 className="sideBarInfo" id="title">
@@ -24,6 +27,9 @@ function Sidebar(props) {
 			<Link to="/statistics" className="sideBarInfo">
 				Statistics
 			</Link>
+			<button onClick={() => auth.logout()} className="sideBarInfo">
+				Logout
+			</button>
 		</Menu>
 	);
 }

@@ -188,10 +188,11 @@ function getTreePic(stage) {
 }
 
 function deleteTree() {
-	axios.delete(`${url}/trees/${id}`);
+	// console.log(id);
+	axios.delete(`${url}/trees/${id}`).then((res) => console.log(res));
 
-	setTimeout(() => {
-		window.location = "/treefarm";
-	}, 500);
+	// setTimeout(() => {
+	// 	window.location = "/treefarm";
+	// }, 500);
 }
 export default Tree;
