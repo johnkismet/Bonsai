@@ -4,7 +4,7 @@ body {
 	font-family: "Montserrat", sans-serif;
 	background: rgb(45, 47, 46);
 }
-.App {
+#App {
 	font-family: sans-serif;
 	height: 100vh;
 	display: flex;
@@ -26,7 +26,6 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid red;
 }
 
 .bm-item {

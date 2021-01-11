@@ -1,7 +1,18 @@
-import { Magic } from "magic-sdk";
-const m = new Magic("pk_test_5E8A26FACB5A436B"); // ✨
+import useAuth from "../../hooks/useAuth";
 
 function Login() {
+	const auth = useAuth();
+	async function loginNow() {
+		try {
+			const email = document.getElementById("loginSubmitBtn").value;
+			if (email) await auth.login(email);
+			else console.log("no email!");
+		} catch (err) {
+			console.error(err);
+			// maybe updat some sort of state to let the user know that it failed =]
+		}
+	}
+
 	return (
 		<>
 			<div className="spacer"></div>
@@ -10,7 +21,7 @@ function Login() {
 				<input id="loginInput" placeholder="Enter your email" type="text" />
 				<input
 					id="loginSubmitBtn"
-					onClick={loginHandler}
+					onClick={loginNow}
 					type="submit"
 					value="Login"
 				/>
@@ -19,13 +30,4 @@ function Login() {
 	);
 }
 
-function loginHandler(event) {
-	event.preventDefault();
-	let email = document.getElementById("loginInput").value;
-	const redirectURI = `${window.location.origin}/callback`;
-
-	if (email) {
-		m.auth.loginWithMagicLink({ email, redirectURI });
-	}
-}
 export default Login;

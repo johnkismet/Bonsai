@@ -1,47 +1,63 @@
 import React from "react";
 import { Switch } from "react-router-dom";
-import ConnectedRoute from "./ConnectedRoute";
-import TreeFarm from "./components/treeFarm/treeFarm";
-import NewTree from "./components/newTree/newTree";
-import MissingPage from "./components/missingPage/MissingPage";
-import Tree from "./components/tree/Tree";
-import Store from "./components/Store/Store";
-import Statistics from "./components/Statistics/Statistics";
-import Archive from "./components/Archive/Archive";
-import Welcome from "./components/WelcomePage/Welcome";
-import Login from "./components/WelcomePage/Login";
-import Register from "./components/WelcomePage/Register";
-import Introduction from "./components/Introduction/Introduction";
+import ConnectedRoute from "./ConnectedRoutes";
+import TreeFarm from "./treeFarm/treeFarm";
+import NewTree from "./newTree/newTree";
+import MissingPage from "./missingPage/MissingPage";
+import Tree from "./tree/Tree";
+import Store from "./Store/Store";
+import Statistics from "./Statistics/Statistics";
+import Archive from "./Archive/Archive";
+import Welcome from "./WelcomePage/Welcome";
+import Login from "./WelcomePage/Login";
+import Register from "./WelcomePage/Register";
+import Introduction from "./Introduction/Introduction";
+import Sidebar from "./sidebar/Sidebar";
+import "../App.css";
 
 export default function Navigation() {
 	return (
-		<Switch>
-			<ConnectedRoute
-				exact
-				path="/"
-				redirectIfAuthenticated
-				component={Welcome}
-			/>
-			<ConnectedRoute exact isProtected path="/treefarm" component={TreeFarm} />
-			<ConnectedRoute exact isProtected path="/newTree" component={NewTree} />
-			<ConnectedRoute exact isProtected path="/trees/:id" component={Tree} />
-			<ConnectedRoute exact isProtected path="/store" component={Store} />
-			<ConnectedRoute
-				exact
-				isProtected
-				path="/statistics"
-				component={Statistics}
-			/>
-			<ConnectedRoute exact isProtected path="/archive" component={Archive} />
-			<ConnectedRoute exact path="/login" component={Login} />
-			<ConnectedRoute exact path="/register" component={Register} />
-			<ConnectedRoute
-				exact
-				isProtected
-				path="/introduction"
-				component={Introduction}
-			/>
-			<ConnectedRoute path="*" component={MissingPage} />
-		</Switch>
+		<div id="App">
+			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
+			<Switch>
+				<ConnectedRoute
+					exact
+					path="/"
+					redirectIfAuthenticated
+					component={Welcome}
+				/>
+				<ConnectedRoute
+					exact
+					path="/login"
+					redirectIfAuthenticated
+					component={Login}
+				/>
+				<ConnectedRoute
+					exact
+					path="/register"
+					redirectIfAuthenticated
+					component={Register}
+				/>
+				<ConnectedRoute exact path="/treefarm" component={TreeFarm} />
+				<ConnectedRoute exact isProtected path="/newTree" component={NewTree} />
+				<ConnectedRoute exact isProtected path="/trees/:id" component={Tree} />
+				<ConnectedRoute exact isProtected path="/store" component={Store} />
+				<ConnectedRoute
+					exact
+					isProtected
+					path="/statistics"
+					component={Statistics}
+				/>
+				<ConnectedRoute exact isProtected path="/archive" component={Archive} />
+
+				<ConnectedRoute
+					exact
+					isProtected
+					path="/introduction"
+					component={Introduction}
+				/>
+				<ConnectedRoute path="*" component={MissingPage} />
+			</Switch>
+		</div>
 	);
 }

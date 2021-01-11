@@ -28,7 +28,7 @@ export default function ConnectedRoute({
 						to={{
 							// where should a user initially go if they are logged in and they
 							// are on a page that has a redirectIfAuthenticated flag
-							pathname: `/dashboard`,
+							pathname: `/treefarm`,
 							state: { from: location },
 						}}
 					/>
