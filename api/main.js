@@ -29,10 +29,11 @@ const treeSchema = new mongoose.Schema({
 	tasks: Array,
 	points: Number,
 	workTimer: Number,
+	userId: String,
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
-app.get("/api/trees/:id", (req, res) => {
+app.get("/api/tree/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findById(id, function (err, tree) {
 		if (err) console.log(err);
@@ -41,11 +42,16 @@ app.get("/api/trees/:id", (req, res) => {
 	});
 });
 
-app.get(`/api/trees`, (req, res) => {
+app.get(`/api/trees/:userId`, (req, res) => {
 	console.log("ah");
 	Tree.find((err, trees) => {
+		let userTrees = trees.filter((tree) => {
+			if (tree.userId === req.params.userId) {
+				return tree;
+			} 
+		});
 		if (err) return console.error(err);
-		res.send(trees);
+		res.send(userTrees);
 	});
 });
 
@@ -58,7 +64,7 @@ app.delete("/api/trees/:id", (req, res) => {
 	});
 });
 
-app.post("/api/newTree", (req, res) => {
+app.post("/api/newTree/:userId", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
 	console.log("hi");
@@ -68,6 +74,7 @@ app.post("/api/newTree", (req, res) => {
 		return;
 	}
 
+	console.log(req.params.userId)
 	const bonsai = new Tree({
 		name: body.name,
 		type: body.typeOfTree,
@@ -76,12 +83,39 @@ app.post("/api/newTree", (req, res) => {
 		tasks: [],
 		points: 0,
 		workTimer: 0,
+		userId: req.params.userId,
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
 		// res.send(`Tree made!`);
 		res.status(400).redirect(`${url}/treefarm`);
 	});
+});
+
+const userSchema = new mongoose.Schema({
+	username: String,
+	birthTime: Date,
+	trees: Array,
+});
+const User = mongoose.model("User", userSchema);
+
+app.post("/api/createUser", (req, res) => {
+	try {
+		const userReq = req.body;
+		const newUser = new User({
+			username: userReq.username,
+			trees: [],
+			birthTime: Date.now(),
+		})
+		newUser.save((err) => {
+			if (err) {
+				console.log(err);
+			}
+			res.send("User Created");
+		})
+	} catch (err) {
+		res.status(500).send({ message: err.message });
+	}
 });
 
 app.post("/api/setTasks/:parentId?", (req, res) => {
