@@ -32,12 +32,6 @@ export default function Navigation() {
 					redirectIfAuthenticated
 					component={Login}
 				/>
-				<ConnectedRoute
-					exact
-					path="/register"
-					redirectIfAuthenticated
-					component={Register}
-				/>
 				<ConnectedRoute exact path="/treefarm" component={TreeFarm} />
 				<ConnectedRoute exact isProtected path="/newTree" component={NewTree} />
 				<ConnectedRoute exact isProtected path="/trees/:id" component={Tree} />
