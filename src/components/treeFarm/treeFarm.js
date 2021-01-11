@@ -25,7 +25,8 @@ function TreeFarm() {
 
 	useEffect(() => {
 		axios
-			.get(`${url}/trees`)
+			.get(`${url}/trees/boo`)
+			// .get(`${url}/trees/${userId}`)
 			.then(function (res) {
 				// handle success
 				let data = res.data;

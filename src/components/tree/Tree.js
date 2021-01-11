@@ -24,7 +24,7 @@ function Tree(props) {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
 
 		axios
-			.get(`${url}/trees/${id}`)
+			.get(`${url}/tree/${id}`)
 			.then(function (res) {
 				// handle success
 				setName(res.data.name);
