@@ -29,7 +29,7 @@ const treeSchema = new mongoose.Schema({
 	tasks: Array,
 	points: Number,
 	workTimer: Number,
-	userId: String,
+	username: String,
 });
 const Tree = mongoose.model("Tree", treeSchema);
 
@@ -42,11 +42,11 @@ app.get("/api/tree/:id", (req, res) => {
 	});
 });
 
-app.get(`/api/trees/:userId`, (req, res) => {
+app.get(`/api/trees/:username`, (req, res) => {
 	console.log("ah");
 	Tree.find((err, trees) => {
 		let userTrees = trees.filter((tree) => {
-			if (tree.userId === req.params.userId) {
+			if (tree.username === req.params.username) {
 				return tree;
 			} 
 		});
@@ -64,7 +64,7 @@ app.delete("/api/trees/:id", (req, res) => {
 	});
 });
 
-app.post("/api/newTree/:userId", (req, res) => {
+app.post("/api/newTree/:username", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
 	console.log("hi");
@@ -74,7 +74,7 @@ app.post("/api/newTree/:userId", (req, res) => {
 		return;
 	}
 
-	console.log(req.params.userId)
+	console.log(req.params.username)
 	const bonsai = new Tree({
 		name: body.name,
 		type: body.typeOfTree,
@@ -83,7 +83,7 @@ app.post("/api/newTree/:userId", (req, res) => {
 		tasks: [],
 		points: 0,
 		workTimer: 0,
-		userId: req.params.userId,
+		username: req.params.username,
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
@@ -104,7 +104,48 @@ app.post("/api/createUser", (req, res) => {
 		const userReq = req.body;
 		const newUser = new User({
 			username: userReq.username,
-			trees: [],
+			trees: [
+				{
+					name: "Meditation",
+					type: "shortTerm",
+					stage: 0,
+					details: "The fine art of meditation.",
+					tasks: [
+						{
+							name: "Meditate for 20 minutes.",
+							completed: false,
+							username: userReq.username,
+						},
+						{
+							name: "Go outside and talk to a tree.",
+							completed: false,
+							username: userReq.username,
+						}
+					],
+					points: 0,
+					workTimer: 0,
+				},
+				{
+					name: "Excercise",
+					type: "longTerm",
+					stage: 0,
+					details: "Get ripped.",
+					tasks: [
+						{
+							name: "Walk for 2 hours.",
+							completed: false,
+							username: userReq.username,
+						},
+						{
+							name: "Jump 2000 times.",
+							completed: false,
+							username: userReq.username,
+						}
+					],
+					points: 0,
+					workTimer: 0,
+				}
+			],
 			birthTime: Date.now(),
 		})
 		newUser.save((err) => {
