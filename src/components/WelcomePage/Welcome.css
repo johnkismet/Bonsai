@@ -1,184 +1,193 @@
 .Welcome {
-  background: rgb(55, 178, 96);
+	background: rgb(55, 178, 96);
 }
 .treeLogo {
-  width: 40vh;
-  height: 40vh;
-  background-image: url("../../assets/dev\ assets/simpleTree.png");
-  background-size: contain;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-repeat: no-repeat;
-  background-position-x: center;
+	width: 40vh;
+	height: 40vh;
+	background-image: url("../../assets/dev\ assets/simpleTree.png");
+	background-size: contain;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-repeat: no-repeat;
+	background-position-x: center;
 }
 .MainBody {
-  text-align: center;
-  background-color: #466343;
-  color: white;
+	text-align: center;
+	background-color: #466343;
+	color: white;
 }
 .welcomeContainer {
-  margin: auto;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  background-image: url("../../assets/images/backgroundTwo.png");
-  background-repeat: none;
-  background-size: cover;
-  background-position-y: center;
+	margin: auto;
+	width: 100%;
+	height: 95vh;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	background-image: url("../../assets/images/backgroundTwo.png");
+	background-repeat: none;
+	background-size: cover;
+	background-position-y: center;
 }
 .welcomeContainer h1 {
-  font-size: 3rem;
-  color: whitesmoke;
+	font-size: 3rem;
+	color: whitesmoke;
 }
 .logoContainer {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
 }
 .spacer {
-  width: 50%;
-  height: 100px;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4rem;
+	width: 50%;
+	height: 100px;
+	margin: auto;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 4rem;
 }
 .registerBtn {
-  background: rgba(0, 0, 0, 0.524);
-  color: white;
-  width: 75px;
-  height: 75px;
-  font-size: 80%;
-  border: 1px solid black;
-  border-radius: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
+	background: rgba(0, 0, 0, 0.524);
+	color: white;
+	width: 75px;
+	height: 75px;
+	font-size: 80%;
+	border: 1px solid black;
+	border-radius: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
 }
 .HOw {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 40vh;
-  height: 10vh;
-  margin: auto;
-  background: rgb(63, 138, 75);
-  border-radius: 10px;
-  color: rgb(218, 218, 218);
-  font-size: 0.7rem;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 40vh;
+	height: 10vh;
+	margin: auto;
+	background: rgb(63, 138, 75);
+	border-radius: 10px;
+	color: rgb(218, 218, 218);
+	font-size: 0.7rem;
 }
 .SampleTree {
-  width: 40%;
-  align-self: center;
+	width: 40%;
+	align-self: center;
 }
 .Begin {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 40vh;
-  height: 10vh;
-  margin: auto;
-  background: rgb(218, 218, 218);
-  border-radius: 10px;
-  color: rgb(63, 138, 75);
-  font-size: 1.5rem;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 40vh;
+	height: 10vh;
+	margin: auto;
+	background: rgb(218, 218, 218);
+	border-radius: 10px;
+	color: rgb(63, 138, 75);
+	font-size: 1.5rem;
 }
 .loginBtn {
-  background: rgba(63, 138, 75.524);
-  color: white;
-  width: 200px;
-  height: 65px;
-  font-size: 1.6rem;
-  border: 0px solid black;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  align-self: center;
+	background: rgba(63, 138, 75.524);
+	color: white;
+	width: 200px;
+	height: 65px;
+	font-size: 1.6rem;
+	border: 0px solid black;
+	border-radius: 10px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-weight: bold;
+	align-self: center;
 }
 .LeftSide {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  height: 100%;
-  width: 50%;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	height: 100%;
+	width: 50%;
 }
 .RightSide {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  height: 100%;
-  width: 50%;
-  align-items: center;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	height: 100%;
+	width: 50%;
+	align-items: center;
 }
 .infoContainer {
-  background: #2d2f2e;
-  border-radius: 10px;
-  height: 60vh;
-  width: 50vh;
-  text-align: left;
-  padding: 10px;
-  line-height: 1.5;
+	background: #2d2f2e;
+	border-radius: 10px;
+	height: 75%;
+	width: 60%;
+	text-align: left;
+	padding: 10px;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	align-items: center;
 }
 .VirtTrees {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  height: 40vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	height: 40vh;
+	width: 70%;
+	margin: auto;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
 }
 .bottomStuff {
-  display: flex;
-  width: 100%;
-  height: 80vh;
+	display: flex;
+	width: 100%;
+	height: 80vh;
 }
 .Login {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 70vh;
-  height: 60vh;
-  margin: auto;
-  background: rgb(218, 218, 218);
-  border-radius: 10px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 70vh;
+	height: 60vh;
+	margin: auto;
+	background: rgb(218, 218, 218);
+	border-radius: 10px;
 }
 .Login h1 {
-  color: rgb(63, 138, 75);
-  font-size: 3rem;
+	color: rgb(63, 138, 75);
+	font-size: 3rem;
 }
 #loginInput {
-  background: none;
-  border: none;
-  border-bottom: 2px solid rgb(34, 34, 34);
-  width: 50%;
+	background: none;
+	border: none;
+	border-bottom: 2px solid rgb(34, 34, 34);
+	width: 50%;
 }
-#loginInput ::placeholder {
-  color: rgb(44, 44, 44);
+::placeholder {
+	color: rgb(44, 44, 44) !important;
 }
 #loginSubmitBtn {
-  width: 50%;
-  height: 10%;
-  border-radius: 10px;
-  border: none;
-  background: rgb(63, 138, 75);
-  color: rgb(245, 245, 245);
-  font-size: 2rem;
+	width: 50%;
+	height: 10%;
+	border-radius: 10px;
+	border: none;
+	background: rgb(63, 138, 75);
+	color: rgb(245, 245, 245);
+	font-size: 2rem;
+}
+#welcomeSpacer {
+	background: #466343;
+	width: 100%;
 }

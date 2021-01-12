@@ -3,6 +3,7 @@ body {
 	margin: 0;
 	font-family: "Montserrat", sans-serif;
 	background: rgb(45, 47, 46);
+	scroll-behavior: smooth;
 }
 .App {
 	font-family: sans-serif;
@@ -156,4 +157,12 @@ body {
 	background-image: url(./assets/images/addTreeIcon.png);
 	background-size: cover;
 	cursor: pointer;
+}
+.loading {
+	width: 70vh;
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
 }

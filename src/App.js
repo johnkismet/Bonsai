@@ -4,6 +4,8 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Navigation from "./components/Navigation";
 import Welcome from "./components/WelcomePage/Welcome";
 import useAuth from "./hooks/useAuth";
+import Login from "./components/WelcomePage/Login";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // import Links from "./components/Links";
 import "./App.css";
 
@@ -23,20 +25,28 @@ function App() {
 
 	if (auth.loading || auth.loggingIn || auth.loggingOut) {
 		// User is currently trying to log in or something..
-		return "Loading....... 😬";
+		return (
+			<>
+				<div className="spacer"></div>
+				<div className="loading">
+					<CircularProgress size={100} />
+				</div>
+			</>
+		);
 	}
 
 	return (
 		<>
 			{auth.loggedIn ? (
 				<>
-					<Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} />
+					<Sidebar outerContainerId={"root"} />
 
 					<Navigation />
 				</>
 			) : (
 				<div>
 					<Welcome />
+					<Login />
 				</div>
 			)}
 		</>

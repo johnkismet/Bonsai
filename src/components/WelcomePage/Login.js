@@ -1,10 +1,15 @@
 import useAuth from "../../hooks/useAuth";
+import "./Welcome.css";
 
 function Login() {
 	const auth = useAuth();
-	async function loginNow() {
+	document.addEventListener("keydown", (e) => {
+		if (e.code === "Enter") loginNow();
+	});
+
+	async function loginNow(e) {
 		try {
-			const email = document.getElementById("loginSubmitBtn").value;
+			const email = document.getElementById("loginInput").value;
 			if (email) await auth.login(email);
 			else console.log("no email!");
 		} catch (err) {
@@ -16,8 +21,8 @@ function Login() {
 	return (
 		<>
 			<div className="spacer"></div>
-			<div className="Login">
-				<h1>Welcome back</h1>
+			<div id="login" className="Login">
+				<h1>Login / Register</h1>
 				<input id="loginInput" placeholder="Enter your email" type="text" />
 				<input
 					id="loginSubmitBtn"
@@ -26,6 +31,7 @@ function Login() {
 					value="Login"
 				/>
 			</div>
+			<div className="spacer"></div>
 		</>
 	);
 }
