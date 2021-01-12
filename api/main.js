@@ -2,6 +2,7 @@ import cors from "cors";
 // import path from "path";
 import express from "express";
 import { Tree } from "./models/TreeModel";
+import { v4 } from "uuid"
 const mongoose = require("mongoose");
 const app = express();
 const uri =
@@ -52,7 +53,6 @@ app.get(`/api/trees/:username`, (req, res) => {
             }
             console.log(tree.username, req.params.username);
         });
-        console.log(userTrees);
         if (err) return console.error(err);
         res.send(userTrees);
     });
@@ -90,7 +90,6 @@ app.post("/api/newTree", (req, res) => {
     // TODO: If name/type is missing then cancel the request
     let body = req.body;
 
-    console.log(req.params.username);
     const bonsai = new Tree({
         name: body.name,
         type: body.typeOfTree,
@@ -130,10 +129,12 @@ app.post("/api/createUser", (req, res) => {
                 {
                     name: "Meditate for 20 minutes.",
                     completed: false,
+                    taskId: v4(),
                 },
                 {
                     name: "Go outside and talk to a tree.",
                     completed: false,
+                    taskId: v4(),
                 },
             ],
             points: 0,
@@ -149,10 +150,12 @@ app.post("/api/createUser", (req, res) => {
                 {
                     name: "Walk for 2 hours.",
                     completed: false,
+                    taskId: v4(),
                 },
                 {
                     name: "Jump 2000 times.",
                     completed: false,
+                    taskId: v4(),
                 },
             ],
             points: 0,
