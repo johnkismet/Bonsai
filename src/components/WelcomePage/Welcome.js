@@ -21,13 +21,12 @@ function Welcome(props) {
 	return (
 		<div className="Welcome">
 			<div className="welcomeContainer">
-				<div className="treeLogo"></div>
-				{/* {<img className="treeLogo" src={logo} alt={logo} /> */}
-				<h1>Bonsai</h1>
+				<div className="headerLogoText">
+					<div className="treeLogo"></div>
+					<h1>BONSAI</h1>
+				</div>
 			</div>
-			{/*<button className="loginBtn" onClick={loginNow}>
-        Login
-  </button>*/}
+
 			<div className="MainBody">
 				<div className="VirtTrees">
 					These virtual trees
@@ -45,7 +44,7 @@ function Welcome(props) {
 						</a>
 					</div>
 					<div className="RightSide">
-						<div className="HOw">
+						<div className="howItWorksCont">
 							<h1>How does it work?</h1>
 						</div>
 						<div className="infoContainer">
@@ -71,19 +70,9 @@ function Welcome(props) {
 					</div>
 				</div>
 			</div>
-			{/*todo: MOAR DIVS*/}
 			<div id="welcomeSpacer" className="spacer"></div>
 		</div>
 	);
 }
-
-// function Login() {
-
-// 	if (auth.loading || auth.loggingIn || auth.loggingOut) {
-// 		return "Loading..........";
-// 	}
-
-// 	return <div>What's up</div>;
-// }
 
 export default Welcome;
