@@ -18,25 +18,21 @@ mongoose.connect(
     }
 );
 const url =
-	process.env.NODE_ENV === "production"
-		? "https://bonsai-one.vercel.app"
-		: "http://localhost:3000";
-const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+    process.env.NODE_ENV === "production"
+        ? "https://bonsai-one.vercel.app"
+        : "http://localhost:3000";
+
 let db = null;
 if (db === null) {
-	mongoose.connect(
-		uri,
-		{ useNewUrlParser: true, useUnifiedTopology: true },
-		() => {
-			console.log("Connected to MongoDB");
-		}
-	);
-	db = mongoose.connection;
-	db.on("error", console.error.bind(console, "MongoDB connection error"));
+    mongoose.connect(
+        uri,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        () => {
+            console.log("Connected to MongoDB");
+        }
+    );
+    db = mongoose.connection;
+    db.on("error", console.error.bind(console, "MongoDB connection error"));
 }
 
 app.get("/api/tree/:id", (req, res) => {
@@ -54,11 +50,14 @@ app.get(`/api/trees/:username`, (req, res) => {
             if (tree.username === req.params.username) {
                 return tree;
             }
+            console.log(tree.username, req.params.username);
         });
+        console.log(userTrees);
         if (err) return console.error(err);
         res.send(userTrees);
     });
-  
+});
+
 // app.get(`/api/trees`, (req, res) => {
 // 	Tree.find((err, trees) => {
 // 		if (err) return console.error(err);
@@ -88,8 +87,8 @@ app.delete("/api/trees/:id", (req, res) => {
 // });
 
 app.post("/api/newTree", (req, res) => {
-	// TODO: If name/type is missing then cancel the request
-	let body = req.body;
+    // TODO: If name/type is missing then cancel the request
+    let body = req.body;
 
     console.log(req.params.username);
     const bonsai = new Tree({
@@ -112,7 +111,6 @@ app.post("/api/newTree", (req, res) => {
 const userSchema = new mongoose.Schema({
     username: String,
     birthTime: Date,
-    trees: Array,
 });
 const User = mongoose.model("User", userSchema);
 
@@ -132,16 +130,15 @@ app.post("/api/createUser", (req, res) => {
                 {
                     name: "Meditate for 20 minutes.",
                     completed: false,
-                    username: userReq.username,
                 },
                 {
                     name: "Go outside and talk to a tree.",
                     completed: false,
-                    username: userReq.username,
                 },
             ],
             points: 0,
             workTimer: 0,
+            username: userReq.username,
         });
         const exampleTree2 = new Tree({
             name: "Excercise",
@@ -152,16 +149,15 @@ app.post("/api/createUser", (req, res) => {
                 {
                     name: "Walk for 2 hours.",
                     completed: false,
-                    username: userReq.username,
                 },
                 {
                     name: "Jump 2000 times.",
                     completed: false,
-                    username: userReq.username,
                 },
             ],
             points: 0,
             workTimer: 0,
+            username: userReq.username,
         });
         exampleTree1.save((err) => {
             if (err) {
