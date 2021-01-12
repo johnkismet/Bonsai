@@ -46,22 +46,25 @@ function TreeFarm() {
 	}, []);
 
 	return (
-		<div className="App">
-			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} /> */}
+		<>
+			<Sidebar pageWrapId={"TreeFarm"} outerContainerId={"root"} />
+			<div id="TreeFarm" className="App">
+				{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} /> */}
 
-			<div className="treeFarmGrid">
-				<Grid
-					className="treeFarmGrid"
-					container
-					direction="row"
-					justify="center"
-					alignItems="center"
-				>
-					{showTrees}
-				</Grid>
+				<div className="treeFarmGrid">
+					<Grid
+						className="treeFarmGrid"
+						container
+						direction="row"
+						justify="center"
+						alignItems="center"
+					>
+						{showTrees}
+					</Grid>
+				</div>
+				<Link to="/newTree" className="addTaskBtn"></Link>
 			</div>
-			<Link to="/newTree" className="addTaskBtn"></Link>
-		</div>
+		</>
 	);
 }
 

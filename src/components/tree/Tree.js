@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../sidebar/treeSidebar";
+import Sidebar from "../sidebar/Sidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
 import TaskContainerClass from "./taskSystem/TaskContainerClass";
@@ -66,8 +66,9 @@ function Tree(props) {
 
 	return (
 		<>
+			<Sidebar pageWrapId={"tree"} outerContainerId={"root"} />
 			<div className="Spacer"></div>
-			<div className="Tree">
+			<div id="tree" className="Tree">
 				<div className="leftSide">
 					<div className="treeNameCont">
 						<div className="treeName">

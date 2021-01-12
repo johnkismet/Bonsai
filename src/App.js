@@ -39,8 +39,6 @@ function App() {
 		<>
 			{auth.loggedIn ? (
 				<>
-					<Sidebar outerContainerId={"root"} />
-
 					<Navigation />
 				</>
 			) : (

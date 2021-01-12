@@ -20,7 +20,7 @@ body {
 
 /* SIDEBAR STYLING */
 #page-wrap {
-	text-align: center;
+	text-align: left;
 	overflow: auto;
 	/* top: 45%; */
 	position: relative;
