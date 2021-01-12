@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./newTree.css";
 import TreePic from "../../assets/images/tempTreeSprite.png";
 import axios from "axios";
+import Sidebar from "../sidebar/Sidebar";
 
 const url =
 	process.env.NODE_ENV === "production"
@@ -18,7 +19,8 @@ function NewTree() {
 
 	return (
 		<>
-			<div className="spacer"></div>
+			<Sidebar pageWrapId={"newTree"} outerContainerId={"root"} />
+			<div id="newTree" className="spacer"></div>
 			<div className="newTree">
 				<div className="treeContainer">
 					<img src={TreePic} alt="Tree" srcset="" />

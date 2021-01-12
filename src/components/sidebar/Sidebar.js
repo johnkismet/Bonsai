@@ -3,6 +3,7 @@ import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import TreeFarm from "../treeFarm/treeFarm";
 import useAuth from "../../hooks/useAuth";
+import "../../App.css";
 
 // TODO: Figure out why text isn't completely aligned
 function Sidebar(props) {
@@ -38,10 +39,6 @@ function Sidebar(props) {
 			</div>
 		</Menu>
 	);
-}
-
-function Store() {
-	return <h1>Store under construction</h1>;
 }
 
 export default Sidebar;
