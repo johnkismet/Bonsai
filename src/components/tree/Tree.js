@@ -52,6 +52,7 @@ function Tree(props) {
 			document.title = `Bonsai`;
 
 			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+			console.log("sent");
 			axios({
 				method: "post",
 				url: `${url}/trees/${id}`,
@@ -79,8 +80,8 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-						{/* TODO: figure out why images aren't working */}
 						{getTreePic(stage)}
+						{convertTime(workTimer)}
 					</div>
 					<div className="buttonsContainer">
 						<button className="treeButton archiveTree">Archive</button>

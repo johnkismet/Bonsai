@@ -4,7 +4,7 @@ body {
 	font-family: "Montserrat", sans-serif;
 	background: rgb(45, 47, 46);
 }
-#App {
+.App {
 	font-family: sans-serif;
 	height: 100vh;
 	display: flex;
@@ -100,12 +100,27 @@ body {
 	margin: 15px;
 }
 #title {
-	color: rgb(33, 83, 33);
+	color: rgb(45, 47, 46);
 	font-family: "Langar", cursive;
 	font-size: 2rem;
 }
 .sideBarInfo {
 	text-align: center;
+}
+#logoutBtn {
+	width: 100%;
+	height: 6%;
+	background: rgb(45, 47, 46);
+	border-radius: 10px;
+	color: whitesmoke;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+	cursor: pointer;
+}
+#logouBtn h2 {
+	align-self: center;
 }
 
 /* MAIN PAGE STYLING */

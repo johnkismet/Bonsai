@@ -27,9 +27,15 @@ function Sidebar(props) {
 			<Link to="/statistics" className="sideBarInfo">
 				Statistics
 			</Link>
-			<button onClick={() => auth.logout()} className="sideBarInfo">
-				Logout
-			</button>
+			<div
+				onClick={() => {
+					auth.logout();
+					// console.log("Log");
+				}}
+				id="logoutBtn"
+			>
+				<h2>Log out</h2>
+			</div>
 		</Menu>
 	);
 }

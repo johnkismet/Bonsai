@@ -24,7 +24,6 @@ if (db === null) {
 	);
 	db = mongoose.connection;
 	db.on("error", console.error.bind(console, "MongoDB connection error"));
-	console.log(db);
 }
 
 app.get("/api/trees/:id", (req, res) => {

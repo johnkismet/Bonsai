@@ -1,6 +1,12 @@
+#App {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
 .Spacer {
 	width: 90%;
-	height: 15vh;
+	height: 10vh;
 }
 .Tree {
 	width: 90%;
@@ -68,8 +74,10 @@
 	border-top: none;
 	color: whitesmoke;
 	display: flex;
+	flex-flow: column;
 	justify-content: space-around;
 	align-items: center;
+	text-align: center;
 }
 .buttonsContainer {
 	width: 100%;

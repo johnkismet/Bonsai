@@ -7,10 +7,6 @@ import useAuth from "./hooks/useAuth";
 // import Links from "./components/Links";
 import "./App.css";
 
-{
-	/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */
-}
-
 function App() {
 	const auth = useAuth();
 
@@ -31,15 +27,19 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<>
 			{auth.loggedIn ? (
-				<Navigation />
+				<>
+					<Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} />
+
+					<Navigation />
+				</>
 			) : (
 				<div>
 					<Welcome />
 				</div>
 			)}
-		</div>
+		</>
 	);
 }
 

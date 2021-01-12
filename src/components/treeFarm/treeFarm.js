@@ -45,23 +45,22 @@ function TreeFarm() {
 	}, []);
 
 	return (
-		<React.Fragment>
-			<div className="App">
-				<div className="treeFarmGrid">
-					<Grid
-						className="treeFarmGrid"
-						container
-						direction="row"
-						justify="center"
-						alignItems="center"
-					>
-						{showTrees}
-					</Grid>
-				</div>
+		<div className="App">
+			{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} /> */}
 
-				<Link to="/newTree" className="addTaskBtn"></Link>
+			<div className="treeFarmGrid">
+				<Grid
+					className="treeFarmGrid"
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+				>
+					{showTrees}
+				</Grid>
 			</div>
-		</React.Fragment>
+			<Link to="/newTree" className="addTaskBtn"></Link>
+		</div>
 	);
 }
 
