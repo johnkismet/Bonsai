@@ -71,9 +71,6 @@ function NewTree() {
 						type="text"
 					/>
 					<input value="Create Tree" className="submitBtn" type="submit" />
-					{/* <div onClick={sendTree} value="Create Tree" className="submitBtn">
-						Create Tree
-					</div> */}
 				</form>
 			</div>
 		</>
