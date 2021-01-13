@@ -5,6 +5,13 @@ export const addTree = (tree) => {
 	};
 };
 
+export const setAuth = (token) => {
+	return {
+		type: "SET_AUTH",
+		payload: token,
+	};
+};
+
 export const deleteTree = (tree) => {
 	return {
 		type: "DEL_TREE",

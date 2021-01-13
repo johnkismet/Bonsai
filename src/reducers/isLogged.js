@@ -1,7 +1,9 @@
-const loggedReducer = (state = false, action) => {
+const loggedReducer = (state = "", action) => {
 	switch (action.type) {
-		case "SIGN_IN":
-			return !state;
+		case "SET_AUTH":
+			return {
+				auth: [action.payload],
+			};
 		default:
 			return state;
 	}

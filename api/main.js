@@ -34,6 +34,7 @@ app.use(async (req, res, next) => {
 		return;
 	}
 	const DIDToken = authorization.substring(7);
+	req.DIDToken = DIDToken;
 	mAdmin.token.validate(DIDToken);
 	const metadata = await mAdmin.users.getMetadataByToken(DIDToken);
 	const user = await metadata.email;
@@ -81,7 +82,11 @@ app.get(`/api/trees`, (req, res) => {
 			}
 		});
 		if (err) return console.error(err);
-		res.send(userTrees);
+		let data = {
+			body: userTrees,
+			auth: req.DIDToken,
+		};
+		res.send(data);
 	});
 });
 
@@ -212,15 +217,15 @@ app.post("/api/createUser", (req, res) => {
 	}
 });
 
-app.post("/api/setTasks/:parentId?", (req, res) => {
+app.post("/api/setTasks/:parentId", (req, res) => {
 	try {
 		const newTasks = req.body.tasks;
 		const itemsCompleted = req.body.itemsCompleted;
 		Tree.findById(req.params.parentId, (err, foundTree) => {
 			if (!foundTree) {
-				res.status(404).send("parentId is missing or invalid.");
+				res.status(400).send("parentId is missing or invalid.");
 			} else {
-				foundTree.tasks = newTasks;
+				foundTree.tasks.push(newTasks);
 				foundTree.points += itemsCompleted * 10;
 				foundTree.save((err) => {
 					if (err) {
@@ -234,7 +239,7 @@ app.post("/api/setTasks/:parentId?", (req, res) => {
 					foundTree.points = 0;
 					res.status(200)
 						.send(`Tasks set successfully, but something has likely gone awry somewhere else.
-					 More tasks have been marked incompelete after being marked complete than possible. 
+					 More tasks have been marked incompelete after being marked complete than possible.
 					 Resetting tree points to 0...`);
 				} else {
 					res.status(200).send("Tasks set successfully.");

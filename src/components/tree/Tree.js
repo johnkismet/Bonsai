@@ -5,6 +5,15 @@ import TimeMe from "timeme.js";
 import TaskContainerClass from "./taskSystem/TaskContainerClass";
 import TreePic from "../../assets/images/tempTreeSprite.png";
 import useAuth from "../../hooks/useAuth";
+
+// material ui
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
@@ -22,6 +31,15 @@ function Tree(props) {
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
 	const token = auth.magic.user.getIdToken();
+	const [open, setOpen] = React.useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	useEffect(() => {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
@@ -101,12 +119,7 @@ function Tree(props) {
 						{getTreePic(stage)}
 						{convertTime(workTimer)}
 					</div>
-					<div className="buttonsContainer">
-						<button className="treeButton archiveTree">Archive</button>
-						<button onClick={deleteTree} className="treeButton deleteTree">
-							Delete
-						</button>
-					</div>
+					<div className="buttonsContainer"></div>
 				</div>
 				<div className="rightSide">
 					<div className="taskCont">

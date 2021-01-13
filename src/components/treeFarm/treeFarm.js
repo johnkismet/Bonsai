@@ -3,11 +3,11 @@ import { Grid } from "@material-ui/core";
 // import { Modal } from "@material-ui/core";
 // import { Container } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../App.css";
 import Sidebar from "../sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
-import { addTree } from "../../actions";
+import { addTree, setAuth } from "../../actions";
 import useAuth from "../../hooks/useAuth";
 import Tree from "./treeLink";
 const url =
@@ -24,14 +24,16 @@ function TreeFarm() {
 		<Tree key={tree._id} name={tree.name} id={tree._id} />
 	));
 	const auth = useAuth();
+	// const token = auth.magic.user.getIdToken();
 	useEffect(() => {
 		auth
 			.fetch("/api/trees")
 			.then((res) => res.json())
 			.then((data) => {
-				data.map((tree) => {
+				data.body.map((tree) => {
 					dispatch(addTree(tree));
 				});
+				dispatch(setAuth(data.auth));
 			});
 	}, []);
 
@@ -61,7 +63,7 @@ function TreeFarm() {
 		<>
 			<Sidebar pageWrapId={"TreeFarm"} outerContainerId={"root"} />
 			<div id="TreeFarm" className="App">
-				{/* <Sidebar pageWrapId={"page-wrap"} outerContainerId={"root"} /> */}
+				<Link to="/newTree" className="addTaskBtn"></Link>
 
 				<div className="treeFarmGrid">
 					<Grid
@@ -74,7 +76,6 @@ function TreeFarm() {
 						{showTrees}
 					</Grid>
 				</div>
-				<Link to="/newTree" className="addTaskBtn"></Link>
 			</div>
 		</>
 	);
