@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 // import { Modal } from "@material-ui/core";
 // import { Container } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import "../../App.css";
 import Sidebar from "../sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";

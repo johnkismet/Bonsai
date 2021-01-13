@@ -6,6 +6,7 @@ import TaskContainerClass from "./taskSystem/TaskContainerClass";
 import treePic from "../../assets/images/tempTreeSprite.png";
 import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
+import useAuth from "../../hooks/useAuth";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
@@ -14,6 +15,7 @@ const url =
 		: "http://localhost:3000/api";
 
 function Tree(props) {
+	const auth = useAuth();
 	const [name, setName] = useState("");
 	const [details, setDetails] = useState("");
 	const [type, setType] = useState("");
@@ -21,42 +23,57 @@ function Tree(props) {
 	const [tasks, setTasks] = useState([]);
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
-	const [treeFlavor, setTreeFlavor] = useState(0);
+
+	const token = auth.magic.user.getIdToken();
 
 	useEffect(() => {
 		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
-
-		axios
-			.get(`${url}/tree/${id}`)
-			.then(function (res) {
-				// handle success
-				setName(res.data.name);
-				setDetails(res.data.details);
-				setType(res.data.type);
-				setStage(res.data.stage);
-				setTasks(res.data.tasks);
-				setPoints(res.data.points);
-				setWorkTimer(res.data.workTimer);
-				setTreeFlavor(res.data.treeFlavor)
-			})
-			.catch(function (error) {
-				// handle error
-				console.error(error);
-			})
-			.then(function () {
-				// always executed
-				// Initialize library and start tracking time
-				TimeMe.initialize({
-					currentPageName: "my-home-page", // current page
-					idleTimeoutInSeconds: 1000000, // seconds
-				});
+		// axios
+		// 	.get(`${url}/tree/${id}`, {
+		// 		headers: {
+		// 			Authorization: `Bearer ${token}`,
+		// 		},
+		// 	})
+		// 	.then(function (res) {
+		// 		// handle success
+		// 		setName(res.data.name);
+		// 		setDetails(res.data.details);
+		// 		setType(res.data.type);
+		// 		setStage(res.data.stage);
+		// 		setTasks(res.data.tasks);
+		// 		setPoints(res.data.points);
+		// 		setWorkTimer(res.data.workTimer);
+		// 	})
+		// 	.catch(function (error) {
+		// 		// handle error
+		// 		console.error(error);
+		// 	})
+		// 	.then(function () {
+		// 		// always executed
+		// 		// Initialize library and start tracking time
+		// 		TimeMe.initialize({
+		// 			currentPageName: "my-home-page", // current page
+		// 			idleTimeoutInSeconds: 1000000, // seconds
+		// 		});
+		// 	});
+		auth
+			.fetch(`${url}/tree/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setName(data.name);
+				setDetails(data.details);
+				setType(data.type);
+				setStage(data.stage);
+				setTasks(data.tasks);
+				setPoints(data.points);
+				setWorkTimer(data.workTimer);
+        setTreeFlavor(data.treeFlavor)
 			});
 
 		return () => {
 			document.title = `Bonsai`;
 
 			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-			console.log("sent");
 			axios({
 				method: "post",
 				url: `${url}/trees/${id}`,
