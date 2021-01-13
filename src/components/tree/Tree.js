@@ -23,7 +23,7 @@ function Tree(props) {
 	const [tasks, setTasks] = useState([]);
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
-
+	const [treeFlavor, setTreeFlavor] = useState(0);
 	const token = auth.magic.user.getIdToken();
 
 	useEffect(() => {
@@ -67,7 +67,7 @@ function Tree(props) {
 				setTasks(data.tasks);
 				setPoints(data.points);
 				setWorkTimer(data.workTimer);
-        setTreeFlavor(data.treeFlavor)
+				setTreeFlavor(data.treeFlavor)
 			});
 
 		return () => {
