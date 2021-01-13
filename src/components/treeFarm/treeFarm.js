@@ -21,7 +21,7 @@ function TreeFarm() {
 	const treeCount = useSelector((state) => state.treeCount);
 	const dispatch = useDispatch();
 	const showTrees = treeCount.trees.map((tree, index) => (
-		<Tree key={tree._id} name={tree.name} id={tree._id} />
+		<Tree key={tree._id} name={tree.name} id={tree._id} treeFlavor={tree.treeFlavor} />
 	));
 	const auth = useAuth();
 	useEffect(() => {

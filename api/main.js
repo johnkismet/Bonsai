@@ -126,7 +126,8 @@ app.post("/api/newTree", (req, res) => {
 		tasks: [],
 		points: 0,
 		workTimer: 0,
-		belongsTo: currentUser,
+        belongsTo: currentUser,
+        treeFlavor: Math.floor(Math.random() * 2),
 	});
 	console.log(bonsai);
 	bonsai.save((err) => {
@@ -168,7 +169,8 @@ app.post("/api/createUser", (req, res) => {
 			],
 			points: 0,
 			workTimer: 0,
-			username: userReq.username,
+            username: userReq.username,
+            treeFlavor: 0,
 		});
 		const exampleTree2 = new Tree({
 			name: "Excercise",
@@ -189,7 +191,8 @@ app.post("/api/createUser", (req, res) => {
 			],
 			points: 0,
 			workTimer: 0,
-			username: userReq.username,
+            username: userReq.username,
+            treeFlavor: 1,
 		});
 		exampleTree1.save((err) => {
 			if (err) {

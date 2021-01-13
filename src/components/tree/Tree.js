@@ -3,7 +3,9 @@ import Sidebar from "../sidebar/Sidebar";
 import "./Tree.css";
 import TimeMe from "timeme.js";
 import TaskContainerClass from "./taskSystem/TaskContainerClass";
-import TreePic from "../../assets/images/tempTreeSprite.png";
+import treePic from "../../assets/images/tempTreeSprite.png";
+import treePic2 from "../../assets/images/tempTreeSprite2.png";
+import treePic3 from "../../assets/images/tempTreeSprite3.png";
 import useAuth from "../../hooks/useAuth";
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
@@ -21,6 +23,7 @@ function Tree(props) {
 	const [tasks, setTasks] = useState([]);
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
+	const [treeFlavor, setTreeFlavor] = useState(0);
 	const token = auth.magic.user.getIdToken();
 
 	useEffect(() => {
@@ -64,6 +67,7 @@ function Tree(props) {
 				setTasks(data.tasks);
 				setPoints(data.points);
 				setWorkTimer(data.workTimer);
+				setTreeFlavor(data.treeFlavor)
 			});
 
 		return () => {
@@ -80,6 +84,25 @@ function Tree(props) {
 		};
 	}, []);
 	document.title = `Working on ${name}`;
+
+	let treeFlavorImg = new Image();
+	if (treeFlavor === 0) {
+		treeFlavorImg = treePic;
+	} else if (treeFlavor === 1) {
+		treeFlavorImg = treePic2;
+	} else {
+		treeFlavorImg = treePic3;
+	}
+
+	function getTreePic(stage) {
+		if (stage === 0) {
+			return <img src={treeFlavorImg} width="100px" />;
+		} else if (stage === 1) {
+			return <img src={treeFlavorImg} width="200px" />;
+		} else {
+			return <img src={treeFlavorImg} width="300px" />;
+		}
+	}
 
 	return (
 		<>
@@ -196,15 +219,6 @@ function convertTime(seconds) {
 	return formatStr.trim();
 }
 
-function getTreePic(stage) {
-	if (stage === 0) {
-		return <img src={TreePic} width="100px" />;
-	} else if (stage === 1) {
-		return <img src={TreePic} width="200px" />;
-	} else {
-		return <img src={TreePic} width="300px" />;
-	}
-}
 
 function deleteTree() {
 	// console.log(id);

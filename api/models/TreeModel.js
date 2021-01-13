@@ -12,5 +12,6 @@ const treeSchema = new mongoose.Schema({
 	points: Number,
 	workTimer: Number,
 	belongsTo: String,
+	treeFlavor: Number,
 });
 export const Tree = mongoose.model("Tree", treeSchema);
