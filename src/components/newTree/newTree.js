@@ -1,12 +1,16 @@
 // Advanced settings:
 // Needs (how long user must work on tree)
 // Wither Rate (How long until tree begins to wither) */
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./newTree.css";
 import TreePic from "../../assets/images/tempTreeSprite.png";
 import axios from "axios";
 import Sidebar from "../sidebar/Sidebar";
+import useAuth from "../../hooks/useAuth";
+import * as api from "../../api";
+import "./newTree.css";
 
 const url =
 	process.env.NODE_ENV === "production"
@@ -14,8 +18,34 @@ const url =
 		: "http://localhost:3000/api";
 
 function NewTree() {
-	const dispatch = useDispatch();
-	const history = useHistory();
+	// do a get request to access authorization tokens
+	// pass that along with the post request
+	const auth = useAuth();
+
+	async function submitTree(e) {
+		e.preventDefault();
+		const token = await auth.magic.user.getIdToken();
+
+		let name = document.getElementById("nameInput").value;
+		let notes = document.getElementById("notesInput").value;
+
+		let data = {
+			name: name,
+			details: notes,
+		};
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
+
+		axios
+			.post(`${url}/newTree`, data, {
+				headers: headers,
+			})
+			.then((response) => {
+				window.location = "/treefarm";
+			});
+	}
 
 	return (
 		<>
@@ -25,12 +55,7 @@ function NewTree() {
 				<div className="treeContainer">
 					<img src={TreePic} alt="Tree" srcset="" />
 				</div>
-				<form
-					className="newTreeForm"
-					action={`${url}/newTree`}
-					method="post"
-					encType="application/x-www-form-urlencoded"
-				>
+				<form className="newTreeForm" onSubmit={submitTree}>
 					<input
 						className="treeInfoInput"
 						id="nameInput"
@@ -46,10 +71,25 @@ function NewTree() {
 						type="text"
 					/>
 					<input value="Create Tree" className="submitBtn" type="submit" />
+					{/* <div onClick={sendTree} value="Create Tree" className="submitBtn">
+						Create Tree
+					</div> */}
 				</form>
 			</div>
 		</>
 	);
+}
+
+function sendTree() {
+	let name = document.getElementById("nameInput").value;
+	let notes = document.getElementById("notesInput").value;
+	// console.log({ name, notes });
+	// axios
+	// 	.post(`${url}/newTree`, {
+	// 		name: name,
+	// 		details: notes,
+	// 	})
+	// 	.then((res) => console.log(res));
 }
 
 export default NewTree;

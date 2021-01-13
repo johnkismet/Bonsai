@@ -8,6 +8,7 @@ import "../../App.css";
 import Sidebar from "../sidebar/Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { addTree } from "../../actions";
+import useAuth from "../../hooks/useAuth";
 import Tree from "./treeLink";
 const url =
 	process.env.NODE_ENV === "production"
@@ -20,30 +21,41 @@ function TreeFarm() {
 	const treeCount = useSelector((state) => state.treeCount);
 	const dispatch = useDispatch();
 	const showTrees = treeCount.trees.map((tree, index) => (
-		<Tree name={tree.name} id={tree._id} />
+		<Tree key={tree._id} name={tree.name} id={tree._id} />
 	));
-
+	const auth = useAuth();
 	useEffect(() => {
-		axios
-			.get(`${url}/trees/boo`)
-			// .get(`${url}/trees/${userId}`)
-			.then(function (res) {
-				// handle success
-				let data = res.data;
+		auth
+			.fetch("/api/trees")
+			.then((res) => res.json())
+			.then((data) => {
 				data.map((tree) => {
 					dispatch(addTree(tree));
 				});
-			})
-			.catch(function (error) {
-				// handle error
-				console.error(error);
-			})
-			.then(function () {
-				// always executed
 			});
-
-		// document.title = `Bonsai`;
 	}, []);
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${url}/trees/boo`)
+	// 		// .get(`${url}/trees/${userId}`)
+	// 		.then(function (res) {
+	// 			// handle success
+	// 			let data = res.data;
+	// data.map((tree) => {
+	// 	dispatch(addTree(tree));
+	// });
+	// 		})
+	// 		.catch(function (error) {
+	// 			// handle error
+	// 			console.error(error);
+	// 		})
+	// 		.then(function () {
+	// 			// always executed
+	// 		});
+
+	// 	// document.title = `Bonsai`;
+	// }, []);
 
 	return (
 		<>
