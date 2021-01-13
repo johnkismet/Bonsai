@@ -899,6 +899,14 @@
 	.Welcome {
 		background: #466343;
 	}
+	.headerLogoText {
+		width: 50%;
+		height: 50%;
+		display: flex;
+		flex-flow: column;
+		justify-content: space-around;
+		align-items: center;
+	}
 	.treeLogo {
 		width: 40vh;
 		height: 40vh;
