@@ -8,14 +8,6 @@ import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
 import useAuth from "../../hooks/useAuth";
 
-// material ui
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
@@ -33,8 +25,8 @@ function Tree(props) {
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
 	const [treeFlavor, setTreeFlavor] = useState(0);
-	const token = auth.magic.user.getIdToken();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
+	const [time, setTime] = useState(0);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -45,35 +37,6 @@ function Tree(props) {
 	};
 
 	useEffect(() => {
-		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
-		// axios
-		// 	.get(`${url}/tree/${id}`, {
-		// 		headers: {
-		// 			Authorization: `Bearer ${token}`,
-		// 		},
-		// 	})
-		// 	.then(function (res) {
-		// 		// handle success
-		// 		setName(res.data.name);
-		// 		setDetails(res.data.details);
-		// 		setType(res.data.type);
-		// 		setStage(res.data.stage);
-		// 		setTasks(res.data.tasks);
-		// 		setPoints(res.data.points);
-		// 		setWorkTimer(res.data.workTimer);
-		// 	})
-		// 	.catch(function (error) {
-		// 		// handle error
-		// 		console.error(error);
-		// 	})
-		// 	.then(function () {
-		// 		// always executed
-		// 		// Initialize library and start tracking time
-		// 		TimeMe.initialize({
-		// 			currentPageName: "my-home-page", // current page
-		// 			idleTimeoutInSeconds: 1000000, // seconds
-		// 		});
-		// 	});
 		auth
 			.fetch(`${url}/tree/${id}`)
 			.then((res) => res.json())
@@ -85,20 +48,30 @@ function Tree(props) {
 				setTasks(data.tasks);
 				setPoints(data.points);
 				setWorkTimer(data.workTimer);
-				setTreeFlavor(data.treeFlavor)
+				setTreeFlavor(data.treeFlavor);
 			});
 
+		setTime(Date.now());
 		return () => {
-			document.title = `Bonsai`;
+			let initialTime = time;
+			let currentTime = Date.now();
+			let timeElapsed = (currentTime - initialTime) / 1000;
+			const token = auth.magic.user.getIdToken();
 
-			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-			axios({
-				method: "post",
-				url: `${url}/trees/${id}`,
-				data: {
-					workTimer: timeSpentOnPage,
-				},
-			});
+			const headers = {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			};
+			const payload = {
+				workTime: timeElapsed,
+			};
+			axios
+				.post(`${url}/setTime/${id}`, payload, {
+					headers: headers,
+				})
+				.then((response) => {
+					console.log(response);
+				});
 		};
 	}, []);
 	document.title = `Working on ${name}`;
@@ -231,7 +204,6 @@ function convertTime(seconds) {
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
 }
-
 
 function deleteTree() {
 	// console.log(id);

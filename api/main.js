@@ -1,5 +1,4 @@
 import cors from "cors";
-// import path from "path";
 import express from "express";
 import { Tree } from "./models/TreeModel";
 import connectToMongoose from "./mongoose";
@@ -7,13 +6,9 @@ import { v4 } from "uuid";
 import mAdmin from "./magic.js";
 const mongoose = require("mongoose");
 const app = express();
-const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-let currentUser = null;
 
 // cache mongoDB
 app.use(async (req, res, next) => {
@@ -44,27 +39,10 @@ app.use(async (req, res, next) => {
 	next();
 });
 
-/*
-1. Tree schema to have belongsTo: req.authorization.
-2. In post request for newTree set belongsTo with req.user._id
-*/
 const url =
 	process.env.NODE_ENV === "production"
 		? "https://bonsai-one.vercel.app"
 		: "http://localhost:3000";
-
-// let db = null;
-// if (db === null) {
-// 	mongoose.connect(
-// 		uri,
-// 		{ useNewUrlParser: true, useUnifiedTopology: true },
-// 		() => {
-// 			console.log("Connected to MongoDB");
-// 		}
-// 	);
-// 	db = mongoose.connection;
-// 	db.on("error", console.error.bind(console, "MongoDB connection error"));
-// }
 
 app.get("/api/tree/:id", (req, res) => {
 	let id = req.params.id;
@@ -90,33 +68,25 @@ app.get(`/api/trees`, (req, res) => {
 	});
 });
 
-// app.get(`/api/trees`, (req, res) => {
-// 	Tree.find((err, trees) => {
-// 		if (err) return console.error(err);
-// 		res.send(trees);
-// 	});
-// });
-
-app.delete("/api/trees/:id", (req, res) => {
-	let id = req.params.id;
-	Tree.findByIdAndDelete(id, function (err, tree) {
-		if (err) console.log(err);
-		res.send("Tree deleted!");
-	});
+app.get("/api/getTasks/:parentId", (req, res) => {
+	try {
+		const parentId = req.params.parentId;
+		let tasks = new Array();
+		Tree.findById(parentId, (err, foundTree) => {
+			if (!foundTree) {
+				res.status(404).send("parentId is missing or invalid.");
+			} else {
+				tasks = foundTree.tasks;
+				res.status(200).send(tasks);
+				if (err) {
+					console.log(err);
+				}
+			}
+		});
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
 });
-
-// app.post("/api/newTree/:username", (req, res) => {
-//     // TODO: If name/type is missing then cancel the request
-//     let body = req.body;
-//     console.log("hi");
-//     console.log(url);
-//     if (!body.name || !body.typeOfTree) {
-//         console.log("Must have name!");
-//         return;
-//     }
-// 		res.status(400).redirect(`${url}/treefarm`);
-// 	});
-// });
 
 app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
@@ -131,8 +101,8 @@ app.post("/api/newTree", (req, res) => {
 		tasks: [],
 		points: 0,
 		workTimer: 0,
-        belongsTo: currentUser,
-        treeFlavor: Math.floor(Math.random() * 2),
+		belongsTo: currentUser,
+		treeFlavor: Math.floor(Math.random() * 2),
 	});
 	console.log(bonsai);
 	bonsai.save((err) => {
@@ -174,8 +144,8 @@ app.post("/api/createUser", (req, res) => {
 			],
 			points: 0,
 			workTimer: 0,
-            username: userReq.username,
-            treeFlavor: 0,
+			username: userReq.username,
+			treeFlavor: 0,
 		});
 		const exampleTree2 = new Tree({
 			name: "Excercise",
@@ -196,8 +166,8 @@ app.post("/api/createUser", (req, res) => {
 			],
 			points: 0,
 			workTimer: 0,
-            username: userReq.username,
-            treeFlavor: 1,
+			username: userReq.username,
+			treeFlavor: 1,
 		});
 		exampleTree1.save((err) => {
 			if (err) {
@@ -254,6 +224,21 @@ app.post("/api/setTasks/:parentId", (req, res) => {
 	}
 });
 
+app.post("/api/setTime/:parentId", (req, res) => {
+	let workTime = req.body.workTime;
+
+	Tree.findById(req.params.parentId, (err, foundTree) => {
+		foundTree.workTimer += workTime;
+
+		foundTree.save((err) => {
+			if (err) {
+				console.log(err);
+				res.send("Updated work time!");
+			}
+		});
+	});
+});
+
 app.post("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findOne({ _id: id }, (err, tree) => {
@@ -265,24 +250,12 @@ app.post("/api/trees/:id", (req, res) => {
 	});
 });
 
-app.get("/api/getTasks/:parentId", (req, res) => {
-	try {
-		const parentId = req.params.parentId;
-		let tasks = new Array();
-		Tree.findById(parentId, (err, foundTree) => {
-			if (!foundTree) {
-				res.status(404).send("parentId is missing or invalid.");
-			} else {
-				tasks = foundTree.tasks;
-				res.status(200).send(tasks);
-				if (err) {
-					console.log(err);
-				}
-			}
-		});
-	} catch (err) {
-		res.status(400).json({ message: err.message });
-	}
+app.delete("/api/trees/:id", (req, res) => {
+	let id = req.params.id;
+	Tree.findByIdAndDelete(id, function (err, tree) {
+		if (err) console.log(err);
+		res.send("Tree deleted!");
+	});
 });
 
 export default app;

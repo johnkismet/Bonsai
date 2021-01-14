@@ -9,15 +9,12 @@
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "^12.6.0",
 		"axios": "^0.21.1",
-<<<<<<< HEAD:frontend/package.json
 		"chart.js": "^2.9.4",
-=======
 		"cors": "^2.8.5",
 		"esm": "^3.2.25",
 		"express": "^4.17.1",
 		"magic-sdk": "^4.0.2",
 		"mongoose": "^5.11.10",
->>>>>>> f4c7e89eb418ad40f94a62ed9aae1a124048f2cf:package.json
 		"react": "^17.0.1",
 		"react-burger-menu": "^3.0.2",
 		"react-chartjs-2": "^2.11.1",
