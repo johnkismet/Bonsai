@@ -35,6 +35,7 @@ function Tree(props) {
 	const [treeFlavor, setTreeFlavor] = useState(0);
 	const token = auth.magic.user.getIdToken();
 	const [open, setOpen] = React.useState(false);
+	const [timeElapsed, setTimeElapsed] = useState("");
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -45,35 +46,6 @@ function Tree(props) {
 	};
 
 	useEffect(() => {
-		// TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
-		// axios
-		// 	.get(`${url}/tree/${id}`, {
-		// 		headers: {
-		// 			Authorization: `Bearer ${token}`,
-		// 		},
-		// 	})
-		// 	.then(function (res) {
-		// 		// handle success
-		// 		setName(res.data.name);
-		// 		setDetails(res.data.details);
-		// 		setType(res.data.type);
-		// 		setStage(res.data.stage);
-		// 		setTasks(res.data.tasks);
-		// 		setPoints(res.data.points);
-		// 		setWorkTimer(res.data.workTimer);
-		// 	})
-		// 	.catch(function (error) {
-		// 		// handle error
-		// 		console.error(error);
-		// 	})
-		// 	.then(function () {
-		// 		// always executed
-		// 		// Initialize library and start tracking time
-		// 		TimeMe.initialize({
-		// 			currentPageName: "my-home-page", // current page
-		// 			idleTimeoutInSeconds: 1000000, // seconds
-		// 		});
-		// 	});
 		auth
 			.fetch(`${url}/tree/${id}`)
 			.then((res) => res.json())
@@ -85,7 +57,7 @@ function Tree(props) {
 				setTasks(data.tasks);
 				setPoints(data.points);
 				setWorkTimer(data.workTimer);
-				setTreeFlavor(data.treeFlavor)
+				setTreeFlavor(data.treeFlavor);
 			});
 
 		return () => {
@@ -231,7 +203,6 @@ function convertTime(seconds) {
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
 }
-
 
 function deleteTree() {
 	// console.log(id);
