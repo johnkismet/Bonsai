@@ -47,24 +47,23 @@ function Tree(props) {
   async function deleteTree() {
     const DIDToken = await auth.magic.user.getIdToken();
     axios
-        .delete(`${url}/trees/${id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${DIDToken}`,
-            },
-        })
-        .then((res) => {
-            console.log(res);
-            setTimeout(() => {
-                window.location = "/treefarm";
-            }, 1000);
-        });
-}
-const handleCloseAndDelete = () => {
-  deleteTree();
-  setOpen(false);
-};
-
+      .delete(`${url}/trees/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${DIDToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setTimeout(() => {
+          window.location = "/treefarm";
+        }, 1000);
+      });
+  }
+  const handleCloseAndDelete = () => {
+    deleteTree();
+    setOpen(false);
+  };
 
   useEffect(() => {
     // TODO: USE REDUX STATE FOR INDIVIDUAL TREE INSTEAD OF ANOTHER FETCH REQUEST
@@ -113,14 +112,14 @@ const handleCloseAndDelete = () => {
     return () => {
       document.title = `Bonsai`;
 
-      // let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-      // axios({
-      //   method: "post",
-      //   url: `${url}/trees/${id}`,
-      //   data: {
-      //     workTimer: timeSpentOnPage,
-      //   },
-      // });
+      let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+      axios({
+        method: "post",
+        url: `${url}/trees/${id}`,
+        data: {
+          workTimer: timeSpentOnPage,
+        },
+      });
     };
   }, []);
   document.title = `Working on ${name}`;
@@ -166,37 +165,37 @@ const handleCloseAndDelete = () => {
             {convertTime(workTimer)}
           </div>
           <div className="buttonsContainer">
-		  <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleClickOpen}
-              >
-                Delete Tree
-              </Button>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Are you sure you want to Delete tree"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              Delete Tree
+            </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Are you sure you want to Delete tree"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
                   Are you sure you want to delete this tree? You've gained 0
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleCloseAndDelete} color="primary">
-                    Delete
-                  </Button>
-                  <Button onClick={handleClose} color="primary" autoFocus>
-                    Cancel
-                  </Button>
-                </DialogActions>
-              </Dialog>
-		  </div>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseAndDelete} color="primary">
+                  Delete
+                </Button>
+                <Button onClick={handleClose} color="primary" autoFocus>
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
         <div className="rightSide">
           <div className="taskCont">
