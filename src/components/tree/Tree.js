@@ -112,14 +112,14 @@ function Tree(props) {
     return () => {
       document.title = `Bonsai`;
 
-      let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-      axios({
-        method: "post",
-        url: `${url}/trees/${id}`,
-        data: {
-          workTimer: timeSpentOnPage,
-        },
-      });
+      // let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+      // axios({
+      //   method: "post",
+      //   url: `${url}/trees/${id}`,
+      //   data: {
+      //     workTimer: timeSpentOnPage,
+      //   },
+      // });
     };
   }, []);
   document.title = `Working on ${name}`;
