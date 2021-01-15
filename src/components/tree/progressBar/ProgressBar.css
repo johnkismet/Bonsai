@@ -1,0 +1,15 @@
+.progressBar{
+    background-color: whitesmoke;
+    color: #424443;
+    width: 15vw;
+    min-height: 2vh;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.374);
+	border-radius: 20px;
+}
+
+.progress {
+    background-color: firebrick;
+    border: 1px solid rgba(255, 255, 255, 0.374);
+	border-radius: 20px;
+}
