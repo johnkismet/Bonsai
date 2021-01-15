@@ -229,7 +229,10 @@ app.post("/api/setTasks/:parentId", (req, res) => {
 				res.status(400).send("parentId is missing or invalid.");
 			} else {
 				foundTree.tasks = [ ...newTasks ];
-				foundTree.points += itemsCompleted * 10;
+				console.log(itemsCompleted)
+				if (itemsCompleted !== 0) {
+					foundTree.points += itemsCompleted * 10;
+				}
 				foundTree.save((err) => {
 					if (err) {
 						console.log(err);
