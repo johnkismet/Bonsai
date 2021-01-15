@@ -10,7 +10,6 @@ import axios from "axios";
 import Sidebar from "../sidebar/Sidebar";
 import useAuth from "../../hooks/useAuth";
 import * as api from "../../api";
-import "./newTree.css";
 
 const url =
   process.env.NODE_ENV === "production"
@@ -53,7 +52,7 @@ function NewTree() {
       <div id="newTree" className="spacer"></div>
       <div className="newTree">
         <div className="treeContainer">
-          <img src={TreePic} alt="Tree" srcset="" />
+          <img src={TreePic} alt="Tree" srcSet="" />
         </div>
         <form className="newTreeForm" onSubmit={submitTree}>
           <input

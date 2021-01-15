@@ -14,9 +14,8 @@ export default function ProgressBar(props) {
                 className="progress"
                 style={{ width: props.points + "%" }}
               ></div>
-              <span className="points">{`${props.points}%`}</span>
+              <span className="points">{`${props.points}%`}c</span>
             </div>
-          </>
         ) : (
           <div className="progressBar">
             <CircularProgress className="spinner" size="3vh" />
