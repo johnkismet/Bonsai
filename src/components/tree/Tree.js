@@ -52,34 +52,7 @@ function Tree(props) {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	async function deleteTree() {
-		const DIDToken = await auth.magic.user.getIdToken();
-		axios
-			.delete(`${url}/trees/${id}`, {
-				headers: {
-					"Content-Type": "application/json",
-					authorization: `Bearer ${DIDToken}`,
-				},
-			})
-			.then((res) => {
-				console.log(res);
-				setTimeout(() => {
-					window.location = "/treefarm";
-				}, 1000);
-			});
-	}
-	const handleCloseAndDelete = () => {
-		deleteTree();
-		setOpen(false);
-	};
 
-	const handleClose = () => {
-		setOpen(false);
-	};
-	const handleCloseAndDelete = () => {
-		deleteTree();
-		setOpen(false);
-	};
 	async function deleteTree() {
 		const DIDToken = await auth.magic.user.getIdToken();
 		axios
@@ -96,6 +69,10 @@ function Tree(props) {
 				}, 1000);
 			});
 	}
+	const handleCloseAndDelete = () => {
+		deleteTree();
+		setOpen(false);
+	};
 
 	useEffect(() => {
 		auth
