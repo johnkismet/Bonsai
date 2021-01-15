@@ -7,6 +7,7 @@ import treePic from "../../assets/images/tempTreeSprite.png";
 import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
 import useAuth from "../../hooks/useAuth";
+import ProgressBar from "./progressBar/ProgressBar";
 
 // material ui
 import Button from "@material-ui/core/Button";
@@ -112,14 +113,14 @@ const handleCloseAndDelete = () => {
     return () => {
       document.title = `Bonsai`;
 
-      let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-      axios({
-        method: "post",
-        url: `${url}/trees/${id}`,
-        data: {
-          workTimer: timeSpentOnPage,
-        },
-      });
+      // let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+      // axios({
+      //   method: "post",
+      //   url: `${url}/trees/${id}`,
+      //   data: {
+      //     workTimer: timeSpentOnPage,
+      //   },
+      // });
     };
   }, []);
   document.title = `Working on ${name}`;
@@ -160,6 +161,7 @@ const handleCloseAndDelete = () => {
             </div>
           </div>
           <div className="treePic">
+            <ProgressBar points={points} />
             {getTreePic(stage)}
             {convertTime(workTimer)}
           </div>
