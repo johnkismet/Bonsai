@@ -1,4 +1,5 @@
 import "./ProgressBar.css";
+<<<<<<< HEAD
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function ProgressBar(props) {
@@ -46,4 +47,20 @@ export default function ProgressBar(props) {
       </>
     );
   }
+=======
+
+export default function ProgressBar(props) {
+    console.log(props.points)
+  return (
+      
+    <>
+      <h2>Progress</h2>
+      <div className="progressBar">
+      
+        <div className="progress" style={{"width": props.points + "%"}}></div>
+        {`${props.points}%`}
+      </div>
+    </>
+  );
+>>>>>>> c11faf7... added progress bar
 }
