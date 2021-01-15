@@ -10,7 +10,6 @@ import axios from "axios";
 import Sidebar from "../sidebar/Sidebar";
 import useAuth from "../../hooks/useAuth";
 import * as api from "../../api";
-import "./newTree.css";
 
 const url =
 	process.env.NODE_ENV === "production"
@@ -48,6 +47,7 @@ function NewTree() {
 			});
 	}
 
+<<<<<<< HEAD
 	return (
 		<>
 			<Sidebar pageWrapId={"newTree"} outerContainerId={"root"} />
@@ -79,6 +79,39 @@ function NewTree() {
 			</div>
 		</>
 	);
+=======
+  return (
+    <>
+      <Sidebar pageWrapId={"newTree"} outerContainerId={"root"} />
+      <div id="newTree" className="spacer"></div>
+      <div className="newTree">
+        <div className="treeContainer">
+          <img src={TreePic} alt="Tree" srcSet="" />
+        </div>
+        <form className="newTreeForm" onSubmit={submitTree}>
+          <input
+            className="treeInfoInput"
+            id="nameInput"
+            name="name"
+            placeholder="Name"
+            type="text"
+            required
+            maxLength="15"
+          />
+          <input
+            className="treeInfoInput"
+            id="notesInput"
+            placeholder="Notes"
+            name="details"
+            type="text"
+            maxLength="70"
+          />
+          <input value="Create Tree" className="submitBtn" type="submit" />
+        </form>
+      </div>
+    </>
+  );
+>>>>>>> 22811a7b69e00407441193067f7695276a7e6842
 }
 
 function sendTree() {

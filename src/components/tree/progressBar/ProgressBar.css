@@ -1,0 +1,25 @@
+.progressBar{
+    background-color: whitesmoke;
+    color: #424443;
+    width: 15vw;
+    min-height: 2vh;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.374);
+    border-radius: 20px;
+    font-size: large;
+}
+
+.progress {
+    background-color: firebrick;
+    border: 1px solid rgba(255, 255, 255, 0.374);
+	border-radius: 20px;
+}
+.spinner {
+    margin-right: 1vh;
+    margin-left: 0.5vh;
+}
+
+.points {
+    padding-left: 1vh;
+    color: black
+}

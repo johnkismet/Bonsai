@@ -8,6 +8,7 @@ import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
 import deadTree from "../../assets/images/deadTreeSprite.png";
 import useAuth from "../../hooks/useAuth";
+import ProgressBar from "./progressBar/ProgressBar";
 
 // material ui
 import Button from "@material-ui/core/Button";
@@ -46,6 +47,30 @@ function Tree(props) {
 
 	const handleClickOpen = () => {
 		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+	async function deleteTree() {
+		const DIDToken = await auth.magic.user.getIdToken();
+		axios
+			.delete(`${url}/trees/${id}`, {
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${DIDToken}`,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				setTimeout(() => {
+					window.location = "/treefarm";
+				}, 1000);
+			});
+	}
+	const handleCloseAndDelete = () => {
+		deleteTree();
+		setOpen(false);
 	};
 
 	const handleClose = () => {
@@ -284,5 +309,4 @@ function convertTime(seconds) {
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
 }
-
 export default Tree;
