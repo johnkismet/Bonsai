@@ -59,7 +59,7 @@ export default function TaskContainer(props) {
 				Authorization: `Bearer ${token}`,
 			};
 			const AGH = {
-				tasks: newTask,
+				tasks: [ ...tasks, newTask],
 				itemsCompleted: 0,
 			};
 			axios
