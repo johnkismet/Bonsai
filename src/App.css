@@ -120,7 +120,7 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
-#logouBtn h2 {
+#logoutBtn h2 {
 	align-self: center;
 }
 
@@ -129,7 +129,6 @@ body {
 	height: 70vh;
 	width: 50%;
 	display: flex;
-	flex-flow: column;
 	justify-content: space-between;
 	align-items: center;
 	/* border: 1px solid black; */
@@ -148,7 +147,7 @@ body {
 .addTaskBtn {
 	width: 9vh;
 	height: 9vh;
-	align-self: flex-end;
+	align-self: center;
 	margin: 10px;
 	position: fixed;
 	bottom: 120px;

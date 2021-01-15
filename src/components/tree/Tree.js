@@ -6,6 +6,7 @@ import TaskContainerClass from "./taskSystem/TaskContainerClass";
 import treePic from "../../assets/images/tempTreeSprite.png";
 import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
+import deadTree from "../../assets/images/deadTreeSprite.png";
 import useAuth from "../../hooks/useAuth";
 
 // material ui
@@ -15,6 +16,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
@@ -36,6 +42,7 @@ function Tree(props) {
 	const token = auth.magic.user.getIdToken();
 	const [open, setOpen] = React.useState(false);
 	const [timeElapsed, setTimeElapsed] = useState("");
+	const [dateLastWorked, setDateLastWorked] = useState(0);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -44,6 +51,26 @@ function Tree(props) {
 	const handleClose = () => {
 		setOpen(false);
 	};
+	const handleCloseAndDelete = () => {
+		deleteTree();
+		setOpen(false);
+	};
+	async function deleteTree() {
+		const DIDToken = await auth.magic.user.getIdToken();
+		axios
+			.delete(`${url}/trees/${id}`, {
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${DIDToken}`,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				setTimeout(() => {
+					window.location = "/treefarm";
+				}, 1000);
+			});
+	}
 
 	useEffect(() => {
 		auth
@@ -62,15 +89,23 @@ function Tree(props) {
 
 		return () => {
 			document.title = `Bonsai`;
+			const token = auth.magic.user.getIdToken();
 
-			let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-			axios({
-				method: "post",
-				url: `${url}/trees/${id}`,
-				data: {
-					workTimer: timeSpentOnPage,
-				},
-			});
+			let data = {
+				dateLastWorked: dateLastWorked,
+			};
+			const headers = {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			};
+
+			axios
+				.post(`${url}/trees/${id}`, data, {
+					headers: headers,
+				})
+				.then((response) => {
+					console.log(response);
+				});
 		};
 	}, []);
 	document.title = `Working on ${name}`;
@@ -84,7 +119,19 @@ function Tree(props) {
 		treeFlavorImg = treePic3;
 	}
 
-	function getTreePic(stage) {
+	function checkTree() {
+		let currentDate = Date.now();
+		if (dateLastWorked === 0) {
+			setDateLastWorked(currentDate);
+		} else {
+			let timeElapsed = (currentDate - dateLastWorked) / 1000;
+			let threeDays = 259200;
+			if (timeElapsed >= threeDays) {
+				setDateLastWorked(Date.now());
+				return <img src={deadTree} />;
+			}
+		}
+
 		if (stage === 0) {
 			return <img src={treeFlavorImg} width="100px" />;
 		} else if (stage === 1) {
@@ -111,10 +158,44 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-						{getTreePic(stage)}
+						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
-					<div className="buttonsContainer"></div>
+					<div className="buttonsContainer">
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={handleClickOpen}
+						>
+							Delete Tree
+						</Button>
+						<Dialog
+							open={open}
+							TransitionComponent={Transition}
+							keepMounted
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-slide-title"
+							aria-describedby="alert-dialog-slide-description"
+						>
+							<DialogTitle id="alert-dialog-slide-title">
+								{"Use Google's location service?"}
+							</DialogTitle>
+							<DialogContent>
+								<DialogContentText id="alert-dialog-slide-description">
+									Are you sure you want to delete this tree? You've gained 0
+									points with this tree, which will be lost if you delete.
+								</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose} color="primary">
+									Cancel
+								</Button>
+								<Button onClick={handleCloseAndDelete} color="primary">
+									Yes, I'm sure
+								</Button>
+							</DialogActions>
+						</Dialog>
+					</div>
 				</div>
 				<div className="rightSide">
 					<div className="taskCont">
@@ -204,12 +285,4 @@ function convertTime(seconds) {
 	return formatStr.trim();
 }
 
-function deleteTree() {
-	// console.log(id);
-	axios.delete(`${url}/trees/${id}`).then((res) => console.log(res));
-
-	// setTimeout(() => {
-	// 	window.location = "/treefarm";
-	// }, 500);
-}
 export default Tree;

@@ -13,83 +13,84 @@ import * as api from "../../api";
 import "./newTree.css";
 
 const url =
-  process.env.NODE_ENV === "production"
-    ? "https://bonsai-one.vercel.app/api"
-    : "http://localhost:3000/api";
+	process.env.NODE_ENV === "production"
+		? "https://bonsai-one.vercel.app/api"
+		: "http://localhost:3000/api";
 
 function NewTree() {
-  // do a get request to access authorization tokens
-  // pass that along with the post request
-  const auth = useAuth();
+	// do a get request to access authorization tokens
+	// pass that along with the post request
+	const auth = useAuth();
 
-  async function submitTree(e) {
-    e.preventDefault();
-    const token = await auth.magic.user.getIdToken();
+	async function submitTree(e) {
+		e.preventDefault();
+		const token = await auth.magic.user.getIdToken();
 
-    let name = document.getElementById("nameInput").value;
-    let notes = document.getElementById("notesInput").value;
+		let name = document.getElementById("nameInput").value;
+		let notes = document.getElementById("notesInput").value;
 
-    let data = {
-      name: name,
-      details: notes,
-    };
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
+		let data = {
+			name: name,
+			details: notes,
+			dateLastWorked: Date.now(),
+		};
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
 
-    axios
-      .post(`${url}/newTree`, data, {
-        headers: headers,
-      })
-      .then((response) => {
-        window.location = "/treefarm";
-      });
-  }
+		axios
+			.post(`${url}/newTree`, data, {
+				headers: headers,
+			})
+			.then((response) => {
+				window.location = "/treefarm";
+			});
+	}
 
-  return (
-    <>
-      <Sidebar pageWrapId={"newTree"} outerContainerId={"root"} />
-      <div id="newTree" className="spacer"></div>
-      <div className="newTree">
-        <div className="treeContainer">
-          <img src={TreePic} alt="Tree" srcset="" />
-        </div>
-        <form className="newTreeForm" onSubmit={submitTree}>
-          <input
-            className="treeInfoInput"
-            id="nameInput"
-            name="name"
-            placeholder="Name"
-            type="text"
-            required
-            maxLength="15"
-          />
-          <input
-            className="treeInfoInput"
-            id="notesInput"
-            placeholder="Notes"
-            name="details"
-            type="text"
-            maxLength="70"
-          />
-          <input value="Create Tree" className="submitBtn" type="submit" />
-        </form>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<Sidebar pageWrapId={"newTree"} outerContainerId={"root"} />
+			<div id="newTree" className="spacer"></div>
+			<div className="newTree">
+				<div className="treeContainer">
+					<img src={TreePic} alt="Tree" srcset="" />
+				</div>
+				<form className="newTreeForm" onSubmit={submitTree}>
+					<input
+						className="treeInfoInput"
+						id="nameInput"
+						name="name"
+						placeholder="Name"
+						type="text"
+						required
+						maxLength="15"
+					/>
+					<input
+						className="treeInfoInput"
+						id="notesInput"
+						placeholder="Notes"
+						name="details"
+						type="text"
+						maxLength="70"
+					/>
+					<input value="Create Tree" className="submitBtn" type="submit" />
+				</form>
+			</div>
+		</>
+	);
 }
 
 function sendTree() {
-  let name = document.getElementById("nameInput").value;
-  let notes = document.getElementById("notesInput").value;
-  // console.log({ name, notes });
-  // axios
-  // 	.post(`${url}/newTree`, {
-  // 		name: name,
-  // 		details: notes,
-  // 	})
-  // 	.then((res) => console.log(res));
+	let name = document.getElementById("nameInput").value;
+	let notes = document.getElementById("notesInput").value;
+	// console.log({ name, notes });
+	// axios
+	// 	.post(`${url}/newTree`, {
+	// 		name: name,
+	// 		details: notes,
+	// 	})
+	// 	.then((res) => console.log(res));
 }
 
 export default NewTree;

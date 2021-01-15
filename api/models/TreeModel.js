@@ -13,5 +13,6 @@ const treeSchema = new mongoose.Schema({
 	workTimer: Number,
 	belongsTo: String,
 	treeFlavor: Number,
+	dateLastWorked: Number,
 });
 export const Tree = mongoose.model("Tree", treeSchema);
