@@ -54,8 +54,53 @@ export default function TaskContainer(props) {
 
       let newTasks = [...tasks, newTask];
       setTasks(newTasks);
-      sendTasksToBack(newTasks);
+      const token = await auth.magic.user.getIdToken();
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+      const AGH = {
+        tasks: [...tasks, newTask],
+        itemsCompleted: 0,
+      };
+      axios.post(`${url}/setTasks/${id}`, AGH, {
+        headers: headers,
+      });
     }
+  };
+
+  const ToggleCompleted = async (changedId) => {
+    //literally stole 90% of this from the todo app
+    let addPoints = -1;
+    const newTasks = [...tasks];
+    for (let i = 0; i < newTasks.length; i++) {
+      if (newTasks[i].taskId === changedId) {
+        if (newTasks[i].completed === false) {
+          addPoints = 1;
+          newTasks[i].completed = true;
+        } else {
+          newTasks[i].completed = false;
+        }
+      }
+    }
+    setTasks(newTasks);
+    const token = await auth.magic.user.getIdToken();
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const newReq = {
+      tasks: [...tasks],
+      itemsCompleted: addPoints,
+    };
+    axios
+      .post(`${url}/setTasks/${id}`, newReq, {
+        headers: headers,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    //newTasks[taskId].completed = !newTasks[taskId].completed;
   };
   const sendTasksToBack = async (NewTasks) => {
     const token = await auth.magic.user.getIdToken();
@@ -75,17 +120,6 @@ export default function TaskContainer(props) {
         console.log(response);
       });
   };
-  const ToggleCompleted = (changedId) => {
-    //literally stole 90% of this from the todo app
-    const newTasks = [...tasks];
-    for (let i = 0; i < newTasks.length; i++) {
-      if (newTasks[i].taskId === changedId) {
-        newTasks[i].completed = !newTasks[i].completed;
-      }
-    }
-    setTasks(newTasks);
-    //newTasks[taskId].completed = !newTasks[taskId].completed;
-  };
   const DeleteTask = async (changedId) => {
     const newTasks = [...tasks];
     console.log(newTasks);
@@ -96,23 +130,6 @@ export default function TaskContainer(props) {
       console.log(newTasks);
       setTasks(newTasks);
       sendTasksToBack(newTasks);
-      //post new Tasks
-      //   const token = await auth.magic.user.getIdToken();
-      //   const headers = {
-      //     "Content-Type": "application/json",
-      //     Authorization: `Bearer ${token}`,
-      //   };
-      //   const AGH = {
-      //     tasks: newTasks,
-      //     itemsCompleted: 0,
-      //   };
-      //   axios
-      //     .post(`${url}/setTasks/${id}`, AGH, {
-      //       headers: headers,
-      //     })
-      //     .then((response) => {
-      //       console.log(response);
-      //     });
     }
   };
   const handleChange = (event) => {
