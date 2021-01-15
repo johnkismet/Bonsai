@@ -66,21 +66,38 @@ export default function TaskContainer(props) {
 				.post(`${url}/setTasks/${id}`, AGH, {
 					headers: headers,
 				})
-				.then((response) => {
-					console.log(response);
-				});
 		}
 	};
 
-	const ToggleCompleted = (changedId) => {
+	const ToggleCompleted = async (changedId) => {
 		//literally stole 90% of this from the todo app
+		let addPoints = -1;
 		const newTasks = [...tasks];
 		for (let i = 0; i < newTasks.length; i++) {
 			if (newTasks[i].taskId === changedId) {
-				newTasks[i].completed = !newTasks[i].completed;
+				if (newTasks[i].completed === false) {
+					addPoints = 1;
+					newTasks[i].completed = true;
+				} else {
+					newTasks[i].completed = false;
+				}
 			}
 		}
 		setTasks(newTasks);
+		const token = await auth.magic.user.getIdToken();
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
+		const newReq = {
+			tasks: [ ...tasks ],
+			itemsCompleted: addPoints,
+		};
+		axios.post(`${url}/setTasks/${id}`, newReq, {
+			headers: headers
+		}).then((response) => {
+			console.log(response);
+		});
 		//newTasks[taskId].completed = !newTasks[taskId].completed;
 	};
 
