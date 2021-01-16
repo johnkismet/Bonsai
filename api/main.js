@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import { Tree } from "./models/TreeModel";
+import { User } from "./models/UserModel";
 import connectToMongoose from "./mongoose";
 import { v4 } from "uuid";
 import mAdmin from "./magic.js";
@@ -111,14 +112,6 @@ app.post("/api/newTree", (req, res) => {
 	});
 });
 
-const userSchema = new mongoose.Schema({
-	email: String,
-	birthTime: Date,
-	hoursWorked: Array,
-	tasksDone: Array,
-});
-const User = mongoose.model("User", userSchema);
-
 app.post("/api/createUser", (req, res) => {
 	try {
 		const userReq = req.body;
@@ -201,6 +194,29 @@ app.post("/api/createUser", (req, res) => {
 	} catch (err) {
 		res.status(500).send({ message: err.message });
 	}
+});
+
+app.post("/api/setHoursWorked", (req, res) => {
+	let userEmail = req.user;
+	let date = new Date();
+	let day = date.getDay();
+	const filter = { email: userEmail };
+	// const update = {hoursWorked[day]: req.body.timeElapsed}
+	User.findOne({ email: userEmail }, (err, user) => {
+		if (!user) {
+			res.status(400).send("User doesn't exist. How'd you do this?");
+		} else {
+			let previousHours = user.hoursWorked[day];
+			let newHours = previousHours + req.body.timeElapsed;
+			user.hoursWorked[day] = newHours;
+			user.save((err) => {
+				if (err) {
+					console.log(err);
+				}
+			});
+			res.status(200).send("Hours updated, champion");
+		}
+	});
 });
 
 app.post("/api/setTasks/:parentId", (req, res) => {
