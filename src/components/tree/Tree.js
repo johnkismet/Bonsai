@@ -6,8 +6,26 @@ import TaskContainerClass from "./taskSystem/TaskContainerClass";
 import treePic from "../../assets/images/tempTreeSprite.png";
 import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
+import deadTree from "../../assets/images/deadTreeSprite.png";
 import useAuth from "../../hooks/useAuth";
+import ProgressBar from "./progressBar/ProgressBar";
 
+<<<<<<< HEAD
+=======
+// material ui
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
+
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
@@ -25,14 +43,42 @@ function Tree(props) {
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
 	const [treeFlavor, setTreeFlavor] = useState(0);
+<<<<<<< HEAD
 	const [open, setOpen] = useState(false);
 	const [time, setTime] = useState(0);
+=======
+	const token = auth.magic.user.getIdToken();
+	const [open, setOpen] = React.useState(false);
+	const [timeElapsed, setTimeElapsed] = useState("");
+	const [dateLastWorked, setDateLastWorked] = useState(0);
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
 
 	const handleClose = () => {
+		setOpen(false);
+	};
+
+	async function deleteTree() {
+		const DIDToken = await auth.magic.user.getIdToken();
+		axios
+			.delete(`${url}/trees/${id}`, {
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${DIDToken}`,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				setTimeout(() => {
+					window.location = "/treefarm";
+				}, 1000);
+			});
+	}
+	const handleCloseAndDelete = () => {
+		deleteTree();
 		setOpen(false);
 	};
 
@@ -53,20 +99,35 @@ function Tree(props) {
 
 		setTime(Date.now());
 		return () => {
+<<<<<<< HEAD
 			let initialTime = time;
 			let currentTime = Date.now();
 			let timeElapsed = (currentTime - initialTime) / 1000;
 			const token = auth.magic.user.getIdToken();
 
+=======
+			document.title = `Bonsai`;
+			const token = auth.magic.user.getIdToken();
+
+			let data = {
+				dateLastWorked: dateLastWorked,
+			};
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 			const headers = {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			};
+<<<<<<< HEAD
 			const payload = {
 				workTime: timeElapsed,
 			};
 			axios
 				.post(`${url}/setTime/${id}`, payload, {
+=======
+
+			axios
+				.post(`${url}/trees/${id}`, data, {
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 					headers: headers,
 				})
 				.then((response) => {
@@ -85,7 +146,19 @@ function Tree(props) {
 		treeFlavorImg = treePic3;
 	}
 
-	function getTreePic(stage) {
+	function checkTree() {
+		let currentDate = Date.now();
+		if (dateLastWorked === 0) {
+			setDateLastWorked(currentDate);
+		} else {
+			let timeElapsed = (currentDate - dateLastWorked) / 1000;
+			let threeDays = 259200;
+			if (timeElapsed >= threeDays) {
+				setDateLastWorked(Date.now());
+				return <img src={deadTree} />;
+			}
+		}
+
 		if (stage === 0) {
 			return <img src={treeFlavorImg} width="100px" />;
 		} else if (stage === 1) {
@@ -112,10 +185,44 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-						{getTreePic(stage)}
+						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
-					<div className="buttonsContainer"></div>
+					<div className="buttonsContainer">
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={handleClickOpen}
+						>
+							Delete Tree
+						</Button>
+						<Dialog
+							open={open}
+							TransitionComponent={Transition}
+							keepMounted
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-slide-title"
+							aria-describedby="alert-dialog-slide-description"
+						>
+							<DialogTitle id="alert-dialog-slide-title">
+								{"Use Google's location service?"}
+							</DialogTitle>
+							<DialogContent>
+								<DialogContentText id="alert-dialog-slide-description">
+									Are you sure you want to delete this tree? You've gained 0
+									points with this tree, which will be lost if you delete.
+								</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose} color="primary">
+									Cancel
+								</Button>
+								<Button onClick={handleCloseAndDelete} color="primary">
+									Yes, I'm sure
+								</Button>
+							</DialogActions>
+						</Dialog>
+					</div>
 				</div>
 				<div className="rightSide">
 					<div className="taskCont">
@@ -204,6 +311,7 @@ function convertTime(seconds) {
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
 }
+<<<<<<< HEAD
 
 function deleteTree() {
 	// console.log(id);
@@ -213,4 +321,6 @@ function deleteTree() {
 	// 	window.location = "/treefarm";
 	// }, 500);
 }
+=======
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 export default Tree;

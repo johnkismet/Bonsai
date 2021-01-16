@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import useMagicLink from "use-magic-link";
 import Task from "./Task";
 import useAuth from "../../../hooks/useAuth";
+import "./Tasks.css";
 import { v4 as uuid } from "uuid";
 import React, { useState, useEffect } from "react";
 const url =
@@ -59,39 +60,138 @@ export default function TaskContainer(props) {
 				Authorization: `Bearer ${token}`,
 			};
 			const AGH = {
-				tasks: newTask,
+				tasks: [...tasks, newTask],
 				itemsCompleted: 0,
 			};
-			axios
-				.post(`${url}/setTasks/${id}`, AGH, {
-					headers: headers,
-				})
-				.then((response) => {
-					console.log(response);
-				});
+			axios.post(`${url}/setTasks/${id}`, AGH, {
+				headers: headers,
+			});
 		}
 	};
 
-	const ToggleCompleted = (changedId) => {
+	const ToggleCompleted = async (changedId) => {
 		//literally stole 90% of this from the todo app
+		let addPoints = -1;
 		const newTasks = [...tasks];
 		for (let i = 0; i < newTasks.length; i++) {
 			if (newTasks[i].taskId === changedId) {
-				newTasks[i].completed = !newTasks[i].completed;
+				if (newTasks[i].completed === false) {
+					addPoints = 1;
+					newTasks[i].completed = true;
+				} else {
+					newTasks[i].completed = false;
+				}
 			}
 		}
 		setTasks(newTasks);
+		const token = await auth.magic.user.getIdToken();
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
+		const newReq = {
+			tasks: [...tasks],
+			itemsCompleted: addPoints,
+		};
+		axios
+			.post(`${url}/setTasks/${id}`, newReq, {
+				headers: headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
 		//newTasks[taskId].completed = !newTasks[taskId].completed;
+	};
+	const sendTasksToBack = async (NewTasks) => {
+		const token = await auth.magic.user.getIdToken();
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		};
+		const AGH = {
+			tasks: NewTasks,
+			itemsCompleted: 0,
+		};
+		axios
+			.post(`${url}/setTasks/${id}`, AGH, {
+				headers: headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	};
+
+	const DeleteTask = async (changedId) => {
+		const newTasks = [...tasks];
+		console.log(newTasks);
+		for (let i = 0; i < newTasks.length; i++) {
+			if (newTasks[i].taskId === changedId) {
+				newTasks.splice(i, 1);
+			}
+			console.log(newTasks);
+			setTasks(newTasks);
+			sendTasksToBack(newTasks);
+		}
 	};
 
 	const handleChange = (event) => {
 		setCurrentName(event.target.value);
 	};
 
+	// 	let newTasks = [...tasks, newTask];
+	// 	setTasks(newTasks);
+	// 	const token = auth.magic.user.getIdToken();
+	// 	const headers = {
+	// 		"Content-Type": "application/json",
+	// 		Authorization: `Bearer ${token}`,
+	// 	};
+	// 	const AGH = {
+	// 		tasks: [ ...tasks, newTask],
+	// 		itemsCompleted: 0,
+	// 	};
+	// 	axios
+	// 		.post(`${url}/setTasks/${id}`, AGH, {
+	// 			headers: headers,
+	// 		})
+	// }
+
+	// 	const ToggleCompleted = async (changedId) => {
+	// 		//literally stole 90% of this from the todo app
+	// 		let addPoints = -1;
+	// 		const newTasks = [...tasks];
+	// 		for (let i = 0; i < newTasks.length; i++) {
+	// 			if (newTasks[i].taskId === changedId) {
+	// 				if (newTasks[i].completed === false) {
+	// 					addPoints = 1;
+	// 					newTasks[i].completed = true;
+	// 				} else {
+	// 					newTasks[i].completed = false;
+	// 				}
+	// 			}
+	// 		}
+	// 		setTasks(newTasks);
+	// 		const token = await auth.magic.user.getIdToken();
+	// 		const headers = {
+	// 			"Content-Type": "application/json",
+	// 			Authorization: `Bearer ${token}`,
+	// 		};
+	// 		const newReq = {
+	// 			tasks: [ ...tasks ],
+	// 			itemsCompleted: addPoints,
+	// 		};
+	// 		axios.post(`${url}/setTasks/${id}`, newReq, {
+	// 			headers: headers
+	// 		}).then((response) => {
+	// 			console.log(response);
+	// 		});
+	// 		//newTasks[taskId].completed = !newTasks[taskId].completed;
+	// 	};
+
 	const showTasks = tasks.map((task, index) => (
 		<Task
 			className="task"
 			name={task.name}
+			Delete={DeleteTask}
 			onChange={ToggleCompleted}
 			completed={task.completed}
 			taskId={task.taskId}

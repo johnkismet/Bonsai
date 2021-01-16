@@ -196,7 +196,6 @@ app.post("/api/createUser", (req, res) => {
 					}
 					res.send("User Created");
 				});
-				w;
 			}
 		});
 	} catch (err) {
@@ -212,8 +211,11 @@ app.post("/api/setTasks/:parentId", (req, res) => {
 			if (!foundTree) {
 				res.status(400).send("parentId is missing or invalid.");
 			} else {
-				foundTree.tasks.push(newTasks);
-				foundTree.points += itemsCompleted * 10;
+				foundTree.tasks = [...newTasks];
+				console.log(itemsCompleted);
+				if (itemsCompleted !== 0) {
+					foundTree.points += itemsCompleted * 10;
+				}
 				foundTree.save((err) => {
 					if (err) {
 						console.log(err);
@@ -257,8 +259,7 @@ app.post("/api/trees/:id", (req, res) => {
 	let id = req.params.id;
 	Tree.findOne({ _id: id }, (err, tree) => {
 		if (err) console.log(err);
-		let totalAmount = parseInt(tree.workTimer) + parseInt(req.body.workTimer);
-		tree.workTimer = totalAmount;
+		tree.dateLastWorked = req.dateLastWorked;
 		tree.save();
 		res.send(tree);
 	});
