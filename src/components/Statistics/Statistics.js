@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Statistics.css";
 import Sidebar from "../sidebar/Sidebar";
+import LineGraph from "./lineGraph";
 
 function Statistics(props) {
 	const [time, setTime] = useState(0);
@@ -98,11 +99,8 @@ function Statistics(props) {
 		<>
 			<Sidebar pageWrapId={"statistics"} />
 			<div id="statistics" className="Statistics">
-				<h1>Statistics</h1>
-				<button onClick={getTime}>
-					Click me to find out how much time has passed since you loaded this
-					page
-				</button>
+				<h1>Your analytics</h1>
+				<LineGraph />
 			</div>
 		</>
 	);

@@ -26,7 +26,7 @@ function Sidebar(props) {
 				Archive
 			</Link>
 			<Link to="/statistics" className="sideBarInfo">
-				Statistics
+				Analytics
 			</Link>
 			<div
 				onClick={() => {

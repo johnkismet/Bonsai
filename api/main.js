@@ -24,18 +24,19 @@ app.use(async (req, res, next) => {
 // magic middleware
 app.use(async (req, res, next) => {
 	const { authorization } = req.headers;
-	if (!authorization) {
+	const isSigningUp = req.body.isSigningUp;
+	if (!authorization && !isSigningUp) {
 		next(new Error("Authorization token not found"));
 		return;
 	}
-	const DIDToken = authorization.substring(7);
-	req.DIDToken = DIDToken;
-	mAdmin.token.validate(DIDToken);
-	const metadata = await mAdmin.users.getMetadataByToken(DIDToken);
-	const user = await metadata.email;
-	req.user = user;
-	// console.log({ user });
-	// console.log(req.user);
+	if (authorization) {
+		const DIDToken = authorization.substring(7);
+		req.DIDToken = DIDToken;
+		mAdmin.token.validate(DIDToken);
+		const metadata = await mAdmin.users.getMetadataByToken(DIDToken);
+		const user = await metadata.email;
+		req.user = user;
+	}
 	next();
 });
 
@@ -92,7 +93,6 @@ app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
 	let currentUser = req.user;
-	console.log(currentUser);
 	const bonsai = new Tree({
 		name: body.name,
 		type: body.typeOfTree,
@@ -104,7 +104,6 @@ app.post("/api/newTree", (req, res) => {
 		belongsTo: currentUser,
 		treeFlavor: Math.floor(Math.random() * 2),
 	});
-	console.log(bonsai);
 	bonsai.save((err) => {
 		if (err) return console.error(err);
 		res.send("Tree created!");
@@ -113,77 +112,92 @@ app.post("/api/newTree", (req, res) => {
 });
 
 const userSchema = new mongoose.Schema({
-	username: String,
+	email: String,
 	birthTime: Date,
+	hoursWorked: Array,
+	tasksDone: Array,
 });
 const User = mongoose.model("User", userSchema);
 
 app.post("/api/createUser", (req, res) => {
 	try {
 		const userReq = req.body;
-		const newUser = new User({
-			username: userReq.username,
-			birthTime: Date.now(),
-		});
-		const exampleTree1 = new Tree({
-			name: "Meditation",
-			type: "shortTerm",
-			stage: 0,
-			details: "The fine art of meditation.",
-			tasks: [
-				{
-					name: "Meditate for 20 minutes.",
-					completed: false,
-					taskId: v4(),
-				},
-				{
-					name: "Go outside and talk to a tree.",
-					completed: false,
-					taskId: v4(),
-				},
-			],
-			points: 0,
-			workTimer: 0,
-			username: userReq.username,
-			treeFlavor: 0,
-		});
-		const exampleTree2 = new Tree({
-			name: "Excercise",
-			type: "longTerm",
-			stage: 0,
-			details: "Get ripped.",
-			tasks: [
-				{
-					name: "Walk for 2 hours.",
-					completed: false,
-					taskId: v4(),
-				},
-				{
-					name: "Jump 2000 times.",
-					completed: false,
-					taskId: v4(),
-				},
-			],
-			points: 0,
-			workTimer: 0,
-			username: userReq.username,
-			treeFlavor: 1,
-		});
-		exampleTree1.save((err) => {
-			if (err) {
-				console.log(err);
+		// Check if there is an existing user
+		User.findOne({ email: userReq.email }).exec(function (err, user) {
+			if (user) {
+				console.log("User exists already :D");
+				return;
+			} else {
+				const newUser = new User({
+					email: userReq.email,
+					birthTime: Date.now(),
+					hoursWorked: [0, 0, 0, 0, 0, 0, 0],
+					tasksDone: [0, 0, 0, 0, 0, 0, 0],
+				});
+				const exampleTree1 = new Tree({
+					name: "Meditation",
+					type: "shortTerm",
+					stage: 0,
+					details: "The fine art of meditation.",
+					tasks: [
+						{
+							name: "Meditate for 20 minutes.",
+							completed: false,
+							taskId: v4(),
+						},
+						{
+							name: "Go outside and talk to a tree.",
+							completed: false,
+							taskId: v4(),
+						},
+					],
+					points: 0,
+					workTimer: 0,
+					belongsTo: userReq.email,
+					treeFlavor: 0,
+					dateLastWorked: 0,
+				});
+				const exampleTree2 = new Tree({
+					name: "Exercise",
+					type: "longTerm",
+					stage: 0,
+					details: "Get ripped.",
+					tasks: [
+						{
+							name: "Walk for 2 hours.",
+							completed: false,
+							taskId: v4(),
+						},
+						{
+							name: "Jump 2000 times.",
+							completed: false,
+							taskId: v4(),
+						},
+					],
+					points: 0,
+					workTimer: 0,
+					belongsTo: userReq.email,
+					treeFlavor: 1,
+					dateLastWorked: 0,
+				});
+				exampleTree1.save((err) => {
+					if (err) {
+						console.log(err);
+					}
+				});
+				exampleTree2.save((err) => {
+					if (err) {
+						console.log(err);
+					}
+				});
+				newUser.save((err) => {
+					if (err) {
+						console.log(err);
+					}
+					res.send("User Created");
+				});
+				w;
 			}
-		});
-		exampleTree2.save((err) => {
-			if (err) {
-				console.log(err);
-			}
-		});
-		newUser.save((err) => {
-			if (err) {
-				console.log(err);
-			}
-			res.send("User Created");
 		});
 	} catch (err) {
 		res.status(500).send({ message: err.message });
