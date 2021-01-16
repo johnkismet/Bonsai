@@ -1,5 +1,11 @@
 import useAuth from "../../hooks/useAuth";
 import "./Welcome.css";
+import axios from "axios";
+
+const url =
+	process.env.NODE_ENV === "production"
+		? "https://bonsai-one.vercel.app/api"
+		: "http://localhost:3000/api";
 
 function Login() {
 	const auth = useAuth();
@@ -10,8 +16,22 @@ function Login() {
 	async function loginNow(e) {
 		try {
 			const email = document.getElementById("loginInput").value;
-			if (email) await auth.login(email);
-			else console.log("no email!");
+			// const token = await auth.magic.user.getIdToken();
+			if (email) {
+				let data = {
+					email: email,
+					isSigningUp: true,
+				};
+				const headers = {
+					"Content-Type": "application/json",
+					// Authorization: `Bearer ${token}`,
+				};
+
+				axios.post(`${url}/createUser`, data, {
+					headers: headers,
+				});
+				await auth.login(email);
+			} else console.log("no email!");
 		} catch (err) {
 			console.error(err);
 			// maybe updat some sort of state to let the user know that it failed =]

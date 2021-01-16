@@ -10,6 +10,8 @@ import deadTree from "../../assets/images/deadTreeSprite.png";
 import useAuth from "../../hooks/useAuth";
 import ProgressBar from "./progressBar/ProgressBar";
 
+<<<<<<< HEAD
+=======
 // material ui
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -23,6 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 const axios = require("axios").default;
 const id = window.location.pathname.substring(7);
 const url =
@@ -40,10 +43,15 @@ function Tree(props) {
 	const [points, setPoints] = useState(0);
 	const [workTimer, setWorkTimer] = useState(0);
 	const [treeFlavor, setTreeFlavor] = useState(0);
+<<<<<<< HEAD
+	const [open, setOpen] = useState(false);
+	const [time, setTime] = useState(0);
+=======
 	const token = auth.magic.user.getIdToken();
 	const [open, setOpen] = React.useState(false);
 	const [timeElapsed, setTimeElapsed] = useState("");
 	const [dateLastWorked, setDateLastWorked] = useState(0);
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -89,20 +97,37 @@ function Tree(props) {
 				setTreeFlavor(data.treeFlavor);
 			});
 
+		setTime(Date.now());
 		return () => {
+<<<<<<< HEAD
+			let initialTime = time;
+			let currentTime = Date.now();
+			let timeElapsed = (currentTime - initialTime) / 1000;
+			const token = auth.magic.user.getIdToken();
+
+=======
 			document.title = `Bonsai`;
 			const token = auth.magic.user.getIdToken();
 
 			let data = {
 				dateLastWorked: dateLastWorked,
 			};
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 			const headers = {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			};
+<<<<<<< HEAD
+			const payload = {
+				workTime: timeElapsed,
+			};
+			axios
+				.post(`${url}/setTime/${id}`, payload, {
+=======
 
 			axios
 				.post(`${url}/trees/${id}`, data, {
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 					headers: headers,
 				})
 				.then((response) => {
@@ -286,4 +311,16 @@ function convertTime(seconds) {
 	formatStr = formatArr.join(" ");
 	return formatStr.trim();
 }
+<<<<<<< HEAD
+
+function deleteTree() {
+	// console.log(id);
+	axios.delete(`${url}/trees/${id}`).then((res) => console.log(res));
+
+	// setTimeout(() => {
+	// 	window.location = "/treefarm";
+	// }, 500);
+}
+=======
+>>>>>>> 400457f1421233d332a023bdd9cb63bcff7912fd
 export default Tree;
