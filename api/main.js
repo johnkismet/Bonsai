@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import { Tree } from "./models/TreeModel";
+import { User } from "./models/UserModel";
 import connectToMongoose from "./mongoose";
 import { v4 } from "uuid";
 import mAdmin from "./magic.js";
@@ -89,6 +90,17 @@ app.get("/api/getTasks/:parentId", (req, res) => {
 	}
 });
 
+app.get("/api/getStats", (req, res) => {
+	let userEmail = req.user;
+	User.findOne({ email: userEmail }, (err, user) => {
+		let stats = {
+			hoursWorked: user.hoursWorked,
+			tasksDone: user.tasksDone,
+		};
+		res.send(stats);
+	});
+});
+
 app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
@@ -103,6 +115,7 @@ app.post("/api/newTree", (req, res) => {
 		workTimer: 0,
 		belongsTo: currentUser,
 		treeFlavor: Math.floor(Math.random() * 2),
+		dateLastWorked: Date.now(),
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
@@ -110,14 +123,6 @@ app.post("/api/newTree", (req, res) => {
 		// res.status(200).redirect(`${url}/treefarm`);
 	});
 });
-
-const userSchema = new mongoose.Schema({
-	email: String,
-	birthTime: Date,
-	hoursWorked: Array,
-	tasksDone: Array,
-});
-const User = mongoose.model("User", userSchema);
 
 app.post("/api/createUser", (req, res) => {
 	try {
@@ -201,6 +206,38 @@ app.post("/api/createUser", (req, res) => {
 	} catch (err) {
 		res.status(500).send({ message: err.message });
 	}
+});
+
+app.post("/api/setHoursWorked", (req, res) => {
+	let userEmail = req.user;
+	let date = new Date();
+	let day = date.getDay();
+	let timeElapsed = req.body.timeElapsed;
+	User.findOne({ email: userEmail }, (err, user) => {
+		if (!user) {
+			res.status(400).send("User doesn't exist. How'd you do this?");
+		}
+		let previousTime = user.hoursWorked[day];
+		let newHours = previousTime + timeElapsed;
+
+		user.hoursWorked.set(day, newHours);
+		user.save();
+		res.send("Hours updated");
+	});
+	// res.send(foundUser.hoursWorked);
+});
+
+app.post("/api/incrementTasks", (req, res) => {
+	let userEmail = req.user;
+	let date = new Date();
+	let day = date.getDay();
+	User.findOne({ email: userEmail }, (err, user) => {
+		let previousCount = user.tasksDone[day];
+		let newCount = previousCount + 1;
+		user.tasksDone.set(day, newCount);
+		user.save();
+		res.send("task count updated!");
+	});
 });
 
 app.post("/api/setTasks/:parentId", (req, res) => {

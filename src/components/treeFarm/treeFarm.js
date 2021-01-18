@@ -26,8 +26,12 @@ function TreeFarm() {
 			name={tree.name}
 			id={tree._id}
 			treeFlavor={tree.treeFlavor}
+			dateLastWorked={tree.dateLastWorked}
 		/>
 	));
+
+	function checkAndShowTrees() {}
+
 	const auth = useAuth();
 	// const token = auth.magic.user.getIdToken();
 	useEffect(() => {

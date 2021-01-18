@@ -6,7 +6,6 @@ let isConnected = false;
 export default async function connectToMongoose() {
 	try {
 		if (isConnected) {
-			console.log("already connected");
 			return;
 		}
 		await mongoose.connect(uri, {
@@ -16,7 +15,6 @@ export default async function connectToMongoose() {
 			useCreateIndex: true,
 		});
 		isConnected = true;
-		console.log("Connected to MongoDB for the first time!");
 	} catch (err) {
 		console.log(err);
 		throw err;
