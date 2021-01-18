@@ -104,6 +104,7 @@ app.post("/api/newTree", (req, res) => {
 		workTimer: 0,
 		belongsTo: currentUser,
 		treeFlavor: Math.floor(Math.random() * 2),
+		dateLastWorked: Date.now(),
 	});
 	bonsai.save((err) => {
 		if (err) return console.error(err);
@@ -200,14 +201,13 @@ app.post("/api/setHoursWorked", (req, res) => {
 	let userEmail = req.user;
 	let date = new Date();
 	let day = date.getDay();
-	const filter = { email: userEmail };
-	// const update = {hoursWorked[day]: req.body.timeElapsed}
+	let timeElapsed = req.body.timeElapsed;
 	User.findOne({ email: userEmail }, (err, user) => {
 		if (!user) {
 			res.status(400).send("User doesn't exist. How'd you do this?");
 		} else {
 			let previousHours = user.hoursWorked[day];
-			let newHours = previousHours + req.body.timeElapsed;
+			let newHours = previousHours + timeElapsed;
 			user.hoursWorked[day] = newHours;
 			user.save((err) => {
 				if (err) {
