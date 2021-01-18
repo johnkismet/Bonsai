@@ -196,12 +196,11 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-            <ProgressBar points={points}/>
+						<ProgressBar points={points} />
 						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
 					<div className="buttonsContainer">
-<<<<<<< HEAD
 						<div className="leftSideBtn">
 							<Button
 								variant="outlined"
@@ -238,43 +237,6 @@ function Tree(props) {
 								</DialogActions>
 							</Dialog>
 						</div>
-=======
-						<Button
-							variant="outlined"
-							color="primary"
-							onClick={handleClickOpen}
-						>
-							Delete Tree
-						</Button>
-						<Dialog
-							open={open}
-							TransitionComponent={Transition}
-							keepMounted
-							onClose={handleClose}
-							aria-labelledby="alert-dialog-slide-title"
-							aria-describedby="alert-dialog-slide-description"
-						>
-							<DialogTitle id="alert-dialog-slide-title">
-								{"Use Google's location service?"}
-							</DialogTitle>
-							<DialogContent>
-								<DialogContentText id="alert-dialog-slide-description">
-									Are you sure you want to delete this tree? You've gained 0
-									points with this tree, which will be lost if you delete.
-								</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-								<Button onClick={handleClose} color="primary">
-									Cancel
-								</Button>
-								<Button onClick={handleCloseAndDelete} color="primary">
-									Yes, I'm sure
-								</Button>
-							</DialogActions>
-						</Dialog>
-
-						<button onClick={getTimeElapsed}>Get time</button>
->>>>>>> 5b8cd159cdbc4244acff84482d244f4f93caaf56
 					</div>
 				</div>
 				<div className="rightSide">
