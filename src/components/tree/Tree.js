@@ -37,7 +37,7 @@ function Tree(props) {
 	const [type, setType] = useState("");
 	const [stage, setStage] = useState(0);
 	const [tasks, setTasks] = useState([]);
-	const [points, setPoints] = useState(0);
+	const [points, setPoints] = useState(undefined);
 	const [workTimer, setWorkTimer] = useState(0);
 	const [treeFlavor, setTreeFlavor] = useState(0);
 	const token = auth.magic.user.getIdToken();
@@ -161,6 +161,7 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
+            <ProgressBar points={points}/>
 						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
