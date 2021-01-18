@@ -3,6 +3,9 @@ import React from "react";
 import treePic from "../../assets/images/tempTreeSprite.png";
 import treePic2 from "../../assets/images/tempTreeSprite2.png";
 import treePic3 from "../../assets/images/tempTreeSprite3.png";
+import happyFace from "../../assets/images/happyFace.png";
+import sadFace from "../../assets/images/sadFace.png";
+import deadFace from "../../assets/images/deadFace.png";
 import "./Tree.css";
 
 function Tree(props) {
@@ -14,10 +17,23 @@ function Tree(props) {
 	} else {
 		treeFlavor = treePic3;
 	}
+	let status = new Image();
+	let timeElapsed = (props.dateLastWorked - Date.now()) / 1000;
+	let twoDays = 172800;
+	let oneDay = 86400;
+	if (timeElapsed >= twoDays) {
+		status = deadFace;
+	} else if (timeElapsed >= oneDay) {
+		status = sadFace;
+	} else {
+		status = happyFace;
+	}
+
 	return (
 		<div id={props.id} className="tree">
 			<div className="bonsaiImg">
 				<img src={treeFlavor} alt="tree" width="100px" />
+				<img src={happyFace} alt="Happy face" width="20px" />
 			</div>
 			<div className="treeNameTag">
 				<h2 className="treeName">{props.name}</h2>

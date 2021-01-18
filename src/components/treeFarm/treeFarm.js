@@ -21,8 +21,17 @@ function TreeFarm() {
 	const treeCount = useSelector((state) => state.treeCount);
 	const dispatch = useDispatch();
 	const showTrees = treeCount.trees.map((tree, index) => (
-		<Tree key={tree._id} name={tree.name} id={tree._id} treeFlavor={tree.treeFlavor} />
+		<Tree
+			key={tree._id}
+			name={tree.name}
+			id={tree._id}
+			treeFlavor={tree.treeFlavor}
+			dateLastWorked={tree.dateLastWorked}
+		/>
 	));
+
+	function checkAndShowTrees() {}
+
 	const auth = useAuth();
 	// const token = auth.magic.user.getIdToken();
 	useEffect(() => {
@@ -36,28 +45,6 @@ function TreeFarm() {
 				dispatch(setAuth(data.auth));
 			});
 	}, []);
-
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${url}/trees/boo`)
-	// 		// .get(`${url}/trees/${userId}`)
-	// 		.then(function (res) {
-	// 			// handle success
-	// 			let data = res.data;
-	// data.map((tree) => {
-	// 	dispatch(addTree(tree));
-	// });
-	// 		})
-	// 		.catch(function (error) {
-	// 			// handle error
-	// 			console.error(error);
-	// 		})
-	// 		.then(function () {
-	// 			// always executed
-	// 		});
-
-	// 	// document.title = `Bonsai`;
-	// }, []);
 
 	return (
 		<>
