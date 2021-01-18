@@ -2,7 +2,25 @@ import "./ProgressBar.css";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function ProgressBar(props) {
-	console.log(props.points);
+    if (props.points === 0) {
+        return (
+			<>
+				<h2>Progress</h2>
+				{props.points === 0 ? (
+					<>
+						<div className="progressBar">
+							<span className="points">{`${props.points}%`}</span>
+						</div>
+					</>
+				) : (
+					<div className="progressBar">
+						<CircularProgress className="spinner" size="3vh" />
+						Loading...
+					</div>
+				)}
+			</>
+		);
+    }
 	if (props.points < 60) {
 		return (
 			<>
@@ -26,7 +44,6 @@ export default function ProgressBar(props) {
 			</>
 		);
 	} else {
-		console.log("smol");
 		return (
 			<>
 				<h2>Progress</h2>
