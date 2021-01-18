@@ -42,7 +42,8 @@ function Tree(props) {
 	const [treeFlavor, setTreeFlavor] = useState(0);
 	const [open, setOpen] = React.useState(false);
 	const [dateLastWorked, setDateLastWorked] = useState(0);
-	const [initialTime, setInitialTime] = useState(0);
+	const initialTime = Date.now();
+	const [loaded, setLoaded] = useState(false);
 	// const token = auth.magic.user.getIdToken();
 
 	const handleClickOpen = () => {
@@ -90,14 +91,14 @@ function Tree(props) {
 			.post(`${url}/trees/${id}`, data, {
 				headers: headers,
 			})
-			.then((response) => {
-				console.log(response);
-			});
+			.then((response) => {});
 	}
 	async function sendTimeElapsed() {
 		const DIDToken = await auth.magic.user.getIdToken();
 		let currentDate = Date.now();
 		let timeElapsed = (currentDate - initialTime) / 1000;
+		console.log({ currentDate, initialTime });
+		console.log({ timeElapsed });
 
 		let data = {
 			timeElapsed: timeElapsed,
@@ -118,6 +119,7 @@ function Tree(props) {
 	function getTimeElapsed() {
 		let currentDate = Date.now();
 		let timeElapsed = (currentDate - initialTime) / 1000;
+		console.log(initialTime);
 		console.log(convertTime(timeElapsed));
 	}
 
@@ -135,13 +137,13 @@ function Tree(props) {
 				setWorkTimer(data.workTimer);
 				setTreeFlavor(data.treeFlavor);
 			});
-
-		setInitialTime(Date.now());
-		return () => {
+		// let currentTime = Date.now();
+		// console.log({ initialTime });
+		return (currentDate) => {
 			document.title = `Bonsai`;
 
 			sendDateLastWorked();
-			sendTimeElapsed();
+			sendTimeElapsed(currentDate);
 		};
 	}, []);
 	document.title = `Working on ${name}`;

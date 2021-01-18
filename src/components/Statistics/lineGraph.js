@@ -14,16 +14,22 @@ export default class LineGraph extends Component {
 				datasets: [
 					{
 						label: "Hours worked",
-						data: [2, 4, 6, 2, 3, 5, 5],
+						data: this.props.hoursWorked,
+						backgroundColor: "rgb(77, 121, 81)",
 					},
 					{
 						label: "Tasks completed",
-						data: [2, 1, 1, 4, 2, 1, 2],
+						data: this.props.tasksDone,
+						backgroundColor: "whitesmoke",
 					},
 				],
 			},
 			options: {
 				// Customize options here, if needed
+				hover: {
+					// Overrides the global setting
+					mode: "index",
+				},
 			},
 		});
 	}

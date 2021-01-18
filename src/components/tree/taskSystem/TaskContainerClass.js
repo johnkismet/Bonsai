@@ -21,13 +21,10 @@ export default function TaskContainer(props) {
 
 	const auth = useAuth();
 	useEffect(() => {
-		console.log("useEffect");
-
 		auth
 			.fetch(`${url}/getTasks/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setTasks(data);
 			});
 	}, []);
@@ -40,7 +37,6 @@ export default function TaskContainer(props) {
 	};
 
 	const addTask = async () => {
-		console.log("addTask");
 		if (currentName !== "") {
 			let newTaskName = currentName;
 			setCurrentName("");
@@ -93,13 +89,18 @@ export default function TaskContainer(props) {
 			tasks: [...tasks],
 			itemsCompleted: addPoints,
 		};
+		const data = {};
 		axios
 			.post(`${url}/setTasks/${id}`, newReq, {
 				headers: headers,
 			})
-			.then((response) => {
-				console.log(response);
-			});
+			.then((response) => {});
+
+		axios
+			.post(`${url}/incrementTasks`, data, {
+				headers: headers,
+			})
+			.then((response) => {});
 		//newTasks[taskId].completed = !newTasks[taskId].completed;
 	};
 	const sendTasksToBack = async (NewTasks) => {
@@ -116,19 +117,15 @@ export default function TaskContainer(props) {
 			.post(`${url}/setTasks/${id}`, AGH, {
 				headers: headers,
 			})
-			.then((response) => {
-				console.log(response);
-			});
+			.then((response) => {});
 	};
 
 	const DeleteTask = async (changedId) => {
 		const newTasks = [...tasks];
-		console.log(newTasks);
 		for (let i = 0; i < newTasks.length; i++) {
 			if (newTasks[i].taskId === changedId) {
 				newTasks.splice(i, 1);
 			}
-			console.log(newTasks);
 			setTasks(newTasks);
 			sendTasksToBack(newTasks);
 		}

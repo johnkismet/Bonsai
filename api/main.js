@@ -90,6 +90,17 @@ app.get("/api/getTasks/:parentId", (req, res) => {
 	}
 });
 
+app.get("/api/getStats", (req, res) => {
+	let userEmail = req.user;
+	User.findOne({ email: userEmail }, (err, user) => {
+		let stats = {
+			hoursWorked: user.hoursWorked,
+			tasksDone: user.tasksDone,
+		};
+		res.send(stats);
+	});
+});
+
 app.post("/api/newTree", (req, res) => {
 	// TODO: If name/type is missing then cancel the request
 	let body = req.body;
@@ -205,17 +216,27 @@ app.post("/api/setHoursWorked", (req, res) => {
 	User.findOne({ email: userEmail }, (err, user) => {
 		if (!user) {
 			res.status(400).send("User doesn't exist. How'd you do this?");
-		} else {
-			let previousHours = user.hoursWorked[day];
-			let newHours = previousHours + timeElapsed;
-			user.hoursWorked[day] = newHours;
-			user.save((err) => {
-				if (err) {
-					console.log(err);
-				}
-			});
-			res.status(200).send("Hours updated, champion");
 		}
+		let previousTime = user.hoursWorked[day];
+		let newHours = previousTime + timeElapsed;
+
+		user.hoursWorked.set(day, newHours);
+		user.save();
+		res.send("Hours updated");
+	});
+	// res.send(foundUser.hoursWorked);
+});
+
+app.post("/api/incrementTasks", (req, res) => {
+	let userEmail = req.user;
+	let date = new Date();
+	let day = date.getDay();
+	User.findOne({ email: userEmail }, (err, user) => {
+		let previousCount = user.tasksDone[day];
+		let newCount = previousCount + 1;
+		user.tasksDone.set(day, newCount);
+		user.save();
+		res.send("task count updated!");
 	});
 });
 
