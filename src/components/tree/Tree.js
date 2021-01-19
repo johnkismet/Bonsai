@@ -196,7 +196,7 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-            <ProgressBar points={points}/>
+						<ProgressBar points={points} />
 						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
