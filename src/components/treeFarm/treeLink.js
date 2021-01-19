@@ -18,7 +18,7 @@ function Tree(props) {
 		treeFlavor = treePic3;
 	}
 	let status = new Image();
-	let timeElapsed = (props.dateLastWorked - Date.now()) / 1000;
+	let timeElapsed = (Date.now() - props.dateLastWorked) / 1000;
 	let twoDays = 172800;
 	let oneDay = 86400;
 	if (timeElapsed >= twoDays) {
