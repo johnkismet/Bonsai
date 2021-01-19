@@ -31,7 +31,9 @@ function Sidebar(props) {
 			<div
 				onClick={() => {
 					auth.logout();
-					window.location = "/";
+					setTimeout(() => {
+						window.location = "/";
+					}, 1000);
 					// console.log("Log");
 				}}
 				id="logoutBtn"
