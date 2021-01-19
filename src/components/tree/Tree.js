@@ -37,19 +37,25 @@ function Tree(props) {
 	const [type, setType] = useState("");
 	const [stage, setStage] = useState(0);
 	const [tasks, setTasks] = useState([]);
-	const [points, setPoints] = useState(0);
+	const [points, setPoints] = useState(undefined);
 	const [workTimer, setWorkTimer] = useState(0);
 	const [treeFlavor, setTreeFlavor] = useState(0);
-	const token = auth.magic.user.getIdToken();
 	const [open, setOpen] = React.useState(false);
-	const [timeElapsed, setTimeElapsed] = useState("");
 	const [dateLastWorked, setDateLastWorked] = useState(0);
+	const initialTime = Date.now();
+	const [loaded, setLoaded] = useState(false);
+	// const token = auth.magic.user.getIdToken();
 
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
 
 	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const handleCloseAndDelete = () => {
+		deleteTree();
 		setOpen(false);
 	};
 
@@ -69,10 +75,53 @@ function Tree(props) {
 				}, 1000);
 			});
 	}
-	const handleCloseAndDelete = () => {
-		deleteTree();
-		setOpen(false);
-	};
+
+	async function sendDateLastWorked() {
+		const DIDToken = await auth.magic.user.getIdToken();
+
+		let data = {
+			dateLastWorked: dateLastWorked,
+		};
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${DIDToken}`,
+		};
+
+		axios
+			.post(`${url}/trees/${id}`, data, {
+				headers: headers,
+			})
+			.then((response) => {});
+	}
+	async function sendTimeElapsed() {
+		const DIDToken = await auth.magic.user.getIdToken();
+		let currentDate = Date.now();
+		let timeElapsed = (currentDate - initialTime) / 1000;
+		console.log({ currentDate, initialTime });
+		console.log({ timeElapsed });
+
+		let data = {
+			timeElapsed: timeElapsed,
+		};
+		const headers = {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${DIDToken}`,
+		};
+
+		axios
+			.post(`${url}/setHoursWorked`, data, {
+				headers: headers,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	}
+	function getTimeElapsed() {
+		let currentDate = Date.now();
+		let timeElapsed = (currentDate - initialTime) / 1000;
+		console.log(initialTime);
+		console.log(convertTime(timeElapsed));
+	}
 
 	useEffect(() => {
 		auth
@@ -88,26 +137,13 @@ function Tree(props) {
 				setWorkTimer(data.workTimer);
 				setTreeFlavor(data.treeFlavor);
 			});
-
-		return () => {
+		// let currentTime = Date.now();
+		// console.log({ initialTime });
+		return (currentDate) => {
 			document.title = `Bonsai`;
-			const token = auth.magic.user.getIdToken();
 
-			let data = {
-				dateLastWorked: dateLastWorked,
-			};
-			const headers = {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			};
-
-			axios
-				.post(`${url}/trees/${id}`, data, {
-					headers: headers,
-				})
-				.then((response) => {
-					console.log(response);
-				});
+			sendDateLastWorked();
+			sendTimeElapsed(currentDate);
 		};
 	}, []);
 	document.title = `Working on ${name}`;
@@ -160,46 +196,44 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
+						<ProgressBar points={points} />
 						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
 					<div className="buttonsContainer">
-						<div className="leftSideBtn">
-							<Button
-								variant="outlined"
-								color="secondary"
-								onClick={handleClickOpen}
-							>
-								Delete Tree
-							</Button>
-							<Dialog
-								open={open}
-								TransitionComponent={Transition}
-								keepMounted
-								onClose={handleClose}
-								aria-labelledby="alert-dialog-slide-title"
-								aria-describedby="alert-dialog-slide-description"
-							>
-								<DialogTitle id="alert-dialog-slide-title">
-									{"Delete tree?"}
-								</DialogTitle>
-								<DialogContent>
-									<DialogContentText id="alert-dialog-slide-description">
-										Are you sure you want to delete this tree? You've gained{" "}
-										{points} points with this tree, which will be lost if you
-										delete.
-									</DialogContentText>
-								</DialogContent>
-								<DialogActions>
-									<Button onClick={handleClose} color="primary">
-										Cancel
-									</Button>
-									<Button onClick={handleClose} color="primary">
-										Yes, I'm sure
-									</Button>
-								</DialogActions>
-							</Dialog>
-						</div>
+						<Button
+							variant="outlined"
+							color="secondary"
+							onClick={handleClickOpen}
+						>
+							Delete Tree
+						</Button>
+						<Dialog
+							open={open}
+							TransitionComponent={Transition}
+							keepMounted
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-slide-title"
+							aria-describedby="alert-dialog-slide-description"
+						>
+							<DialogTitle id="alert-dialog-slide-title">
+								{"Use Google's location service?"}
+							</DialogTitle>
+							<DialogContent>
+								<DialogContentText id="alert-dialog-slide-description">
+									Are you sure you want to delete this tree? You've gained 0
+									points with this tree, which will be lost if you delete.
+								</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose} color="primary">
+									Cancel
+								</Button>
+								<Button onClick={handleCloseAndDelete} color="primary">
+									Yes, I'm sure
+								</Button>
+							</DialogActions>
+						</Dialog>
 					</div>
 				</div>
 				<div className="rightSide">
