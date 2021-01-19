@@ -25,9 +25,8 @@ Bonsai gives you a helpful report with statistics about your productivity. You w
 | Name | Scrum Role | Role |
 |------|------------|------|
 | Jon Taylor  |  Investor  |Investing|
-| John Anderson | Owner/Scrum|......|
-| Timothy Charboneau  |      Backend   |......|
-| Nicholas Smock |      Frontend   |......|
-| Luke Charboneau |      Dev   |......|
-|Nathan Holt|      Dev   |......|
+| John Anderson | Owner/Scrum|Managaing scrum, helping frontend and backend, design|
+| Timothy Charboneau  | Backend |Did bulk of backend/task system, set up Vercel|
+| Nicholas Smock | Frontend|Did bulk of frontend, made welcome page|
+| Luke Charboneau |Developer|Assisted with UI and functionality|
 #### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
