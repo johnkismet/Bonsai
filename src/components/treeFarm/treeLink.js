@@ -33,7 +33,7 @@ function Tree(props) {
 		<div id={props.id} className="tree">
 			<div className="bonsaiImg">
 				<img src={treeFlavor} alt="tree" width="100px" />
-				<img src={happyFace} alt="Happy face" width="20px" />
+				<img src={status} alt="Happy face" width="20px" />
 			</div>
 			<div className="treeNameTag">
 				<h2 className="treeName">{props.name}</h2>
