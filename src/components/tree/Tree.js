@@ -196,47 +196,46 @@ function Tree(props) {
 						</div>
 					</div>
 					<div className="treePic">
-						<ProgressBar points={points} />
+            <ProgressBar points={points}/>
 						{checkTree()}
 						{convertTime(workTimer)}
 					</div>
 					<div className="buttonsContainer">
-						<div className="leftSideBtn">
-							<Button
-								variant="outlined"
-								color="secondary"
-								onClick={handleClickOpen}
-							>
-								Delete Tree
-							</Button>
-							<Dialog
-								open={open}
-								TransitionComponent={Transition}
-								keepMounted
-								onClose={handleClose}
-								aria-labelledby="alert-dialog-slide-title"
-								aria-describedby="alert-dialog-slide-description"
-							>
-								<DialogTitle id="alert-dialog-slide-title">
-									{"Delete tree?"}
-								</DialogTitle>
-								<DialogContent>
-									<DialogContentText id="alert-dialog-slide-description">
-										Are you sure you want to delete this tree? You've gained{" "}
-										{points} points with this tree, which will be lost if you
-										delete.
-									</DialogContentText>
-								</DialogContent>
-								<DialogActions>
-									<Button onClick={handleClose} color="primary">
-										Cancel
-									</Button>
-									<Button onClick={handleClose} color="primary">
-										Yes, I'm sure
-									</Button>
-								</DialogActions>
-							</Dialog>
-						</div>
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={handleClickOpen}
+						>
+							Delete Tree
+						</Button>
+						<Dialog
+							open={open}
+							TransitionComponent={Transition}
+							keepMounted
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-slide-title"
+							aria-describedby="alert-dialog-slide-description"
+						>
+							<DialogTitle id="alert-dialog-slide-title">
+								{"Use Google's location service?"}
+							</DialogTitle>
+							<DialogContent>
+								<DialogContentText id="alert-dialog-slide-description">
+									Are you sure you want to delete this tree? You've gained 0
+									points with this tree, which will be lost if you delete.
+								</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+								<Button onClick={handleClose} color="primary">
+									Cancel
+								</Button>
+								<Button onClick={handleCloseAndDelete} color="primary">
+									Yes, I'm sure
+								</Button>
+							</DialogActions>
+						</Dialog>
+
+						<button onClick={getTimeElapsed}>Get time</button>
 					</div>
 				</div>
 				<div className="rightSide">
