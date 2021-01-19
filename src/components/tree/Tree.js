@@ -217,12 +217,13 @@ function Tree(props) {
 							aria-describedby="alert-dialog-slide-description"
 						>
 							<DialogTitle id="alert-dialog-slide-title">
-								{"Use Google's location service?"}
+								{"Delete tree?"}
 							</DialogTitle>
 							<DialogContent>
 								<DialogContentText id="alert-dialog-slide-description">
-									Are you sure you want to delete this tree? You've gained 0
-									points with this tree, which will be lost if you delete.
+									Are you sure you want to delete this tree? You've gained{" "}
+									{points} points with this tree, which will be lost if you
+									delete.
 								</DialogContentText>
 							</DialogContent>
 							<DialogActions>
