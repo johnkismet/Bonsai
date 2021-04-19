@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-const uri =
-	"mongodb+srv://Kismet:wZ0vNyvkUENVhg2o@cluster0.l8p7d.mongodb.net/tree_farm?retryWrites=true&w=majority";
 let isConnected = false;
 
 export default async function connectToMongoose() {
@@ -8,7 +6,7 @@ export default async function connectToMongoose() {
 		if (isConnected) {
 			return;
 		}
-		await mongoose.connect(uri, {
+		await mongoose.connect(process.env.MONGO_URI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useFindAndModify: false,
